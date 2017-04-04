@@ -72,7 +72,7 @@ const actions = {
   ['getGift'](sessionId, context, cb) {
     // Here should go the api call, e.g.:
     // context.forecast = apiCall(context.loc)
-    context.gift = 'shoes';
+    context.gift = 'right version';
     cb(context);
   },
 };
