@@ -1,0 +1,25 @@
+{
+  "name": "owlie",
+  "version": "1.0.0",
+  "description": "giftbot",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aivytran/owlie.git"
+  },
+  "keywords": [],
+  "author": "aivy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aivytran/owlie/issues"
+  },
+  "homepage": "https://github.com/aivytran/owlie#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "request": "^2.81.0"
+  }
+}
