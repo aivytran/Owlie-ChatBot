@@ -63,17 +63,7 @@ const actions = {
     const giftType = firstEntityValue(entities, 'giftType');
     const gender = firstEntityValue(entities, 'gender');
     const filterByPrice = firstEntityValue(entities, 'filterByPrice');
-    const newKeyword = firstEntityValue(entities, 'keyword');
-    // context.keywords = ["orange", "yellow"];
-    // let keywords;
-    // if (context.keywords && newKeyword) {
-    //   context.keywords.push(newKeyword);
-    // } else if (!context.keywords && newKeyword) {
-    //   context.keywords = [];
-    //   context.keywords.push(newKeyword);
-    // } else if (!context.keywords) {
-    //   context.keywords = [];
-    // }
+
 
     if (giftRecipient) {
       context.giftRecipient = giftRecipient; // store it in context
@@ -87,19 +77,11 @@ const actions = {
     if (filterByPrice) {
       context.filterByPrice = filterByPrice; // store it in context
     }
-    if (newKeyword) {
-      context.newKeyword = newKeyword; // store it in context
-    }
     console.log("this is what the context looks like");
     console.log("giftRecipient: " + context.giftRecipient);
     console.log("giftType: " + context.giftType);
     console.log("gender: " + context.gender);
     console.log("filterByPrice: " + context.filterByPrice);
-    console.log("newKeyword" + newKeyword);
-    // console.log("context.keywords " + context.keywords[0]);
-    // console.log("context.keywords " + context.keywords[1]);
-    // console.log("context.keywords " + context.keywords[2]);
-    // console.log("context.keywords length" + context.keywords.length);
     cb(context);
   },
 
@@ -119,29 +101,22 @@ const actions = {
     console.log("in searchGifts.... ");
     // Here should go the api call, e.g.:
     // context.forecast = apiCall(context.loc)
-    console.log("gender in searchGifts" + context.gender);
-    console.log("giftType in searchGifts" + context.giftType);
-    console.log("giftRecipient in searchGifts" + context.giftRecipient);
-    // console.log("keywords in searchGifts" + context.keywords);
     context.possibleGifts = 'POSSIBLE GIFTS';
+    console.log(context.gender);
+    console.log(context.giftType);
+    console.log(context.giftRecipient);
+    //YOU CAN ACCESS giftRecipient, giftType, and gender
+    cb(context);
+  },
+  ['filterByPrice'](sessionId, context, cb) {
+    console.log("in searchGifts.... ");
+    // Here should go the api call, e.g.:
+    // context.forecast = apiCall(context.loc)
     context.filteredGifts = 'FILTERED GIFTS';
-    // let stringifiedKeywords;
-    // context.stringifiedKeywords  = context.keywords[0];
-    context.stringifiedKeywords  = context.newKeyword;
 
     //YOU CAN ACCESS giftRecipient, giftType, and gender
     cb(context);
   }
-  // ['filterByPrice'](sessionId, context, cb) {
-  //   console.log("in searchGifts.... ");
-  //   // Here should go the api call, e.g.:
-  //   // context.forecast = apiCall(context.loc)
-  //   context.filteredGifts = 'FILTERED GIFTS';
-  //
-  //
-  //   //YOU CAN ACCESS giftRecipient, giftType, and gender
-  //   cb(context);
-  // }
 
   // ['setGiftRecipient'](sessionId, context, cb) {
   //   console.log("in searchGifts.... ");
