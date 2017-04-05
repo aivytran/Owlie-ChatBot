@@ -64,6 +64,7 @@ const actions = {
     const gender = firstEntityValue(entities, 'gender');
     const filterByPrice = firstEntityValue(entities, 'filterByPrice');
 
+
     if (giftRecipient) {
       context.giftRecipient = giftRecipient; // store it in context
     }
@@ -77,10 +78,10 @@ const actions = {
       context.filterByPrice = filterByPrice; // store it in context
     }
     console.log("this is what the context looks like");
-    console.log("giftRecipient: " + giftRecipient);
-    console.log("giftType: " + giftType);
-    console.log("gender: " + gender);
-    console.log("filterByPrice: " + filterByPrice);
+    console.log("giftRecipient: " + context.giftRecipient);
+    console.log("giftType: " + context.giftType);
+    console.log("gender: " + context.gender);
+    console.log("filterByPrice: " + context.filterByPrice);
     cb(context);
   },
 
