@@ -54,13 +54,33 @@ const actions = {
       cb();
     }
   },
+
   merge(sessionId, context, entities, message, cb) {
     // Retrieve the location entity and store it into a context field
-    const person = firstEntityValue(entities, 'person');
-    if (person) {
-      context.person = person; // store it in context
-    }
+    console.log("this is merging....");
+    console.log(entities);
+    const giftRecipient = firstEntityValue(entities, 'giftRecipient');
+    const giftType = firstEntityValue(entities, 'giftType');
+    const gender = firstEntityValue(entities, 'gender');
+    const filterByPrice = firstEntityValue(entities, 'filterByPrice');
 
+    if (giftRecipient) {
+      context.giftRecipient = giftRecipient; // store it in context
+    }
+    if (giftType) {
+      context.giftType = giftType; // store it in context
+    }
+    if (gender) {
+      context.gender = gender; // store it in context
+    }
+    if (filterByPrice) {
+      context.filterByPrice = filterByPrice; // store it in context
+    }
+    console.log("this is what the context looks like");
+    console.log("giftRecipient: " + giftRecipient);
+    console.log("giftType: " + giftType);
+    console.log("gender: " + gender);
+    console.log("filterByPrice: " + filterByPrice);
     cb(context);
   },
 
@@ -75,6 +95,37 @@ const actions = {
     context.gift = 'shoes';
     cb(context);
   },
+
+  ['searchGifts'](sessionId, context, cb) {
+    console.log("in searchGifts.... ");
+    // Here should go the api call, e.g.:
+    // context.forecast = apiCall(context.loc)
+    context.possibleGifts = 'POSSIBLE GIFTS';
+    console.log(context.gender);
+    console.log(context.giftType);
+    console.log(context.giftRecipient);
+    //YOU CAN ACCESS giftRecipient, giftType, and gender
+    cb(context);
+  },
+  ['filterByPrice'](sessionId, context, cb) {
+    console.log("in searchGifts.... ");
+    // Here should go the api call, e.g.:
+    // context.forecast = apiCall(context.loc)
+    context.filteredGifts = 'FILTERED GIFTS';
+
+    //YOU CAN ACCESS giftRecipient, giftType, and gender
+    cb(context);
+  }
+
+  // ['setGiftRecipient'](sessionId, context, cb) {
+  //   console.log("in searchGifts.... ");
+  //   // Here should go the api call, e.g.:
+  //   // context.forecast = apiCall(context.loc)
+  //   context.giftRecipient = 'POSSIBLE GIFTS';
+  //   cb(context);
+  // },
+
+
 };
 
 
