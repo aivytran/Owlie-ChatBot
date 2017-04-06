@@ -44,7 +44,8 @@ const actions = {
       //     }
       //     delete response.quickreplies;
       // }
-      data = {text: "Test"};
+      console.log("SENDING RESPONSE");
+      data = response;
       console.log(data);
       return FB.fbMessage(recipientId, data, (err, data) => {
         console.log("in Facebook");
