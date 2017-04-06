@@ -35,19 +35,16 @@ const actions = {
     if (recipientId) {
       // Yay, we found our recipient!
       // Let's forward our bot response to her.
-      let data = null
+      let data = {}
       if(response.quickreplies) { // Wit.ai wants us to include quickreplies, alright!
           response.quick_replies = [];
 
           for(var i = 0, len = response.quickreplies.length; i < len; i++) { // Loop through quickreplies
               response.quick_replies.push({ title: response.quickreplies[i], content_type: 'text', payload: 'CUSTOM_TEXT' });
           }
-          data = {"text" : "in quick replies"}
           delete response.quickreplies;
-      } else {
-        data = {"text" : "random"}
       }
-      data = response
+      data = {"text" : response}
       return FB.fbMessage(recipientId, data, (err, data) => {
         console.log("in Facebook");
         if (err) {
@@ -122,43 +119,13 @@ const actions = {
 
   // fetch-weather bot executes
 
-  ['getGift'](sessionId, context, cb) {
+  ['searchGifts'](sessionId, context, cb) {
     console.log("gender in searchGifts " + context.gender);
     console.log("giftType in searchGifts " + context.giftType);
     console.log("giftRecipient in searchGifts " + context.giftRecipient);
     // console.log("keywords in searchGifts" + context.keywords);
 
-    context.gift = {
-	    "attachment": {
-		    "type": "template",
-		    "payload": {
-				"template_type": "generic",
-			    "elements": [{
-					"title": "First card",
-				    "subtitle": "Element #1 of an hscroll",
-				    "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
-				    "buttons": [{
-					    "type": "web_url",
-					    "url": "https://www.messenger.com",
-					    "title": "web url"
-				    }, {
-					    "type": "postback",
-					    "title": "Postback",
-					    "payload": "Payload for first element in a generic bubble",
-				    }],
-			    }, {
-				    "title": "Second card",
-				    "subtitle": "Element #2 of an hscroll",
-				    "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
-				    "buttons": [{
-					    "type": "postback",
-					    "title": "Postback",
-					    "payload": "Payload for second element in a generic bubble",
-				    }],
-			    }]
-		    }
-	    }
-    };
+    context.possibleGifts = 'POSSIBLE GIFTS';
     context.filteredGifts = 'FILTERED GIFTS';
     // let stringifiedKeywords;
     // context.stringifiedKeywords  = context.keywords[0];
