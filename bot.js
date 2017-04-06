@@ -5,6 +5,7 @@
 const Wit = require('node-wit').Wit;
 const FB = require('./facebook.js');
 const Config = require('./const.js');
+const AmazonApiUtil = require('./util/amazon_api_util.js');
 
 const firstEntityValue = (entities, entity) => {
   const val = entities && entities[entity] &&
@@ -57,7 +58,6 @@ const actions = {
 
   merge(sessionId, context, entities, message, cb) {
     // Retrieve the location entity and store it into a context field
-    console.log("this is merging....");
     console.log(entities);
     const giftRecipient = firstEntityValue(entities, 'giftRecipient');
     const giftType = firstEntityValue(entities, 'giftType');
@@ -90,12 +90,12 @@ const actions = {
     if (newKeyword) {
       context.newKeyword = newKeyword; // store it in context
     }
-    console.log("this is what the context looks like");
-    console.log("giftRecipient: " + context.giftRecipient);
-    console.log("giftType: " + context.giftType);
-    console.log("gender: " + context.gender);
-    console.log("filterByPrice: " + context.filterByPrice);
-    console.log("newKeyword" + newKeyword);
+    // console.log("this is what the context looks like");
+    // console.log("giftRecipient: " + context.giftRecipient);
+    // console.log("giftType: " + context.giftType);
+    // console.log("gender: " + context.gender);
+    // console.log("filterByPrice: " + context.filterByPrice);
+    // console.log("newKeyword" + newKeyword);
     // console.log("context.keywords " + context.keywords[0]);
     // console.log("context.keywords " + context.keywords[1]);
     // console.log("context.keywords " + context.keywords[2]);
@@ -116,18 +116,22 @@ const actions = {
   },
 
   ['searchGifts'](sessionId, context, cb) {
-    console.log("in searchGifts.... ");
     // Here should go the api call, e.g.:
     // context.forecast = apiCall(context.loc)
-    console.log("gender in searchGifts" + context.gender);
-    console.log("giftType in searchGifts" + context.giftType);
-    console.log("giftRecipient in searchGifts" + context.giftRecipient);
+    // console.log("gender in searchGifts" + context.gender);
+    // console.log("giftType in searchGifts" + context.giftType);
+    // console.log("giftRecipient in searchGifts" + context.giftRecipient);
     // console.log("keywords in searchGifts" + context.keywords);
     context.possibleGifts = 'POSSIBLE GIFTS';
     context.filteredGifts = 'FILTERED GIFTS';
     // let stringifiedKeywords;
     // context.stringifiedKeywords  = context.keywords[0];
+    console.log("this is the type:");
+    console.log(typeof(context.giftType));
     context.stringifiedKeywords  = context.newKeyword;
+    console.log("beginning");
+    console.log(AmazonApiUtil.searchItem(context.giftType));
+    console.log("end");
 
     //YOU CAN ACCESS giftRecipient, giftType, and gender
     cb(context);

@@ -22,3 +22,5 @@ const searchItem = (keywords) => {
     console.log(err);
   });
 };
+
+module.exports = {searchItem: searchItem};
