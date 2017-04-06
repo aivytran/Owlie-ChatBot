@@ -54,7 +54,7 @@ const fbMessage = (recipientId, data, cb) => {
   			    }]
   		    }
   	    }
-      };,
+      },
     },
   };
 
