@@ -45,7 +45,7 @@ const actions = {
           data = {"text" : "in quick replies"}
           delete response.quickreplies;
       } else {
-        data = {"text" : "not in"}
+        data = response
       }
       return FB.fbMessage(recipientId, data, (err, data) => {
         console.log("in Facebook");
@@ -121,13 +121,43 @@ const actions = {
 
   // fetch-weather bot executes
 
-  ['searchGifts'](sessionId, context, cb) {
+  ['getGift'](sessionId, context, cb) {
     console.log("gender in searchGifts " + context.gender);
     console.log("giftType in searchGifts " + context.giftType);
     console.log("giftRecipient in searchGifts " + context.giftRecipient);
     // console.log("keywords in searchGifts" + context.keywords);
 
-    context.possibleGifts = 'POSSIBLE GIFTS';
+    context.gift = {
+	    "attachment": {
+		    "type": "template",
+		    "payload": {
+				"template_type": "generic",
+			    "elements": [{
+					"title": "First card",
+				    "subtitle": "Element #1 of an hscroll",
+				    "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+				    "buttons": [{
+					    "type": "web_url",
+					    "url": "https://www.messenger.com",
+					    "title": "web url"
+				    }, {
+					    "type": "postback",
+					    "title": "Postback",
+					    "payload": "Payload for first element in a generic bubble",
+				    }],
+			    }, {
+				    "title": "Second card",
+				    "subtitle": "Element #2 of an hscroll",
+				    "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
+				    "buttons": [{
+					    "type": "postback",
+					    "title": "Postback",
+					    "payload": "Payload for second element in a generic bubble",
+				    }],
+			    }]
+		    }
+	    }
+    };
     context.filteredGifts = 'FILTERED GIFTS';
     // let stringifiedKeywords;
     // context.stringifiedKeywords  = context.keywords[0];
