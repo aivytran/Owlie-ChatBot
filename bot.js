@@ -57,8 +57,7 @@ const actions = {
 
   merge(sessionId, context, entities, message, cb) {
     // Retrieve the location entity and store it into a context field
-    console.log("this is merging....");
-    console.log(entities);
+    // console.log(entities);
     const giftRecipient = firstEntityValue(entities, 'giftRecipient');
     const giftType = firstEntityValue(entities, 'giftType');
     const gender = firstEntityValue(entities, 'gender');
@@ -90,12 +89,12 @@ const actions = {
     if (newKeyword) {
       context.newKeyword = newKeyword; // store it in context
     }
-    console.log("this is what the context looks like");
-    console.log("giftRecipient: " + context.giftRecipient);
-    console.log("giftType: " + context.giftType);
-    console.log("gender: " + context.gender);
-    console.log("filterByPrice: " + context.filterByPrice);
-    console.log("newKeyword" + newKeyword);
+    // console.log("this is what the context looks like ");
+    // console.log("giftRecipient: " + context.giftRecipient);
+    // console.log("giftType: " + context.giftType);
+    // console.log("gender: " + context.gender);
+    // console.log("filterByPrice: " + context.filterByPrice);
+    // console.log("newKeyword" + newKeyword);
     // console.log("context.keywords " + context.keywords[0]);
     // console.log("context.keywords " + context.keywords[1]);
     // console.log("context.keywords " + context.keywords[2]);
@@ -108,22 +107,44 @@ const actions = {
   },
 
   // fetch-weather bot executes
-  ['getGift'](sessionId, context, cb) {
-    // Here should go the api call, e.g.:
-    // context.forecast = apiCall(context.loc)
-    context.gift = 'right version';
-    cb(context);
-  },
 
   ['searchGifts'](sessionId, context, cb) {
-    console.log("in searchGifts.... ");
-    // Here should go the api call, e.g.:
-    // context.forecast = apiCall(context.loc)
-    console.log("gender in searchGifts" + context.gender);
-    console.log("giftType in searchGifts" + context.giftType);
-    console.log("giftRecipient in searchGifts" + context.giftRecipient);
+    console.log("gender in searchGifts " + context.gender);
+    console.log("giftType in searchGifts " + context.giftType);
+    console.log("giftRecipient in searchGifts " + context.giftRecipient);
     // console.log("keywords in searchGifts" + context.keywords);
-    context.possibleGifts = 'POSSIBLE GIFTS';
+
+    context.possibleGifts = {
+	    "attachment": {
+		    "type": "template",
+		    "payload": {
+				"template_type": "generic",
+			    "elements": [{
+					"title": "First card",
+				    "subtitle": "Element #1 of an hscroll",
+				    "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+				    "buttons": [{
+					    "type": "web_url",
+					    "url": "https://www.messenger.com",
+					    "title": "web url"
+				    }, {
+					    "type": "postback",
+					    "title": "Postback",
+					    "payload": "Payload for first element in a generic bubble",
+				    }],
+			    }, {
+				    "title": "Second card",
+				    "subtitle": "Element #2 of an hscroll",
+				    "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
+				    "buttons": [{
+					    "type": "postback",
+					    "title": "Postback",
+					    "payload": "Payload for second element in a generic bubble",
+				    }],
+			    }]
+		    }
+	    }
+    };
     context.filteredGifts = 'FILTERED GIFTS';
     // let stringifiedKeywords;
     // context.stringifiedKeywords  = context.keywords[0];
