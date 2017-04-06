@@ -74,6 +74,7 @@ const actions = {
   			    }]
   		    }
   	    }
+      };
       console.log(data);
       return FB.fbMessage(recipientId, data, (err, data) => {
         console.log("in Facebook");
