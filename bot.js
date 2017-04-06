@@ -45,7 +45,7 @@ const actions = {
           data = {"text" : "in quick replies"}
           delete response.quickreplies;
       } else {
-        data = response
+        data = {"text" : "random"}
       }
       return FB.fbMessage(recipientId, data, (err, data) => {
         console.log("in Facebook");
