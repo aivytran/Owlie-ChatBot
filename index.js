@@ -99,7 +99,7 @@ app.post('/webhook', (req, res) => {
       // Let's reply with an automatic message
       FB.fbMessage(
         sender,
-        'Sorry I can only process text messages for now.'
+        {text: 'Sorry I can only process text messages for now.'}
       );
     } else if (msg) {
       // We received a text message
