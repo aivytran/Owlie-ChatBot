@@ -47,6 +47,7 @@ const actions = {
       } else {
         data = {"text" : "random"}
       }
+      data = response
       return FB.fbMessage(recipientId, data, (err, data) => {
         console.log("in Facebook");
         if (err) {
