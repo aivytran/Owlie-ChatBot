@@ -45,7 +45,7 @@ const actions = {
       //     delete response.quickreplies;
       // }
       console.log("SENDING RESPONSE");
-      data = response;
+      data = JSON.parse(response);
       console.log(data);
       return FB.fbMessage(recipientId, data, (err, data) => {
         console.log("in Facebook");
@@ -127,7 +127,7 @@ const actions = {
     // console.log("giftRecipient in searchGifts " + context.giftRecipient);
     // console.log("keywords in searchGifts" + context.keywords);
 
-    context.gift = {
+    context.gift = JSON.stringify({
 	    "attachment": {
 		    "type": "template",
 		    "payload": {
@@ -157,7 +157,7 @@ const actions = {
 			    }]
 		    }
 	    }
-    };
+    });
     context.filteredGifts = 'FILTERED GIFTS';
     // let stringifiedKeywords;
     // context.stringifiedKeywords  = context.keywords[0];
