@@ -35,6 +35,7 @@ const actions = {
     if (recipientId) {
       // Yay, we found our recipient!
       // Let's forward our bot response to her.
+      let data = {}
       if(response.quickreplies) { // Wit.ai wants us to include quickreplies, alright!
           response.quick_replies = [];
 
@@ -43,7 +44,8 @@ const actions = {
           }
           delete response.quickreplies;
       }
-      return FB.fbMessage(recipientId, response, (err, data) => {
+      data = {"text" : response}
+      return FB.fbMessage(recipientId, data, (err, data) => {
         console.log("in Facebook");
         if (err) {
           console.log(
