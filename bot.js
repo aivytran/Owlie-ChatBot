@@ -19,7 +19,7 @@ const firstEntityValue = (entities, entity) => {
 
 // Bot actions
 const actions = {
-  say(sessionId, context, response, cb) {
+  say (sessionId, context, response, cb) {
     console.log(response);
 
     // Bot testing mode, run cb() and return
@@ -35,22 +35,15 @@ const actions = {
     if (recipientId) {
       // Yay, we found our recipient!
       // Let's forward our bot response to her.
-      let data = {}
-      console.log(data);
       if(response.quickreplies) { // Wit.ai wants us to include quickreplies, alright!
-        console.log("there is quick replies");
           response.quick_replies = [];
 
           for(var i = 0, len = response.quickreplies.length; i < len; i++) { // Loop through quickreplies
               response.quick_replies.push({ title: response.quickreplies[i], content_type: 'text', payload: 'CUSTOM_TEXT' });
           }
           delete response.quickreplies;
-      } else {
-        data = {text: response}
       }
-
-      console.log(data);
-      return FB.fbMessage(recipientId, data, (err, data) => {
+      return FB.fbMessage(recipientId, response, (err, data) => {
         console.log("in Facebook");
         if (err) {
           console.log(
