@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/aivytran/owlie#readme",
   "dependencies": {
+    "amazon-product-api": "^0.4.3",
     "babel-core": "^6.0.0",
     "babel-jest": "^6.0.1",
     "babel-polyfill": "^6.1.4",
