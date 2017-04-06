@@ -1,7 +1,7 @@
 // npm install amazon-product-api
 
 const amazon = require('amazon-product-api');
-const Config = require('./const.js');
+const Config = require('../const.js');
 
 let client = amazon.createClient({
   awsId: Config.AWS_ACCESS_KEY,
