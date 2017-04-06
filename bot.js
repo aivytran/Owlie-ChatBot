@@ -45,6 +45,7 @@ const actions = {
       //     delete response.quickreplies;
       // }
       data = response
+      console.log(data);
       return FB.fbMessage(recipientId, data, (err, data) => {
         console.log("in Facebook");
         if (err) {
@@ -120,9 +121,9 @@ const actions = {
   // fetch-weather bot executes
 
   ['getGift'](sessionId, context, cb) {
-    console.log("gender in searchGifts " + context.gender);
-    console.log("giftType in searchGifts " + context.giftType);
-    console.log("giftRecipient in searchGifts " + context.giftRecipient);
+    // console.log("gender in searchGifts " + context.gender);
+    // console.log("giftType in searchGifts " + context.giftType);
+    // console.log("giftRecipient in searchGifts " + context.giftRecipient);
     // console.log("keywords in searchGifts" + context.keywords);
 
     context.gift = {
