@@ -2,12 +2,6 @@
 
 const amazon = require('amazon-product-api');
 
-let client = amazon.createClient({
-  awsId: "AKIAIZPUSEQZQXJQRVKA",
-  awsSecret: "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",
-  awsTag: "owliethegiftb-20"
-});
-
 const searchItem = (keywords) => {
   client.itemSearch({
     // director: 'Quentin Tarantino',
