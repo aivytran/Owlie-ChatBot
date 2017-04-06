@@ -16,6 +16,10 @@ if (!FB_VERIFY_TOKEN) {
 
 // AWS API parameters
 const AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
+if (!AWS_ACCESS_KEY) {
+  throw new Error('missing AWS_ACCESS_KEY');
+}
+
 const AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
 const AWS_ASSOCIATE_TAG = process.env.AWS_ASSOCIATE_TAG;
 
