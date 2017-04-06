@@ -42,9 +42,11 @@ const actions = {
           for(var i = 0, len = response.quickreplies.length; i < len; i++) { // Loop through quickreplies
               response.quick_replies.push({ title: response.quickreplies[i], content_type: 'text', payload: 'CUSTOM_TEXT' });
           }
+          data = {"text" : "in quick replies"}
           delete response.quickreplies;
+      } else {
+        data = {"text" : "not in"}
       }
-      data = {"text" : response}
       return FB.fbMessage(recipientId, data, (err, data) => {
         console.log("in Facebook");
         if (err) {
