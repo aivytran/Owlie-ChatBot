@@ -5,7 +5,7 @@
 const Wit = require('node-wit').Wit;
 const FB = require('./facebook.js');
 const Config = require('./const.js');
-// const AmazonApiUtil = require('./util/amazon_api_util.js');
+const searchItem = require('./util/amazon_api_util.js');
 const JsonUtil = require('./util/json_util.js');
 
 
