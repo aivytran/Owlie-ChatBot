@@ -49,6 +49,7 @@ const actions = {
       // }
       console.log("SENDING RESPONSE");
       console.log(response);
+      console.log(response.quickreplies);
 
       let data = null;
 
@@ -57,12 +58,8 @@ const actions = {
       } else {
         data = {"text": response}
       }
-      console.log(data);
-
-      console.log(data);
 
       return FB.fbMessage(recipientId, data, (err, data) => {
-        console.log("in Facebook");
         if (err) {
           console.log(
             'Oops! An error occurred while forwarding the response to',
