@@ -204,26 +204,38 @@ const actions = {
   },
 
   ['moreSuggestions'](sessionId, context, cb) {
-    context.moreSuggestGifts = JSON.stringify({
-      "text":"Pick a color:",
-      "quick_replies":[
-        {
-          "content_type":"text",
-          "title":"more suggestions",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
-        },
-        {
-          "content_type":"text",
-          "title":"search by filters",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
-        },
-        {
-          "content_type":"text",
-          "title":"new search",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
-        }
-      ]
+    context.moreSuggestions = JSON.stringify({
+	    "attachment": {
+		    "type": "template",
+		    "payload": {
+				"template_type": "generic",
+			    "elements": [{
+					"title": "First card",
+				    "subtitle": "Element #1 of an hscroll",
+				    "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+				    "buttons": [{
+					    "type": "web_url",
+					    "url": "https://www.messenger.com",
+					    "title": "web url"
+				    }, {
+					    "type": "postback",
+					    "title": "Postback",
+					    "payload": "Payload for first element in a generic bubble",
+				    }],
+			    }, {
+				    "title": "Second card",
+				    "subtitle": "Element #2 of an hscroll",
+				    "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
+				    "buttons": [{
+					    "type": "postback",
+					    "title": "Postback",
+					    "payload": "Payload for second element in a generic bubble",
+				    }],
+			    }]
+		    }
+	    }
     });
+
     cb(context);
   },
 
@@ -266,13 +278,41 @@ const actions = {
         },
         {
           "content_type":"text",
-          "title":"new search",
+          "title":"new search please!",
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
         }
       ]
     });
     cb(context);
-  }
+  },
+
+  ['showFilterOptions'](sessionId, context, cb) {
+    context.showFilterOptions = JSON.stringify({
+      "quick_replies":[
+        {
+          "content_type":"text",
+          "title":"Subject",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
+        },
+        {
+          "content_type":"text",
+          "title":"Brand Name",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+        },
+        {
+          "content_type":"text",
+          "title":"Price Range",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+        },
+        {
+          "content_type":"text",
+          "title":"Size",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+        }
+      ]
+    });
+    cb(context);
+  },
 
   // ['filterByPrice'](sessionId, context, cb) {
   //   console.log("in searchGifts.... ");
