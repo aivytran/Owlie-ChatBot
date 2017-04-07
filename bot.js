@@ -230,6 +230,7 @@ const actions = {
 
   ['showButtons'](sessionId, context, cb) {
     context.showButtonOptions = JSON.stringify({
+      "text":"showing Buttons..",
       "quick_replies":[
         {
           "content_type":"text",
