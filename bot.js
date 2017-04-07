@@ -253,6 +253,7 @@ const actions = {
 
   ['showFilterOptions'](sessionId, context, cb) {
     context.showFilterOptions = JSON.stringify({
+      "text":"filter options....",
       "quick_replies":[
         {
           "content_type":"text",
