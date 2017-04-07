@@ -184,7 +184,7 @@ const actions = {
     cb(context);
   }
 
-  ['getGift'](sessionId, context, cb) {
+  ['argee'](sessionId, context, cb) {
     context.ans = {
       "text":"Pick a color:",
       "quick_replies":[
