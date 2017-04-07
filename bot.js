@@ -54,9 +54,9 @@ const actions = {
       let data = null;
 
       if (JsonUtil.isJsonString(response)) {
-        data = JSON.parse(response)
+        data = JSON.parse(response);
       } else {
-        data = {"text": response}
+        data = {"text": response};
       }
 
       return FB.fbMessage(recipientId, data, (err, data) => {
@@ -200,8 +200,84 @@ const actions = {
         }
       ]
     });
-    cb(context)
-  }
+    cb(context);
+  },
+
+
+  ['filterBySubject'](sessionId, context, cb) {
+    context.filteredGifts = JSON.stringify({
+      "text":"filterBySubject..",
+      "quick_replies":[
+        {
+          "content_type":"text",
+          "title":"more suggestions",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
+        },
+        {
+          "content_type":"text",
+          "title":"search by filters",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+        },
+        {
+          "content_type":"text",
+          "title":"new search",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+        }
+      ]
+    });
+    cb(context);
+  },
+
+  ['showButtons'](sessionId, context, cb) {
+    context.showButtonOptions = JSON.stringify({
+      "quick_replies":[
+        {
+          "content_type":"text",
+          "title":"more suggestions",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
+        },
+        {
+          "content_type":"text",
+          "title":"search by filters",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+        },
+        {
+          "content_type":"text",
+          "title":"new search please!",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+        }
+      ]
+    });
+    cb(context);
+  },
+
+  ['showFilterOptions'](sessionId, context, cb) {
+    context.showFilterOptions = JSON.stringify({
+      "quick_replies":[
+        {
+          "content_type":"text",
+          "title":"Subject",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
+        },
+        {
+          "content_type":"text",
+          "title":"Brand Name",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+        },
+        {
+          "content_type":"text",
+          "title":"Price Range",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+        },
+        {
+          "content_type":"text",
+          "title":"Size",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+        }
+      ]
+    });
+    cb(context);
+  },
 
   // ['filterByPrice'](sessionId, context, cb) {
   //   console.log("in searchGifts.... ");
