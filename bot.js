@@ -185,7 +185,7 @@ const actions = {
   },
 
   ['argee'](sessionId, context, cb) {
-    context.ans = {
+    context.ans = JSON.stringify({
       "text":"Pick a color:",
       "quick_replies":[
         {
@@ -199,7 +199,7 @@ const actions = {
           "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
         }
       ]
-    }
+    });
     cb(context)
   }
 
