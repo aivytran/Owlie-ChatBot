@@ -83,6 +83,7 @@ app.get('/webhook', (req, res) => {
 app.post('/webhook', (req, res) => {
   // Parsing the Messenger API response
   console.log("getting fb req");
+  
   console.log(req);
   const messaging = FB.getFirstMessagingEntry(req.body);
   if (messaging && messaging.message) {
