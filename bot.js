@@ -139,6 +139,10 @@ const actions = {
     // console.log("giftRecipient in searchGifts" + context.giftRecipient);
     // console.log("keywords in searchGifts" + context.keywords);
 
+    console.log("gift type is: " + context.giftType);
+    searchItem(context.giftType)
+      .then(response => console.log(response[0]));
+
     context.gift = JSON.stringify({
 	    "attachment": {
 		    "type": "template",
