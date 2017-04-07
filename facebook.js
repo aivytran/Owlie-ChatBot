@@ -8,10 +8,10 @@ const Config = require('./const.js');
 const createGreetingApi = (data) => {
   request({
     uri: 'https://graph.facebook.com/v2.6/me/thread_settings',
-    qs: {access_token: Config.FB_PAGE_TOKEN},
+    qs: { access_token: Config.FB_PAGE_TOKEN },
     method: 'POST',
-    json: true,
-    headers: {'Content-Type': 'application/json'}
+    json: data
+
   }, function (error, response, body) {
   if (!error && response.statusCode == 200) {
     console.log("Greeting set successfully!");
@@ -25,7 +25,7 @@ const setGreetingText = () => {
   const greetingData = {
     setting_type: "greeting",
     greeting:{
-    text :"Welcome!!!!"
+    text:"Welcome!!!!"
     }
   };
   createGreetingApi(greetingData);
