@@ -45,11 +45,20 @@ const actions = {
       //     }
       //     delete response.quickreplies;
       // }
-      console.log("SENDING RESPONSE");
-      console.log(response);
-      console.log(typeof response);
-      data = JSON.parse(response);
-      console.log(data);
+      // console.log("SENDING RESPONSE");
+      // console.log(response);
+      // console.log(typeof response);
+      // data = JSON.parse(response);
+      // console.log(data);
+
+      let data = {}
+      try {
+        JSON.parse(response)
+      } catch (e) {
+        data = {"text": response}
+      }
+      data = response
+
       return FB.fbMessage(recipientId, data, (err, data) => {
         console.log("in Facebook");
         if (err) {
