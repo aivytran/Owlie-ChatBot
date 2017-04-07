@@ -234,6 +234,7 @@ const actions = {
 
   ['showButtons'](sessionId, context, cb) {
     context.showButtonOptions = JSON.stringify({
+      "text":"showing Buttons..",
       "quick_replies":[
         {
           "content_type":"text",
@@ -257,6 +258,7 @@ const actions = {
 
   ['showFilterOptions'](sessionId, context, cb) {
     context.showFilterOptions = JSON.stringify({
+      "text":"filter options....",
       "quick_replies":[
         {
           "content_type":"text",
