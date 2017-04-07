@@ -23,10 +23,10 @@ const createGreetingApi = (data) => {
 
 const setGreetingText = () => {
   const greetingData = {
-    setting_type: "greeting",
-    message:{
-    text:"Welcome!!!!"
-    }
+    "setting_type":"greeting",
+    "greeting":{
+      "text":"Timeless apparel for the masses."
+  }
   };
   createGreetingApi(greetingData);
 }
