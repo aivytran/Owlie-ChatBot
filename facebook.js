@@ -8,7 +8,9 @@ const Config = require('./const.js');
 const createGreetingApi = (data) => {
   request({
     uri: 'https://graph.facebook.com/v2.6/me/thread_settings',
-    qs: { access_token: Config.FB_PAGE_TOKEN },
+    qs: {
+      access_token: Config.FB_PAGE_TOKEN
+    },
     method: 'POST',
     json: data
 
