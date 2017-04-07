@@ -52,12 +52,7 @@ const findOrCreateSession = (fbid) => {
 // Starting our webserver and putting it all together
 const app = express();
 app.set('port', PORT);
-
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
-  return setGreetingText();
-});
-
+app.listen(app.get('port'));
 app.use(bodyParser.json());
 console.log("I'm wating for you @" + PORT);
 
