@@ -200,7 +200,78 @@ const actions = {
         }
       ]
     });
-    cb(context)
+    cb(context);
+  },
+
+  ['moreSuggestions'](sessionId, context, cb) {
+    context.moreSuggestGifts = JSON.stringify({
+      "text":"Pick a color:",
+      "quick_replies":[
+        {
+          "content_type":"text",
+          "title":"more suggestions",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
+        },
+        {
+          "content_type":"text",
+          "title":"search by filters",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+        },
+        {
+          "content_type":"text",
+          "title":"new search",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+        }
+      ]
+    });
+    cb(context);
+  },
+
+  ['filterBySubject'](sessionId, context, cb) {
+    context.filteredGifts = JSON.stringify({
+      "text":"filterBySubject..",
+      "quick_replies":[
+        {
+          "content_type":"text",
+          "title":"more suggestions",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
+        },
+        {
+          "content_type":"text",
+          "title":"search by filters",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+        },
+        {
+          "content_type":"text",
+          "title":"new search",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+        }
+      ]
+    });
+    cb(context);
+  },
+
+  ['showButtons'](sessionId, context, cb) {
+    context.showButtons = JSON.stringify({
+      "quick_replies":[
+        {
+          "content_type":"text",
+          "title":"more suggestions",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
+        },
+        {
+          "content_type":"text",
+          "title":"search by filters",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+        },
+        {
+          "content_type":"text",
+          "title":"new search",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+        }
+      ]
+    });
+    cb(context);
   }
 
   // ['filterByPrice'](sessionId, context, cb) {
