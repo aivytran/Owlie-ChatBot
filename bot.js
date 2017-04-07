@@ -46,6 +46,8 @@ const actions = {
       //     delete response.quickreplies;
       // }
       console.log("SENDING RESPONSE");
+      console.log(response);
+      console.log(typeof response);
       data = JSON.parse(response);
       console.log(data);
       return FB.fbMessage(recipientId, data, (err, data) => {
@@ -160,19 +162,20 @@ const actions = {
 		    }
 	    }
     });
-    context.filteredGifts = 'FILTERED GIFTS';
+    // context.filteredGifts = 'FILTERED GIFTS';
     // let stringifiedKeywords;
     // context.stringifiedKeywords  = context.keywords[0];
-    console.log("this is the type:");
-    console.log(typeof(context.giftType));
-    context.stringifiedKeywords  = context.newKeyword;
-    console.log("beginning");
-    console.log(AmazonApiUtil.searchItem(context.giftType));
-    console.log("end");
+    // console.log("this is the type:");
+    // console.log(typeof(context.giftType));
+    // context.stringifiedKeywords  = context.newKeyword;
+    // console.log("beginning");
+    // console.log(AmazonApiUtil.searchItem(context.giftType));
+    // console.log("end");
 
     //YOU CAN ACCESS giftRecipient, giftType, and gender
     cb(context);
   }
+
   // ['filterByPrice'](sessionId, context, cb) {
   //   console.log("in searchGifts.... ");
   //   // Here should go the api call, e.g.:
