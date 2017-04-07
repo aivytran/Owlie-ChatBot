@@ -24,7 +24,7 @@ const createGreetingApi = (data) => {
 const setGreetingText = () => {
   const greetingData = {
     setting_type: "greeting",
-    greeting:{
+    message:{
     text:"Welcome!!!!"
     }
   };
