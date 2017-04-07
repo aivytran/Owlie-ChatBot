@@ -86,7 +86,13 @@ app.post('/webhook', (req, res) => {
 
   const messaging = FB.getFirstMessagingEntry(req.body);
   console.log(messaging);
-  if (messaging && messaging.message) {
+  if (messaging.postback.payload) {
+    FB.fbMessage(
+      messaging.sender.id,
+      {text: "Hi, I'm Owlie! "}
+    );
+  }
+  else if (messaging && messaging.message) {
 
     // Yay! We got a new message!
 
