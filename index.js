@@ -55,7 +55,7 @@ app.set('port', PORT);
 
 app.listen(app.get('port'), () => {
   console.log('Node app is running on port', app.get('port'));
-  // FB.setGreetingText();
+  FB.setGreetingText();
 });
 
 app.use(bodyParser.json());
@@ -63,12 +63,12 @@ console.log("I'm wating for you @" + PORT);
 
 // index. Let's say something fun
 app.get('/', function(req, res) {
-  FB.setGreetingText();
   res.send('"Only those who will risk going too far can possibly find out how far one can go." - T.S. Eliot');
 });
 
 // Webhook verify setup using FB_VERIFY_TOKEN
 app.get('/webhook', (req, res) => {
+  FB.setGreetingText();
   if (!Config.FB_VERIFY_TOKEN) {
     throw new Error('missing FB_VERIFY_TOKEN');
   }
