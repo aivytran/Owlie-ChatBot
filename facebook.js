@@ -5,33 +5,56 @@
 const request = require('request');
 const Config = require('./const.js');
 
+// const createGreetingApi = (data) => {
+//   request.defaults({
+//     uri: 'https://graph.facebook.com/v2.6/me/thread_settings',
+//     qs: { access_token: Config.FB_PAGE_TOKEN },
+//     method: 'POST',
+//     json: data
+//
+//   }, function (error, response, body) {
+//   if (!error && response.statusCode == 200) {
+//     console.log("Greeting set successfully!");
+//   } else {
+//     console.error("Failed calling Thread Reference API", response.statusCode,     response.statusMessage, body.error);
+//   }
+//   });
+// }
+
 const createGreetingApi = (data) => {
-  request({
+  request.defaults({
     uri: 'https://graph.facebook.com/v2.6/me/thread_settings',
+    method: 'POST',
+    json: data,
     qs: {
       access_token: Config.FB_PAGE_TOKEN
     },
-    method: 'POST',
-    json: data
-
-  }, function (error, response, body) {
-  if (!error && response.statusCode == 200) {
-    console.log("Greeting set successfully!");
-  } else {
-    console.error("Failed calling Thread Reference API", response.statusCode,     response.statusMessage, body.error);
-  }
-  });
-}
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+};
 
 const setGreetingText = () => {
-  const greetingData = {
-    setting_type: "greeting",
+  const opts = {
+    setting_type: "greeting" ,
     greeting:{
-    text:"Welcome!!!!"
+      text: "Hi {{user_first_name}}, welcome!"
     }
   };
-  createGreetingApi(greetingData);
-}
+  createGreetingApi(opts);
+};
+
+
+// const setGreetingText = () => {
+//   const greetingData = {
+//     "setting_type":"greeting",
+//     "greeting":{
+//       "text":"Timeless apparel for the masses."
+//     }
+//   };
+//   createGreetingApi(greetingData);
+// }
 
 const fbReq = request.defaults({
   uri: 'https://graph.facebook.com/me/messages',

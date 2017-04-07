@@ -53,9 +53,8 @@ const findOrCreateSession = (fbid) => {
 const app = express();
 app.set('port', PORT);
 
-app.listen(app.get('port'), () => {
+app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
-  FB.setGreetingText();
 });
 
 app.use(bodyParser.json());
@@ -65,6 +64,7 @@ console.log("I'm wating for you @" + PORT);
 app.get('/', function(req, res) {
   res.send('"Only those who will risk going too far can possibly find out how far one can go." - T.S. Eliot');
 });
+
 
 // Webhook verify setup using FB_VERIFY_TOKEN
 app.get('/webhook', (req, res) => {
