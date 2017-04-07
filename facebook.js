@@ -83,5 +83,5 @@ module.exports = {
   getFirstMessagingEntry: getFirstMessagingEntry,
   fbMessage: fbMessage,
   fbReq: fbReq,
-  setGreetingText: setGreetingText
+  // setGreetingText: setGreetingText
 };
