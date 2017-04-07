@@ -54,9 +54,9 @@ const actions = {
       let data = null;
 
       if (JsonUtil.isJsonString(response)) {
-        data = JSON.parse(response)
+        data = JSON.parse(response);
       } else {
-        data = {"text": response}
+        data = {"text": response};
       }
 
       return FB.fbMessage(recipientId, data, (err, data) => {
@@ -229,7 +229,7 @@ const actions = {
   },
 
   ['showButtons'](sessionId, context, cb) {
-    context.showButtons = JSON.stringify({
+    context.showButtonOptions = JSON.stringify({
       "quick_replies":[
         {
           "content_type":"text",
