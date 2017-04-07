@@ -141,7 +141,7 @@ const actions = {
 
     console.log("gift type is: " + context.giftType);
     searchItem(context.giftType)
-      .then(response => console.log(response[0]));
+      .then(response => console.log(response[0]["ASIN"]));
 
     context.gift = JSON.stringify({
 	    "attachment": {
@@ -188,68 +188,25 @@ const actions = {
     cb(context);
   },
 
-  ['argee'](sessionId, context, cb) {
-    context.ans = JSON.stringify({
-      "text":"Pick a color:",
-      "quick_replies":[
-        {
-          "content_type":"text",
-          "title":"more fun",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
-        },
-        {
-          "content_type":"text",
-          "title":"no more fun",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
-        }
-      ]
-    });
-    cb(context);
-  },
-
-
-  ['filterBySubject'](sessionId, context, cb) {
-    context.filteredGifts = JSON.stringify({
-      "text":"filterBySubject..",
-      "quick_replies":[
-        {
-          "content_type":"text",
-          "title":"more suggestions",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
-        },
-        {
-          "content_type":"text",
-          "title":"search by filters",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
-        },
-        {
-          "content_type":"text",
-          "title":"new search",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
-        }
-      ]
-    });
-    cb(context);
-  },
-
   ['showButtons'](sessionId, context, cb) {
+    console.log(context);
     context.showButtonOptions = JSON.stringify({
       "text":"showing Buttons..",
       "quick_replies":[
         {
           "content_type":"text",
           "title":"more suggestions",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
+          "payload":"MORE_SUGGESTIONS"
         },
         {
           "content_type":"text",
           "title":"search by filters",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+          "payload":"SEARCH_BY_FILTERS"
         },
         {
           "content_type":"text",
           "title":"new search please!",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+          "payload":"NEW_SEARCH_PLEASE"
         }
       ]
     });
@@ -263,22 +220,22 @@ const actions = {
         {
           "content_type":"text",
           "title":"Subject",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
+          "payload":"FILTER_BY_SUBJECT"
         },
         {
           "content_type":"text",
           "title":"Brand Name",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+          "payload":"FILTER_BY_BRAND_NAME"
         },
         {
           "content_type":"text",
           "title":"Price Range",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+          "payload":"FILTER_BY_PRICE_RANGE"
         },
         {
           "content_type":"text",
           "title":"Size",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+          "payload":"FILTER_BY_SIZE"
         }
       ]
     });
