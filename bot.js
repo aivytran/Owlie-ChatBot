@@ -182,7 +182,7 @@ const actions = {
 
     //YOU CAN ACCESS giftRecipient, giftType, and gender
     cb(context);
-  }
+  },
 
   ['argee'](sessionId, context, cb) {
     context.ans = {
