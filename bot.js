@@ -5,7 +5,9 @@
 const Wit = require('node-wit').Wit;
 const FB = require('./facebook.js');
 const Config = require('./const.js');
-const AmazonApiUtil = require('./util/amazon_api_util.js');
+// const AmazonApiUtil = require('./util/amazon_api_util.js');
+const JsonUtil = require('./util/json_util.js');
+
 
 const firstEntityValue = (entities, entity) => {
   const val = entities && entities[entity] &&
@@ -45,19 +47,19 @@ const actions = {
       //     }
       //     delete response.quickreplies;
       // }
-      // console.log("SENDING RESPONSE");
-      // console.log(response);
-      // console.log(typeof response);
-      // data = JSON.parse(response);
-      // console.log(data);
+      console.log("SENDING RESPONSE");
+      console.log(response);
 
-      let data = {}
-      try {
-        JSON.parse(response)
-      } catch (e) {
+      let data = null;
+
+      if (JsonUtil.isJsonString(response)) {
+        data = JSON.parse(response)
+      } else {
         data = {"text": response}
       }
-      data = response
+      console.log(data);
+
+      console.log(data);
 
       return FB.fbMessage(recipientId, data, (err, data) => {
         console.log("in Facebook");
