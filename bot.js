@@ -184,6 +184,25 @@ const actions = {
     cb(context);
   }
 
+  ['getGift'](sessionId, context, cb) {
+    context.ans = {
+      "text":"Pick a color:",
+      "quick_replies":[
+        {
+          "content_type":"text",
+          "title":"more fun",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
+        },
+        {
+          "content_type":"text",
+          "title":"no more fun",
+          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+        }
+      ]
+    }
+    cb(context)
+  }
+
   // ['filterByPrice'](sessionId, context, cb) {
   //   console.log("in searchGifts.... ");
   //   // Here should go the api call, e.g.:
