@@ -95,7 +95,31 @@ app.post('/webhook', (req, res) => {
       ), 2000);
       setTimeout(() => FB.fbMessage(
         messaging.sender.id,
-        {text: `You can tell me things like: buy gift 🎁 or remind me to send gift ⏰`}
+        {"attachment":{
+            "type":"template",
+            "payload":{
+              "template_type":"button",
+              "text":"What would you like to do?",
+              "buttons":[
+                {
+                  "type":"postback",
+                  "title":"🎁 Buy gift ",
+                  "payload":"USER_BUY_GIFT"
+                },
+                {
+                  "type":"postback",
+                  "title":"⏰ Remind me to send gift",
+                  "payload":"USER_REMINDER"
+                },
+                {
+                  "type":"postback",
+                  "title":"😭 Help",
+                  "payload":"USER_HELP"
+                }
+              ]
+            }
+          }
+        }
       ), 3000);
     }
   }
