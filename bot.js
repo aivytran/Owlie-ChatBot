@@ -127,14 +127,18 @@ const actions = {
         for (let i = 0; i < 10; i++) {
           cards.push( {
             "title": `${response[i]["ItemAttributes"][0]["Title"]}`,
-            "subtitle": `${response[i]["ItemAttributes"][0]["ListPrice"][0]["FormattedPrice"]}`,
-            "image_url": `${response[i]["MediumImage"][0]["URL"]}`,
+            "subtitle": `${response[i]["ItemAttributes"][0]["ListPrice"][0]["FormattedPrice"]} ${response[i]["ItemAttributes"][0]["ListPrice"][0]["CurrencyCode"]}`,
+            "image_url": `${response[i]["LargeImage"][0]["URL"]}`,
             "buttons": [
               {
-              "type": "web_url",
-              "url": `${response[i]["DetailPageURL"]}`,
-              "title": "details & buy"
-              }],
+                "type": "web_url",
+                "url": `${response[i]["DetailPageURL"]}`,
+                "title": "details & buy"
+              }, {
+                "type": "element_share",
+                "title": "share"
+              }
+            ],
           });
         }
 
