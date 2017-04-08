@@ -23,7 +23,7 @@ const firstEntityValue = (entities, entity) => {
 // Bot actions
 const actions = {
   say (sessionId, context, response, cb) {
-    console.log(response);
+    // console.log(response);
 
     // Bot testing mode, run cb() and return
     if (require.main === module) {
@@ -138,11 +138,14 @@ const actions = {
     // console.log("giftType in searchGifts" + context.giftType);
     // console.log("giftRecipient in searchGifts" + context.giftRecipient);
     // console.log("keywords in searchGifts" + context.keywords);
-
+    let savedUrl;
     console.log("gift type is: " + context.giftType);
     searchItem(context.giftType)
-      .then(response => console.log(response[0]["ASIN"]));
-
+      .then(response => {
+        savedUrl = response[0]["SmallImage"][0]["URL"];
+        console.log("in promise" + savedUrl);
+        return savedUrl;});
+    console.log("out" + savedUrl);
     context.gift = JSON.stringify({
 	    "attachment": {
 		    "type": "template",
