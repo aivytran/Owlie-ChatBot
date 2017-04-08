@@ -121,8 +121,8 @@ const actions = {
   ['getGift'](sessionId, context, cb) {
 
     console.log("gift type is: " + context.giftType);
-
     context.itemPage += 1;
+    console.log("the item page is " + context.itemPage);
     searchItem(context.giftType, context.itemPage)
       .then(response => {
         let cards = [];
@@ -151,7 +151,7 @@ const actions = {
             }
           }
         });
-        
+
         context.gift = template;
       });
 
