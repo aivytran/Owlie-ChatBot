@@ -101,28 +101,64 @@ const actions = {
             "payload": {
               "template_type": "generic",
               "elements": [{
-                "title": "First card",
-                "subtitle": "Element #1 of an hscroll",
-                // "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
-                "image_url": `${response[0]["LargeImage"][0]["URL"]}`,
+                "title": `${response[0]["ItemAttributes"][0]["Title"]}`,
+                "subtitle": `${response[0]["ItemAttributes"][0]["ListPrice"]}`,
+                "image_url": `${response[0]["MediumImage"][0]["URL"]}`,
                 "buttons": [{
                   "type": "web_url",
-                  // "url": "https://www.messenger.com",
                   "url": `${response[0]["DetailPageURL"]}`,
-                  "title": "buy"
+                  "title": "details & buy"
                 }, {
-                  "type": "postback",
-                  "title": "Postback",
-                  "payload": "Payload for first element in a generic bubble",
+                  "type": "web_url",
+                  "title": "share"
                 }],
               }, {
-                "title": "Second card",
-                "subtitle": "Element #2 of an hscroll",
-                "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
+                "title": `${response[1]["ItemAttributes"][1]["Title"]}`,
+                "subtitle": `${response[1]["ItemAttributes"][1]["ListPrice"]}`,
+                "image_url": `${response[1]["MediumImage"][1]["URL"]}`,
                 "buttons": [{
-                  "type": "postback",
-                  "title": "Postback",
-                  "payload": "Payload for second element in a generic bubble",
+                  "type": "web_url",
+                  "url": `${response[1]["DetailPageURL"]}`,
+                  "title": "details & buy"
+                }, {
+                  "type": "web_url",
+                  "title": "share"
+                }],
+              }, {
+                "title": `${response[2]["ItemAttributes"][2]["Title"]}`,
+                "subtitle": `${response[2]["ItemAttributes"][2]["ListPrice"]}`,
+                "image_url": `${response[2]["MediumImage"][2]["URL"]}`,
+                "buttons": [{
+                  "type": "web_url",
+                  "url": `${response[2]["DetailPageURL"]}`,
+                  "title": "details & buy"
+                }, {
+                  "type": "web_url",
+                  "title": "share"
+                }],
+              }, {
+                "title": `${response[3]["ItemAttributes"][3]["Title"]}`,
+                "subtitle": `${response[3]["ItemAttributes"][3]["ListPrice"]}`,
+                "image_url": `${response[3]["MediumImage"][3]["URL"]}`,
+                "buttons": [{
+                  "type": "web_url",
+                  "url": `${response[3]["DetailPageURL"]}`,
+                  "title": "details & buy"
+                }, {
+                  "type": "web_url",
+                  "title": "share"
+                }],
+              }, {
+                "title": `${response[4]["ItemAttributes"][4]["Title"]}`,
+                "subtitle": `${response[4]["ItemAttributes"][4]["ListPrice"]}`,
+                "image_url": `${response[4]["MediumImage"][4]["URL"]}`,
+                "buttons": [{
+                  "type": "web_url",
+                  "url": `${response[4]["DetailPageURL"]}`,
+                  "title": "details & buy"
+                }, {
+                  "type": "web_url",
+                  "title": "share"
                 }],
               }]
             }
