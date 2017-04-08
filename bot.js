@@ -120,8 +120,7 @@ const actions = {
               "url": `${response[i]["DetailPageURL"]}`,
               "title": "details & buy"
             }, {
-              "type": "element_share",
-              "title": "share"
+              "type": "element_share"
             }],
           });
         }
