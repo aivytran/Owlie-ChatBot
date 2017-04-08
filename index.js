@@ -72,15 +72,36 @@ app.post('/webhook', (req, res) => {
   const messaging = FB.getFirstMessagingEntry(req.body);
   console.log(messaging);
 
+  // retrieve the Facebook user ID
+  const sender = messaging.sender.id;
+
+  // retrieve the user's current session or create one if it doesn't exist
+  const sessionId = findOrCreateSession(sender);
+
   if (messaging.postback) {
-    if (messaging.postback.payload === "USER_GET_STARTED") {
+    const payload = messaging.postback.payload;
+    if (payload === "USER_BUY_GIFT") {
+      wit.runActions(
+        sessionId, // the user's current session
+        "buy gift", // the user's message
+        sessions[sessionId].context, // the user's current session state
+        (error, context) => {
+          if (error) {
+            console.log('Oops! Got an error from Wit:', error);
+          } else {
+            console.log('Waiting for futher messages.');
+            sessions[sessionId].context = context;
+          }
+        }
+      );
+    } else if (payload === "USER_GET_STARTED") {
       console.log("index");
       let name = "test"
       FB.getProfile(messaging.sender.id, (body) => {
         name = body.first_name;
       })
       FB.fbMessage(
-        messaging.sender.id,
+        sender,
         {attachment:{
           type:"image",
           payload:{
@@ -90,11 +111,11 @@ app.post('/webhook', (req, res) => {
         }
       );
       setTimeout(() => FB.fbMessage(
-        messaging.sender.id,
+        sender,
         {text: `Oh, hey ${name} 👋. I'm Owlie! I'm here to help you with gifts! 😍`}
       ), 2000);
       setTimeout(() => FB.fbMessage(
-        messaging.sender.id,
+        sender,
         {"attachment":{
             "type":"template",
             "payload":{
@@ -103,17 +124,17 @@ app.post('/webhook', (req, res) => {
               "buttons":[
                 {
                   "type":"postback",
-                  "title":"🎁 Buy gift ",
+                  "title":"🎁  Buy gift",
                   "payload":"USER_BUY_GIFT"
                 },
                 {
                   "type":"postback",
-                  "title":"⏰ Remind me to send gift",
+                  "title":"⏰  Remind to send gift",
                   "payload":"USER_REMINDER"
                 },
                 {
                   "type":"postback",
-                  "title":"😭 Help",
+                  "title":"😭  Help",
                   "payload":"USER_HELP"
                 }
               ]
@@ -124,12 +145,6 @@ app.post('/webhook', (req, res) => {
     }
   }
   else if (messaging && messaging.message) {
-    // retrieve the Facebook user ID
-    const sender = messaging.sender.id;
-
-    // retrieve the user's current session or create one if it doesn't exist
-    const sessionId = findOrCreateSession(sender);
-
     // retrieve the message content
     const msg = messaging.message.text;
     const atts = messaging.message.attachments;
@@ -149,8 +164,6 @@ app.post('/webhook', (req, res) => {
             console.log('Oops! Got an error from Wit:', error);
           } else {
             console.log('Waiting for futher messages.');
-
-            // Updating the user's current session state
             sessions[sessionId].context = context;
           }
         }
