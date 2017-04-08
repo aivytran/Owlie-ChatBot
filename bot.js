@@ -115,13 +115,15 @@ const actions = {
             "title": `${response[i]["ItemAttributes"][0]["Title"]}`,
             "subtitle": `${response[i]["ItemAttributes"][0]["ListPrice"]}`,
             "image_url": `${response[i]["MediumImage"][0]["URL"]}`,
-            "buttons": [{
+            "buttons": [
+              {
+                "type": "element_share"
+              },
+              {
               "type": "web_url",
               "url": `${response[i]["DetailPageURL"]}`,
               "title": "details & buy"
-            }, {
-              "type": "element_share"
-            }],
+              }],
           });
         }
 
