@@ -5,7 +5,7 @@
 const request = require('request');
 const Config = require('./const.js');
 
-getProfile (id, cb) {
+const getProfile = (id, cb) => {
   request({
     method: 'GET',
     uri: `https://graph.facebook.com/v2.6/${id}`,
@@ -75,5 +75,5 @@ module.exports = {
   getFirstMessagingEntry: getFirstMessagingEntry,
   fbMessage: fbMessage,
   fbReq: fbReq,
-  setGreetingText: setGreetingText
+  getProfile: getProfile
 };
