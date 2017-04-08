@@ -145,72 +145,29 @@ const actions = {
 
     searchItem(context.giftType)
       .then(response => {
+        let cards = [];
+        for (let i = 0; i < 10; i++) {
+          cards << {
+            "title": `${response[i]["ItemAttributes"][i]["Title"]}`,
+            "subtitle": `${response[i]["ItemAttributes"][i]["ListPrice"]}`,
+            "image_url": `${response[i]["MediumImage"][i]["URL"]}`,
+            "buttons": [{
+              "type": "web_url",
+              "url": `${response[i]["DetailPageURL"]}`,
+              "title": "details & buy"
+            }, {
+              "type": "element_share",
+              "title": "share"
+            }],
+          };
+        }
+
         let template = JSON.stringify({
           "attachment": {
             "type": "template",
             "payload": {
               "template_type": "generic",
-              "elements": [{
-                "title": `${response[0]["ItemAttributes"][0]["Title"]}`,
-                "subtitle": `${response[0]["ItemAttributes"][0]["ListPrice"]}`,
-                "image_url": `${response[0]["MediumImage"][0]["URL"]}`,
-                "buttons": [{
-                  "type": "web_url",
-                  "url": `${response[0]["DetailPageURL"]}`,
-                  "title": "details & buy"
-                }, {
-                  "type": "web_url",
-                  "title": "share"
-                }],
-              }, {
-                "title": `${response[1]["ItemAttributes"][1]["Title"]}`,
-                "subtitle": `${response[1]["ItemAttributes"][1]["ListPrice"]}`,
-                "image_url": `${response[1]["MediumImage"][1]["URL"]}`,
-                "buttons": [{
-                  "type": "web_url",
-                  "url": `${response[1]["DetailPageURL"]}`,
-                  "title": "details & buy"
-                }, {
-                  "type": "web_url",
-                  "title": "share"
-                }],
-              }, {
-                "title": `${response[2]["ItemAttributes"][2]["Title"]}`,
-                "subtitle": `${response[2]["ItemAttributes"][2]["ListPrice"]}`,
-                "image_url": `${response[2]["MediumImage"][2]["URL"]}`,
-                "buttons": [{
-                  "type": "web_url",
-                  "url": `${response[2]["DetailPageURL"]}`,
-                  "title": "details & buy"
-                }, {
-                  "type": "web_url",
-                  "title": "share"
-                }],
-              }, {
-                "title": `${response[3]["ItemAttributes"][3]["Title"]}`,
-                "subtitle": `${response[3]["ItemAttributes"][3]["ListPrice"]}`,
-                "image_url": `${response[3]["MediumImage"][3]["URL"]}`,
-                "buttons": [{
-                  "type": "web_url",
-                  "url": `${response[3]["DetailPageURL"]}`,
-                  "title": "details & buy"
-                }, {
-                  "type": "web_url",
-                  "title": "share"
-                }],
-              }, {
-                "title": `${response[4]["ItemAttributes"][4]["Title"]}`,
-                "subtitle": `${response[4]["ItemAttributes"][4]["ListPrice"]}`,
-                "image_url": `${response[4]["MediumImage"][4]["URL"]}`,
-                "buttons": [{
-                  "type": "web_url",
-                  "url": `${response[4]["DetailPageURL"]}`,
-                  "title": "details & buy"
-                }, {
-                  "type": "web_url",
-                  "title": "share"
-                }],
-              }]
+              "elements": `${cards}`
             }
           }
         });
