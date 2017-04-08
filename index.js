@@ -76,7 +76,10 @@ app.post('/webhook', (req, res) => {
     if (messaging.postback.payload === "USER_GET_STARTED") {
       console.log("index");
       let name = "test"
-      FB.getProfile(messaging.sender.id, (body) => {name = body.first_name; console.log(name);})
+      FB.getProfile(messaging.sender.id, (body) => {
+        name = body.first_name;
+        console.log(name);
+      })
 
       FB.fbMessage(
         messaging.sender.id,
