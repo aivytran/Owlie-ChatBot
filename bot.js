@@ -151,6 +151,7 @@ const actions = {
             }
           }
         });
+        
         context.gift = template;
       });
 
