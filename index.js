@@ -78,7 +78,6 @@ app.post('/webhook', (req, res) => {
       let name = "test"
       FB.getProfile(messaging.sender.id, (body) => {
         name = body.first_name;
-        console.log(name);
       })
 
       FB.fbMessage(
@@ -93,7 +92,7 @@ app.post('/webhook', (req, res) => {
       );
       setTimeout(() => FB.fbMessage(
         messaging.sender.id,
-        {text: `Hi ${name}, I'm Owlie! <3 How can I help you today?`}
+        {text: `Oh, hey 🙋, ${name}, I'm Owlie! I'm here to help you with gift!`}
       ), 2000);
     }
   }
