@@ -90,6 +90,16 @@ app.post('/webhook', (req, res) => {
     if (messaging.postback.payload === "USER_GET_STARTED") {
       FB.fbMessage(
         messaging.sender.id,
+        {attachment:{
+          type:"image",
+          payload:{
+            "url":"http://res.cloudinary.com/candycanetrain/image/upload/v1491615642/owlie_new_iw5efw.gif"
+            }
+          }
+        }
+      );
+      FB.fbMessage(
+        messaging.sender.id,
         {text: "Hi, I'm Owlie! How can I help you today?"}
       );
     }
