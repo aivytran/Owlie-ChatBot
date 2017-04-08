@@ -123,12 +123,11 @@ const actions = {
 
     searchItem(context.giftType)
       .then(response => {
-
         let cards = [];
         for (let i = 0; i < 10; i++) {
           cards.push( {
             "title": `${response[i]["ItemAttributes"][0]["Title"]}`,
-            "subtitle": `${response[i]["ItemAttributes"][0]["ListPrice"]}`,
+            "subtitle": `${response[i]["ItemAttributes"][0]["ListPrice"][0]["FormattedPrice"]}`,
             "image_url": `${response[i]["MediumImage"][0]["URL"]}`,
             "buttons": [
               {
