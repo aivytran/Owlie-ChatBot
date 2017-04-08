@@ -135,6 +135,7 @@ const actions = {
         });
         context.gift = template;
       });
+
     cb(context);
   },
 
