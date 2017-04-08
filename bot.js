@@ -81,6 +81,7 @@ const actions = {
     if (newKeyword) {
       context.newKeyword = newKeyword;
     }
+
     cb(context);
   },
 
@@ -107,12 +108,13 @@ const actions = {
 
     searchItem(context.giftType)
       .then(response => {
+
         let cards = [];
         for (let i = 0; i < 10; i++) {
-          cards << {
-            "title": `${response[i]["ItemAttributes"][i]["Title"]}`,
-            "subtitle": `${response[i]["ItemAttributes"][i]["ListPrice"]}`,
-            "image_url": `${response[i]["MediumImage"][i]["URL"]}`,
+          cards.push( {
+            "title": `${response[i]["ItemAttributes"][0]["Title"]}`,
+            "subtitle": `${response[i]["ItemAttributes"][0]["ListPrice"]}`,
+            "image_url": `${response[i]["MediumImage"][0]["URL"]}`,
             "buttons": [{
               "type": "web_url",
               "url": `${response[i]["DetailPageURL"]}`,
@@ -121,15 +123,16 @@ const actions = {
               "type": "element_share",
               "title": "share"
             }],
-          };
+          });
         }
 
+        // console.log(cards);
         let template = JSON.stringify({
           "attachment": {
             "type": "template",
             "payload": {
               "template_type": "generic",
-              "elements": `${cards}`
+              "elements": cards
             }
           }
         });
