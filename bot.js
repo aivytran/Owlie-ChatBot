@@ -85,6 +85,20 @@ const actions = {
     cb(context);
   },
 
+  clearContext(sessionId, context, entities, response, cb) {
+    const clearContext = firstEntityValue(entities, 'clearContext');
+
+
+    if (clearContext) {
+      context.giftRecipient = undefined;
+      context.giftType = undefined;
+      context.gender = undefined;
+      context.newKeyword = undefined;
+    }
+
+    cb(context);
+  },
+
   // findMethod(sessionId, context, entities, response, cb) {
   //   const method = firstEntityValue(entities, 'method');
   //
