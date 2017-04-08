@@ -79,7 +79,6 @@ app.post('/webhook', (req, res) => {
       FB.getProfile(messaging.sender.id, (body) => {
         name = body.first_name;
       })
-
       FB.fbMessage(
         messaging.sender.id,
         {attachment:{
@@ -92,7 +91,7 @@ app.post('/webhook', (req, res) => {
       );
       setTimeout(() => FB.fbMessage(
         messaging.sender.id,
-        {text: `Oh, hey 🙋, ${name}, I'm Owlie! I'm here to help you with gift!`}
+        {text: `Oh, hey ${name} 👋. I'm Owlie! I'm here to help you with gifts!😍 You can tell me things like: buy gift 🎁 or remind me to send gift ⏰`}
       ), 2000);
     }
   }
