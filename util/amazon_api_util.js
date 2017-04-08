@@ -9,18 +9,15 @@ const client = amazon.createClient({
   awsTag: Config.AWS_ASSOCIATE_TAG
 });
 
-const searchItem = (keywords) => {
+const searchItem = (keywords, itemPage) => {
   return client.itemSearch({
-    // director: 'Quentin Tarantino',
-    // actor: 'Samuel L. Jackson',
-    // searchIndex: 'DVD',
-    // audienceRating: 'R',
     keywords: keywords,
-    responseGroup: 'ItemAttributes,Offers,Images'
+    itemPage: itemPage,
+    responseGroup: 'ItemAttributes,Offers,Images,SearchBins'
   }).then(function(results){
-    return results;
+    console.log(results.length);
     // console.log(results);
-    // return results.json();
+    return results;
   }).catch(function(err){
     console.log(err);
   });

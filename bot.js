@@ -134,9 +134,6 @@ const actions = {
                 "type": "web_url",
                 "url": `${response[i]["DetailPageURL"]}`,
                 "title": "details & buy"
-              }, {
-                "type": "element_share",
-                "title": "share"
               }
             ],
           });
