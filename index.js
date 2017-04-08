@@ -1,11 +1,5 @@
 'use strict';
 
-// Messenger API integration example
-// We assume you have:
-// * a Wit.ai bot setup (https://wit.ai/docs/quickstart)
-// * a Messenger Platform setup (https://developers.facebook.com/docs/messenger-platform/quickstart)
-// You need to `npm install` the following dependencies: body-parser, express, request.
-//
 const bodyParser = require('body-parser');
 const express = require('express');
 
@@ -14,37 +8,31 @@ const bot = require('./bot.js');
 const Config = require('./const.js');
 const FB = require('./facebook.js');
 
-// Setting up our bot
+// Set up bot
 const wit = bot.getWit();
 
 // Webserver parameter
 const PORT = process.env.PORT || 8445;
 
-// Wit.ai bot specific code
-
-// This will contain all user sessions.
-// Each session has an entry:
-// sessionId -> {fbid: facebookUserId, context: sessionState}
 const sessions = {};
 
 const findOrCreateSession = (fbid) => {
   let sessionId;
-  // Let's see if we already have a session for the user fbid
+  // Check if we already have a session for the user fbid
   Object.keys(sessions).forEach(k => {
     if (sessions[k].fbid === fbid) {
-      // Yep, got it!
       sessionId = k;
     }
   });
   if (!sessionId) {
-    // No session found for user fbid, let's create a new one
+    // No session found for user fbid, create a new one
     sessionId = new Date().toISOString();
     sessions[sessionId] = {
       fbid: fbid,
       context: {
         _fbid_: fbid
       }
-    }; // set context, _fid_
+    };
   }
   return sessionId;
 };
@@ -58,9 +46,8 @@ app.listen(app.get('port'), function() {
 });
 
 app.use(bodyParser.json());
-console.log("I'm wating for you @" + PORT);
 
-// index. Let's say something fun
+// index
 app.get('/', function(req, res) {
   res.send('"Only those who will risk going too far can possibly find out how far one can go." - T.S. Eliot');
 });
@@ -82,12 +69,12 @@ app.get('/webhook', (req, res) => {
 // The main message handler
 app.post('/webhook', (req, res) => {
   // Parsing the Messenger API response
-  console.log("getting fb req");
-
   const messaging = FB.getFirstMessagingEntry(req.body);
   console.log(messaging);
+
   if (messaging.postback) {
     if (messaging.postback.payload === "USER_GET_STARTED") {
+
       FB.fbMessage(
         messaging.sender.id,
         {attachment:{
@@ -101,37 +88,26 @@ app.post('/webhook', (req, res) => {
       setTimeout(() => FB.fbMessage(
         messaging.sender.id,
         {text: "Hi, I'm Owlie! <3 How can I help you today?"}
-      ), 1000);
+      ), 2000);
     }
   }
   else if (messaging && messaging.message) {
-
-    // Yay! We got a new message!
-
-    // We retrieve the Facebook user ID of the sender
+    // retrieve the Facebook user ID
     const sender = messaging.sender.id;
 
-    // We retrieve the user's current session, or create one if it doesn't exist
-    // This is needed for our bot to figure out the conversation history
+    // retrieve the user's current session or create one if it doesn't exist
     const sessionId = findOrCreateSession(sender);
 
-    // We retrieve the message content
+    // retrieve the message content
     const msg = messaging.message.text;
     const atts = messaging.message.attachments;
 
     if (atts) {
-      // We received an attachment
-
-      // Let's reply with an automatic message
       FB.fbMessage(
         sender,
         {text: 'Sorry I can only process text messages for now.'}
       );
     } else if (msg) {
-      // We received a text message
-
-      // Let's forward the message to the Wit.ai Bot Engine
-      // This will run all actions until our bot has nothing left to do
       wit.runActions(
         sessionId, // the user's current session
         msg, // the user's message
@@ -140,16 +116,7 @@ app.post('/webhook', (req, res) => {
           if (error) {
             console.log('Oops! Got an error from Wit:', error);
           } else {
-            // Our bot did everything it has to do.
-            // Now it's waiting for further messages to proceed.
             console.log('Waiting for futher messages.');
-
-            // Based on the session state, you might want to reset the session.
-            // This depends heavily on the business logic of your bot.
-            // Example:
-            // if (context['done']) {
-            //   delete sessions[sessionId];
-            // }
 
             // Updating the user's current session state
             sessions[sessionId].context = context;
