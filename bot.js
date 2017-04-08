@@ -155,6 +155,29 @@ const actions = {
         context.gift = template;
       });
 
+      FB.fbMessage(
+        context._fbid_,
+        {
+          "text":"showing Buttons..",
+          "quick_replies":[
+            {
+              "content_type":"text",
+              "title":"more suggestions",
+              "payload":"MORE_SUGGESTIONS"
+            },
+            {
+              "content_type":"text",
+              "title":"search by filters",
+              "payload":"SEARCH_BY_FILTERS"
+            },
+            {
+              "content_type":"text",
+              "title":"new search please!",
+              "payload":"NEW_SEARCH_PLEASE"
+            }
+          ]
+        }
+    );
     cb(context);
   },
 
