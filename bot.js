@@ -188,6 +188,7 @@ const actions = {
     console.log("clearing context..");
     context.giftRecipient = undefined;
     context.giftType = undefined;
+    context.itemPage = 0;
     context.gender = undefined;
     context.newKeyword = undefined;
     console.log(context);
