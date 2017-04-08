@@ -123,7 +123,7 @@ const actions = {
         });
         context.gift = template;
       });
-
+      this.showButtons();
     cb(context);
   },
 
