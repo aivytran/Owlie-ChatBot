@@ -181,6 +181,37 @@ const actions = {
         context.gift = template;
       });
 
+    context.gift = JSON.stringify({
+	    "attachment": {
+		    "type": "template",
+		    "payload": {
+				"template_type": "generic",
+			    "elements": [{
+					"title": "First card",
+				    "subtitle": "Element #1 of an hscroll",
+				    "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+				    "buttons": [{
+					    "type": "web_url",
+					    "url": "https://www.messenger.com",
+					    "title": "web url"
+				    }, {
+					    "type": "postback",
+					    "title": "Postback",
+					    "payload": "Payload for first element in a generic bubble",
+				    }],
+			    }, {
+				    "title": "Second card",
+				    "subtitle": "Element #2 of an hscroll",
+				    "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
+				    "buttons": [{
+					    "type": "postback",
+					    "title": "Postback",
+					    "payload": "Payload for second element in a generic bubble",
+				    }],
+			    }]
+		    }
+	    }
+    });
     // context.filteredGifts = 'FILTERED GIFTS';
     // let stringifiedKeywords;
     // context.stringifiedKeywords  = context.keywords[0];
@@ -195,68 +226,25 @@ const actions = {
     cb(context);
   },
 
-  ['argee'](sessionId, context, cb) {
-    context.ans = JSON.stringify({
-      "text":"Pick a color:",
-      "quick_replies":[
-        {
-          "content_type":"text",
-          "title":"more fun",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
-        },
-        {
-          "content_type":"text",
-          "title":"no more fun",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
-        }
-      ]
-    });
-    cb(context);
-  },
-
-
-  ['filterBySubject'](sessionId, context, cb) {
-    context.filteredGifts = JSON.stringify({
-      "text":"filterBySubject..",
-      "quick_replies":[
-        {
-          "content_type":"text",
-          "title":"more suggestions",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
-        },
-        {
-          "content_type":"text",
-          "title":"search by filters",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
-        },
-        {
-          "content_type":"text",
-          "title":"new search",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
-        }
-      ]
-    });
-    cb(context);
-  },
-
   ['showButtons'](sessionId, context, cb) {
+    console.log(context);
     context.showButtonOptions = JSON.stringify({
       "text":"showing Buttons..",
       "quick_replies":[
         {
           "content_type":"text",
           "title":"more suggestions",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
+          "payload":"MORE_SUGGESTIONS"
         },
         {
           "content_type":"text",
           "title":"search by filters",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+          "payload":"SEARCH_BY_FILTERS"
         },
         {
           "content_type":"text",
           "title":"new search please!",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+          "payload":"NEW_SEARCH_PLEASE"
         }
       ]
     });
@@ -270,22 +258,22 @@ const actions = {
         {
           "content_type":"text",
           "title":"Subject",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
+          "payload":"FILTER_BY_SUBJECT"
         },
         {
           "content_type":"text",
           "title":"Brand Name",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+          "payload":"FILTER_BY_BRAND_NAME"
         },
         {
           "content_type":"text",
           "title":"Price Range",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+          "payload":"FILTER_BY_PRICE_RANGE"
         },
         {
           "content_type":"text",
           "title":"Size",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+          "payload":"FILTER_BY_SIZE"
         }
       ]
     });
