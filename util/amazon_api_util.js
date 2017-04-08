@@ -13,7 +13,7 @@ const searchItem = (keywords, itemPage) => {
   return client.itemSearch({
     keywords: keywords,
     itemPage: itemPage,
-    responseGroup: 'ItemAttributes,Offers,Images,SearchBins'
+    responseGroup: 'ItemAttributes,Offers,Images'
   }).then(function(results){
     // console.log(results);
     return results;
