@@ -15,7 +15,6 @@ const searchItem = (keywords, itemPage) => {
     itemPage: itemPage,
     responseGroup: 'ItemAttributes,Offers,Images,SearchBins'
   }).then(function(results){
-    console.log(results.length);
     // console.log(results);
     return results;
   }).catch(function(err){

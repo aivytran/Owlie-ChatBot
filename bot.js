@@ -71,6 +71,7 @@ const actions = {
     }
     if (giftType) {
       context.giftType = giftType;
+      context.itemPage = 0;
     }
     if (gender) {
       context.gender = gender;
@@ -121,7 +122,8 @@ const actions = {
 
     console.log("gift type is: " + context.giftType);
 
-    searchItem(context.giftType)
+    context.itemPage += 1;
+    searchItem(context.giftType, context.itemPage)
       .then(response => {
         let cards = [];
         for (let i = 0; i < 10; i++) {
