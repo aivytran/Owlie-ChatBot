@@ -89,16 +89,14 @@ app.post('/webhook', (req, res) => {
           }
         }
       );
-      setTimeout(() => {
-        FB.fbMessage(
+      setTimeout(() => FB.fbMessage(
         messaging.sender.id,
         {text: `Oh, hey ${name} 👋. I'm Owlie! I'm here to help you with gifts! 😍`}
-        )
-        FB.fbMessage(
+      ), 2000);
+      setTimeout(() => FB.fbMessage(
         messaging.sender.id,
         {text: `You can tell me things like: buy gift 🎁 or remind me to send gift ⏰`}
-        )
-      }, 2000);
+      ), 3000);
     }
   }
   else if (messaging && messaging.message) {
