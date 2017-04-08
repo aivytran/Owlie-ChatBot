@@ -75,7 +75,8 @@ app.post('/webhook', (req, res) => {
   if (messaging.postback) {
     if (messaging.postback.payload === "USER_GET_STARTED") {
       console.log("index");
-      FB.getProfile(messaging.sender.id, (res) => {console.log(res);})
+      let name = "test"
+      FB.getProfile(messaging.sender.id, (body) => {const name = body; console.log(name);})
 
       FB.fbMessage(
         messaging.sender.id,
@@ -89,7 +90,7 @@ app.post('/webhook', (req, res) => {
       );
       setTimeout(() => FB.fbMessage(
         messaging.sender.id,
-        {text: "Hi, I'm Owlie! <3 How can I help you today?"}
+        {text: `Hi ${name}, I'm Owlie! <3 How can I help you today?`}
       ), 2000);
     }
   }
