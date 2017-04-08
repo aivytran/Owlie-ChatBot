@@ -125,19 +125,16 @@ app.post('/webhook', (req, res) => {
                 {
                   "type":"postback",
                   "title":"🎁  Buy gift",
-                  "content_type":"text",
                   "payload":"USER_BUY_GIFT"
                 },
                 {
                   "type":"postback",
                   "title":"⏰  Remind to send gift",
-                  "content_type":"text",
                   "payload":"USER_REMINDER"
                 },
                 {
                   "type":"postback",
                   "title":"😭  Help",
-                  "content_type":"text",
                   "payload":"USER_HELP"
                 }
               ]
