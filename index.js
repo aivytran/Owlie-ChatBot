@@ -100,7 +100,7 @@ app.post('/webhook', (req, res) => {
       );
       setTimeout(() => FB.fbMessage(
         messaging.sender.id,
-        {text: "Hi, I'm Owlie!" + u'\U+2764'+ " How can I help you today?"}
+        {text: "Hi, I'm Owlie! <3 How can I help you today?"}
       ), 1000);
     }
   }
