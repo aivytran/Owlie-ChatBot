@@ -98,10 +98,10 @@ app.post('/webhook', (req, res) => {
           }
         }
       );
-      FB.fbMessage(
+      setTimeout(() => FB.fbMessage(
         messaging.sender.id,
         {text: "Hi, I'm Owlie! How can I help you today?"}
-      );
+      ), 1000);
     }
   }
   else if (messaging && messaging.message) {
