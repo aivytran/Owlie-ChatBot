@@ -138,45 +138,49 @@ const actions = {
     // console.log("giftType in searchGifts" + context.giftType);
     // console.log("giftRecipient in searchGifts" + context.giftRecipient);
     // console.log("keywords in searchGifts" + context.keywords);
-    let savedUrl;
+
     console.log("gift type is: " + context.giftType);
+    // searchItem(context.giftType)
+    //   .then(response => console.log(response[0]));
+
     searchItem(context.giftType)
       .then(response => {
-        savedUrl = response[0]["SmallImage"][0]["URL"];
-        console.log("in promise" + savedUrl);
-        return savedUrl;});
-    console.log("out" + savedUrl);
-    context.gift = JSON.stringify({
-	    "attachment": {
-		    "type": "template",
-		    "payload": {
-				"template_type": "generic",
-			    "elements": [{
-					"title": "First card",
-				    "subtitle": "Element #1 of an hscroll",
-				    "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
-				    "buttons": [{
-					    "type": "web_url",
-					    "url": "https://www.messenger.com",
-					    "title": "web url"
-				    }, {
-					    "type": "postback",
-					    "title": "Postback",
-					    "payload": "Payload for first element in a generic bubble",
-				    }],
-			    }, {
-				    "title": "Second card",
-				    "subtitle": "Element #2 of an hscroll",
-				    "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
-				    "buttons": [{
-					    "type": "postback",
-					    "title": "Postback",
-					    "payload": "Payload for second element in a generic bubble",
-				    }],
-			    }]
-		    }
-	    }
-    });
+        let template = JSON.stringify({
+          "attachment": {
+            "type": "template",
+            "payload": {
+              "template_type": "generic",
+              "elements": [{
+                "title": "First card",
+                "subtitle": "Element #1 of an hscroll",
+                // "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+                "image_url": `${response[0]["LargeImage"][0]["URL"]}`,
+                "buttons": [{
+                  "type": "web_url",
+                  // "url": "https://www.messenger.com",
+                  "url": `${response[0]["DetailPageURL"]}`,
+                  "title": "buy"
+                }, {
+                  "type": "postback",
+                  "title": "Postback",
+                  "payload": "Payload for first element in a generic bubble",
+                }],
+              }, {
+                "title": "Second card",
+                "subtitle": "Element #2 of an hscroll",
+                "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
+                "buttons": [{
+                  "type": "postback",
+                  "title": "Postback",
+                  "payload": "Payload for second element in a generic bubble",
+                }],
+              }]
+            }
+          }
+        });
+        context.gift = template;
+      });
+
     // context.filteredGifts = 'FILTERED GIFTS';
     // let stringifiedKeywords;
     // context.stringifiedKeywords  = context.keywords[0];
