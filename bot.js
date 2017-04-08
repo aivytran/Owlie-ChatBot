@@ -84,6 +84,18 @@ const actions = {
     cb(context);
   },
 
+  // findMethod(sessionId, context, entities, response, cb) {
+  //   const method = firstEntityValue(entities, 'method');
+  //
+  //   if (method === 'more suggestions') {
+  //     this.getGift();
+  //   }
+  //   if (method === "showButtons") {
+  //     this.showButtons();
+  //   }
+  // },
+
+
   error(sessionId, context, error) {
     console.log(error.message);
   },
@@ -123,7 +135,6 @@ const actions = {
         });
         context.gift = template;
       });
-      this.showButtons();
     cb(context);
   },
 
