@@ -117,9 +117,6 @@ const actions = {
             "image_url": `${response[i]["MediumImage"][0]["URL"]}`,
             "buttons": [
               {
-                "type": "element_share"
-              },
-              {
               "type": "web_url",
               "url": `${response[i]["DetailPageURL"]}`,
               "title": "details & buy"
