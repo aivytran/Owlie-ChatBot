@@ -17,7 +17,6 @@ const getProfile = (id, cb) => {
     }, (err, res, body) => {
       if (err) return cb(err)
       if (body.error) return cb(body.error)
-      // return body
       cb(body)
     })
 }
