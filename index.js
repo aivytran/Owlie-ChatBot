@@ -93,14 +93,14 @@ app.post('/webhook', (req, res) => {
         {attachment:{
           type:"image",
           payload:{
-            "url":"http://res.cloudinary.com/candycanetrain/image/upload/v1491615642/owlie_new_iw5efw.gif"
+            "url":"http://res.cloudinary.com/candycanetrain/image/upload/v1491616754/owlie_slow_aqj8yo.gif"
             }
           }
         }
       );
       setTimeout(() => FB.fbMessage(
         messaging.sender.id,
-        {text: "Hi, I'm Owlie! How can I help you today?"}
+        {text: "Hi, I'm Owlie!" + u'\U+2764'+ " How can I help you today?"}
       ), 1000);
     }
   }
