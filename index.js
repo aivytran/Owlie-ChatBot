@@ -184,7 +184,7 @@ app.post('/webhook', (req, res) => {
     }
     else if (msg === "new search please!") {
       console.log("INSIDE CLEAR FUNCTION!!");
-      bot.clearContext(
+      bot.actions.clearContext(
         sessionId,
         sessions[sessionId].context,
         (error, context) => {
