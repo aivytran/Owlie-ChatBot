@@ -139,16 +139,40 @@ const actions = {
     searchItem(context.giftType, context.itemPage)
       .then(response => {
         let cards = [];
-        let title = "";
-        let price = "";
-        let imageUrl = "";
-        let url = "";
+        let title;
+        let price;
+        let imageUrl;
+        let url;
 
         for (let i = 0; i < response.length; i++) {
-          title = response[i]["ItemAttributes"][0]["Title"];
-          price = response[i]["ItemAttributes"][0]["ListPrice"][0]["FormattedPrice"];
-          imageUrl = response[i]["LargeImage"][0]["URL"];
-          url = response[i]["DetailPageURL"];
+          
+          title = response[i]
+          if (!!title["ItemAttributes"][0]["Title"]) {
+            title = title["ItemAttributes"][0]["Title"];
+          } else {
+            title = "untitled";
+          }
+
+          price = response[i];
+          if (!!price["ItemAttributes"][0]["ListPrice"]) {
+            price = price["ItemAttributes"][0]["ListPrice"][0]["FormattedPrice"];
+          } else {
+            price = "no price";
+          }
+
+          imageUrl = response[i];
+          if (!!imageUrl["LargeImage"]) {
+            imageUrl = imageUrl["LargeImage"][0]["URL"];
+          } else {
+            imageUrl = "http://res.cloudinary.com/d239j12/image/upload/v1491707637/noimagefound_vcaxfn.jpg";
+          }
+
+          url = response[i];
+          if (!!url["DetailPageURL"]) {
+            url = url["DetailPageURL"];
+          } else {
+            url = "no link available";
+          }
 
           cards.push( {
             "title": title,
