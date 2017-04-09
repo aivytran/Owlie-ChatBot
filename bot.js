@@ -60,6 +60,8 @@ const actions = {
   },
 
   merge(sessionId, context, entities, response, cb) {
+    // console.log(entities);
+    const datetime = firstEntityValue(entities, 'datetime');
     const giftRecipient = firstEntityValue(entities, 'giftRecipient');
     const giftType = firstEntityValue(entities, 'giftType');
     const gender = firstEntityValue(entities, 'gender');
@@ -81,6 +83,9 @@ const actions = {
     }
     if (newKeyword) {
       context.newKeyword = newKeyword;
+    }
+    if (datetime) {
+      context.datetime = datetime;
     }
 
     cb(context);
@@ -200,6 +205,23 @@ const actions = {
     context.newKeyword = undefined;
     console.log(context);
 
+    cb(context);
+  },
+
+  ['setReminder'](sessionId, context, cb) {
+    console.log(context);
+    const newReminder = {
+        user_address: context._fbid_,
+        value: context.giftRecipient,
+        expiration: context.datetime
+    };
+    console.log(newReminder);
+
+    Reminder.create(newReminder, err => {
+      console.log(err);
+    });
+    
+    context.reminder = context.datetime
     cb(context);
   },
 

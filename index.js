@@ -2,6 +2,16 @@
 
 const bodyParser = require('body-parser');
 const express = require('express');
+const mongoose = require('mongoose');
+const createReminderProcessor = require('./helpers/reminderProcessor');
+
+//setup mongodb
+mongoose.connect("mongodb://heroku_2gt6f8p3:p475lmnk33sei94t8f6r5eo7hh@ds155820.mlab.com:55820/heroku_2gt6f8p3", err => {
+    if (err) {
+        return console.error(err);
+    }
+    console.log("Connected to MongoDB");
+});
 
 // get Bot, const, and Facebook API
 const bot = require('./bot.js');
@@ -172,3 +182,7 @@ app.post('/webhook', (req, res) => {
   }
   res.sendStatus(200);
 });
+
+
+// Set up interval to process reminder
+setInterval(createReminderProcessor(), 15000)
