@@ -59,18 +59,18 @@ const actions = {
     }
   },
 
-  clearContext(sessionId, context, cb) {
-    console.log(context);
-    console.log("clearing context..");
-    context.giftRecipient = undefined;
-    context.giftType = undefined;
-    context.itemPage = 0;
-    context.gender = undefined;
-    context.newKeyword = undefined;
-    console.log(context);
-
-    cb(context);
-  },
+  // clearContext(sessionId, context, cb) {
+  //   console.log(context);
+  //   console.log("clearing context..");
+  //   context.giftRecipient = undefined;
+  //   context.giftType = undefined;
+  //   context.itemPage = 0;
+  //   context.gender = undefined;
+  //   context.newKeyword = undefined;
+  //   console.log(context);
+  //
+  //   cb(context);
+  // },
 
   merge(sessionId, context, entities, response, cb) {
     const giftRecipient = firstEntityValue(entities, 'giftRecipient');
@@ -78,17 +78,21 @@ const actions = {
     const gender = firstEntityValue(entities, 'gender');
     const filterByPrice = firstEntityValue(entities, 'filterByPrice');
     const newKeyword = firstEntityValue(entities, 'keyword');
+    // const moreSuggestions = firstEntityValue(entities, 'moreSuggestions');
 
     if (giftRecipient) {
       context.giftRecipient = giftRecipient;
     }
     if (giftType) {
       context.giftType = giftType;
-      context.itemPage = 0;
+      context.itemPage = 1;
     }
     if (gender) {
       context.gender = gender;
     }
+    // if (moreSuggestions) {
+    //   context.itemPage += 1;
+    // }
     if (filterByPrice) {
       context.filterByPrice = filterByPrice;
     }
@@ -140,11 +144,12 @@ const actions = {
 
   //bot executes
   ['getGift'](sessionId, context, cb) {
-
+    
     context.itemPage = 1;
     context.minimumPrice = "5000";
     context.maximumPrice = "10000";
 
+    console.log("in bot" + context);
     console.log("gift type is: " + context.giftType);
     console.log("the item page is " + context.itemPage);
     console.log(" ");
@@ -227,9 +232,13 @@ const actions = {
           }
         });
 
-        context.gift = template;
+        // setTimeout( () => {
+          context.gift = template;
+        // }, 3000);
       });
-
+    // context.giftRecipient = undefined;
+    // context.gender = undefined;
+    // context.gift = undefined;
     cb(context);
   },
 
@@ -259,18 +268,37 @@ const actions = {
   },
 
 
-  // ['clearContext'](sessionId, context, cb) {
-  //   console.log(context);
-  //   console.log("clearing context..");
-  //   context.giftRecipient = undefined;
-  //   context.giftType = undefined;
-  //   context.itemPage = 0;
-  //   context.gender = undefined;
-  //   context.newKeyword = undefined;
-  //   console.log(context);
-  //
-  //   cb(context);
-  // },
+  ['clearContext'](sessionId, context, cb) {
+    console.log(context);
+    console.log("clearing context..");
+    context.new_search = JSON.stringify({"attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"button",
+          "text":"What would you like to do?",
+          "buttons":[
+            {
+              "type":"postback",
+              "title":"🎁  Buy gift",
+              "payload":"USER_BUY_GIFT"
+            },
+            {
+              "type":"postback",
+              "title":"⏰  Remind to send gift",
+              "payload":"USER_REMINDER"
+            },
+            {
+              "type":"postback",
+              "title":"😭  Help",
+              "payload":"USER_HELP"
+            }
+          ]
+        }
+      }
+    });
+
+    cb(context);
+  },
 
   ['showFilterOptions'](sessionId, context, cb) {
     context.showFilterOptions = JSON.stringify({
