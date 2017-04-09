@@ -233,10 +233,10 @@ const actions = {
             if (eligiblePrime === '1') {
               eligiblePrime = 'Eligible for Prime shipping';
             } else {
-              eligiblePrime = 'Not eligible for Prime shipping';
+              eligiblePrime = 'No info on Prime shipping';
             }
           } else {
-            eligiblePrime = 'Not eligible for Prime shipping';
+            eligiblePrime = 'No info on Prime shipping';
           }
           // console.log("Eligible " + eligiblePrime);
 
@@ -249,6 +249,10 @@ const actions = {
                 "type": "web_url",
                 "url": url,
                 "title": "details & buy"
+              }, {
+                "type": "web_url",
+                "url": url,
+                "title": eligiblePrime
               }
             ],
           });
