@@ -96,7 +96,7 @@ const actions = {
     const filterByPrice = firstEntityValue(entities, 'filterByPrice');
     const newKeyword = firstEntityValue(entities, 'keyword');
     const datetime = firstEntityValue(entities, 'datetime');
-    context.showButtonOptions = undefined;
+    // context.showButtonOptions = undefined;
     // const moreSuggestions = firstEntityValue(entities, 'moreSuggestions');
     if (giftRecipient) {
       context.giftRecipient = giftRecipient;
