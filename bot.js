@@ -340,8 +340,6 @@ const actions = {
         }
       }
     });
-
->>>>>>> 57de46d31e471b84c41a8de9f8b326cc2374131a
     cb(context);
   },
 
