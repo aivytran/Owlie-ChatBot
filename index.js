@@ -182,6 +182,21 @@ app.post('/webhook', (req, res) => {
         }
       );
     }
+    else if (msg === "new search please!") {
+      console.log("INSIDE CLEAR FUNCTION!!");
+      bot.clearContext(
+        sessionId,
+        sessions[sessionId].context,
+        (error, context) => {
+        if (error) {
+          console.log('Got an error inside incrementItemPage..', error);
+        } else {
+          console.log('Waiting for futher messages...');
+          sessions[sessionId].context = context;
+        }
+      });
+
+    }
     else if (msg) {
       wit.runActions(
         sessionId, // the user's current session
