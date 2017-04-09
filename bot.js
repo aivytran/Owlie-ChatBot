@@ -5,6 +5,7 @@ const FB = require('./facebook.js');
 const Config = require('./const.js');
 const {searchItem} = require('./util/amazon_api_util.js');
 const JsonUtil = require('./util/json_util.js');
+const Reminder = require('./models/reminder');
 
 
 const firstEntityValue = (entities, entity) => {
@@ -94,8 +95,8 @@ const actions = {
     const gender = firstEntityValue(entities, 'gender');
     const filterByPrice = firstEntityValue(entities, 'filterByPrice');
     const newKeyword = firstEntityValue(entities, 'keyword');
+    const datetime = firstEntityValue(entities, 'datetime');
     // const moreSuggestions = firstEntityValue(entities, 'moreSuggestions');
-
     if (giftRecipient) {
       context.giftRecipient = giftRecipient;
     }
@@ -114,6 +115,9 @@ const actions = {
     }
     if (newKeyword) {
       context.newKeyword = newKeyword;
+    }
+    if (datetime) {
+      context.datetime = datetime;
     }
     cb(context);
   },
@@ -315,31 +319,6 @@ const actions = {
 
   ['setReminder'](sessionId, context, cb) {
     context.reminder = "Got Cha!"
-    context.new_search = JSON.stringify({"attachment":{
-        "type":"template",
-        "payload":{
-          "template_type":"button",
-          "text":"What would you like to do?",
-          "buttons":[
-            {
-              "type":"postback",
-              "title":"🎁  Buy gift",
-              "payload":"USER_BUY_GIFT"
-            },
-            {
-              "type":"postback",
-              "title":"⏰  Remind to send gift",
-              "payload":"USER_REMINDER"
-            },
-            {
-              "type":"postback",
-              "title":"😭  Help",
-              "payload":"USER_HELP"
-            }
-          ]
-        }
-      }
-    });
     cb(context);
   },
 
