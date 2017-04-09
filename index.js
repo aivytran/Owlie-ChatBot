@@ -161,7 +161,7 @@ app.post('/webhook', (req, res) => {
       console.log("INSIDE MORE SUGGESTIONS FUNCTION!!");
       wit.runActions(
         sessionId, // the user's current session
-        "buy gift for " + sessions[sessionId].context.giftRecipient, // the user's message
+        "buy gift", // the user's message
         {_fbid_: sender,
           giftRecipient: sessions[sessionId].context.giftRecipient,
           gender: sessions[sessionId].context.gender,
