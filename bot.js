@@ -217,7 +217,7 @@ const actions = {
 
         setTimeout( () => {
           context.gift = template;
-        }, 5000);
+        }, 3000);
       });
     // context.giftRecipient = undefined;
     // context.gender = undefined;
