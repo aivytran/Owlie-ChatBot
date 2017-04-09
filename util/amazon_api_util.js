@@ -20,11 +20,12 @@ const searchItem = (keywords, itemPage, minimumPrice, maximumPrice) => {
     responseGroup: 'ItemAttributes,Offers,Images'
   }).then(function(results){
     // for (let i = 0; i < results.length; i++) {
-      // console.log(i);
-      // console.log(results[i]);
+    //   console.log("item " + i);
+      // console.log(results[0]);
       // console.log(results[i]["OfferSummary"][0]["LowestNewPrice"][0]["FormattedPrice"][0]);
       // console.log(results[i]["Offers"][0]["Offer"][0]["OfferListing"][0]["Price"]);
-      // console.log(results[i]["Offers"][0]["Offer"][0]["OfferListing"][0]);
+      // console.log(results[0]["Offers"][0]["Offer"][0]["OfferListing"][0]["IsEligibleForPrime"][0]);
+      // console.log(results[0]["Offers"][0]["Offer"][0]["OfferListing"][0]["AvailabilityAttributes"]);
       // console.log(results[i]["Offers"][0]["Offer"][0]["OfferListing"][0]["Availability"][0]);
       // console.log(results[i]["ItemAttributes"][0]["ListPrice"]);
       // console.log(results[i]["BrowseNodes"]);

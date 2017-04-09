@@ -166,6 +166,7 @@ const actions = {
         let imageUrl;
         let url;
         let shipping;
+        let eligiblePrime;
 
         for (let i = 0; i < response.length; i++) {
           title = response[i];
@@ -210,6 +211,20 @@ const actions = {
             shipping = "";
           }
 
+          eligiblePrime = response[i];
+          if (!!eligiblePrime["Offers"][0]["Offer"][0]["OfferListing"][0]["IsEligibleForPrime"]) {
+            eligiblePrime = eligiblePrime["Offers"][0]["Offer"][0]["OfferListing"][0]["IsEligibleForPrime"][0];
+            // console.log("if " + eligiblePrime);
+            if (eligiblePrime === '1') {
+              eligiblePrime = 'Eligible for Prime shipping';
+            } else {
+              eligiblePrime = 'Not eligible for Prime shipping';
+            }
+          } else {
+            eligiblePrime = 'Not eligible for Prime shipping';
+          }
+          // console.log("Eligible " + eligiblePrime);
+
           cards.push( {
             "title": title,
             "subtitle": `${price}\n${availability}`,
@@ -219,6 +234,9 @@ const actions = {
                 "type": "web_url",
                 "url": url,
                 "title": "details & buy"
+              }, {
+                "type": "text",
+                "title": eligiblePrime
               }
             ],
           });
