@@ -140,6 +140,7 @@ const actions = {
 
   //bot executes
   ['getGift'](sessionId, context, cb) {
+    context.itemPage += 1;
 
     console.log("gift type is: " + context.giftType);
     console.log("the item page is " + context.itemPage);
@@ -148,7 +149,6 @@ const actions = {
     console.log(context);
     console.log("end of context .....");
     console.log(" ");
-    context.itemPage += 1;
 
     searchItem(context.giftType, context.itemPage)
       .then(response => {
@@ -159,7 +159,7 @@ const actions = {
         let url;
 
         for (let i = 0; i < response.length; i++) {
-          
+
           title = response[i]
           if (!!title["ItemAttributes"][0]["Title"]) {
             title = title["ItemAttributes"][0]["Title"];
