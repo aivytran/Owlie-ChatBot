@@ -111,6 +111,21 @@ app.post('/webhook', (req, res) => {
           }
         }
       );
+    } else if (payload === "USER_REMINDER") {
+      console.log("in user buy gift");
+      wit.runActions(
+        sessionId, // the user's current session
+        "set reminder", // the user's message
+        {_fbid_: sender}, // the user's current session state
+        (error, context) => {
+          if (error) {
+            console.log('Oops! Got an error from Wit:', error);
+          } else {
+            console.log('Waiting for futher messages.');
+            sessions[sessionId].context = context;
+          }
+        }
+      );
     } else if (payload === "USER_GET_STARTED") {
       console.log("index");
       let name = "test";
