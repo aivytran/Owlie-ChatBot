@@ -181,7 +181,6 @@ app.post('/webhook', (req, res) => {
     else if (messaging.message.quick_reply) {
       const payload = messaging.message.quick_reply.payload;
       if (payload === 'MORE_SUGGESTIONS'){
-
             sessions[sessionId].context.itemPage += 1;
             console.log("INSIDE MORE SUGGESTIONS FUNCTION!!");
             wit.runActions(
