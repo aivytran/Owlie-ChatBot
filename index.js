@@ -165,7 +165,11 @@ app.post('/webhook', (req, res) => {
     // retrieve the message content
     const msg = messaging.message.text;
     const atts = messaging.message.attachments;
-
+    console.log("  ");
+    console.log("..printing msg..");
+    console.log(msg);
+    console.log("..ending msg..");
+    console.log("  ");
 
 
     if (atts) {
@@ -227,14 +231,14 @@ app.post('/webhook', (req, res) => {
       );
     }
   }
-  else if (messaging && messaging.message.quick_reply) {
-    const quickReply = messaging.message.quick_reply;
-    console.log(" ");
-    console.log("..beginning of quickReply...");
-    console.log(quickReply);
-    console.log("..ending of quickReply...");
-    console.log(" ");
-  }
+  // else if (messaging && messaging.message.quick_reply) {
+  //   const quickReply = messaging.message.quick_reply;
+  //   console.log(" ");
+  //   console.log("..beginning of quickReply...");
+  //   console.log(quickReply);
+  //   console.log("..ending of quickReply...");
+  //   console.log(" ");
+  // }
 
 
   res.sendStatus(200);
