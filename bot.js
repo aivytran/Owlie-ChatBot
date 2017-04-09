@@ -59,6 +59,19 @@ const actions = {
     }
   },
 
+  clearContext(sessionId, context, cb) {
+    console.log(context);
+    console.log("clearing context..");
+    context.giftRecipient = undefined;
+    context.giftType = undefined;
+    context.itemPage = 0;
+    context.gender = undefined;
+    context.newKeyword = undefined;
+    console.log(context);
+
+    cb(context);
+  },
+
   merge(sessionId, context, entities, response, cb) {
     const giftRecipient = firstEntityValue(entities, 'giftRecipient');
     const giftType = firstEntityValue(entities, 'giftType');
@@ -231,18 +244,18 @@ const actions = {
   },
 
 
-  ['clearContext'](sessionId, context, cb) {
-    console.log(context);
-    console.log("clearing context..");
-    context.giftRecipient = undefined;
-    context.giftType = undefined;
-    context.itemPage = 0;
-    context.gender = undefined;
-    context.newKeyword = undefined;
-    console.log(context);
-
-    cb(context);
-  },
+  // ['clearContext'](sessionId, context, cb) {
+  //   console.log(context);
+  //   console.log("clearing context..");
+  //   context.giftRecipient = undefined;
+  //   context.giftType = undefined;
+  //   context.itemPage = 0;
+  //   context.gender = undefined;
+  //   context.newKeyword = undefined;
+  //   console.log(context);
+  //
+  //   cb(context);
+  // },
 
   ['showFilterOptions'](sessionId, context, cb) {
     context.showFilterOptions = JSON.stringify({

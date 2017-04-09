@@ -124,12 +124,12 @@ app.post('/webhook', (req, res) => {
               "buttons":[
                 {
                   "type":"postback",
-                  "title":"🎁 Buy gift",
+                  "title":"🎁  Buy gift",
                   "payload":"USER_BUY_GIFT"
                 },
                 {
                   "type":"postback",
-                  "title":"⏰ Set gift reminder",
+                  "title":"⏰  Remind to send gift",
                   "payload":"USER_REMINDER"
                 },
                 {
@@ -152,8 +152,20 @@ app.post('/webhook', (req, res) => {
     if (atts) {
       FB.fbMessage(
         sender,
-        {text: `Owlie can only understand text message for now 😥. I'm learning human speech though; I'll get you next time 😉.`}
+        {text: 'Sorry I can only process text messages for now.'}
       );
+    } else if (msg === "more suggestions") {
+      bot.incrementItemPage(
+        sessionId,
+        sessions[sessionId].context,
+        (error, context) => {
+        if (error) {
+          console.log('Got an error inside incrementItemPage..', error);
+        } else {
+          console.log('Waiting for futher messages...');
+          sessions[sessionId].context = context;
+        }
+      });
     } else if (msg) {
       wit.runActions(
         sessionId, // the user's current session
