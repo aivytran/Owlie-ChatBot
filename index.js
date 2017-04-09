@@ -96,10 +96,10 @@ app.post('/webhook', (req, res) => {
       );
     } else if (payload === "USER_GET_STARTED") {
       console.log("index");
-      let name = "test"
+      let name = "test";
       FB.getProfile(messaging.sender.id, (body) => {
         name = body.first_name;
-      })
+      });
       FB.fbMessage(
         sender,
         {attachment:{
@@ -184,17 +184,30 @@ app.post('/webhook', (req, res) => {
     }
     else if (msg === "new search please!") {
       console.log("INSIDE CLEAR FUNCTION!!");
-      bot.actions.clearContext(
-        sessionId,
-        sessions[sessionId].context,
+      // bot.actions.clearContext(
+      //   sessionId,
+      //   sessions[sessionId].context,
+      //   (error, context) => {
+      //   if (error) {
+      //     console.log('Got an error inside incrementItemPage..', error);
+      //   } else {
+      //     console.log('Waiting for futher messages...');
+      //     sessions[sessionId].context = context;
+      //   }
+      // });
+      wit.runActions(
+        sessionId, // the user's current session
+        "new search please!", // the user's message
+        sessions[sessionId].context, // the user's current session state
         (error, context) => {
-        if (error) {
-          console.log('Got an error inside incrementItemPage..', error);
-        } else {
-          console.log('Waiting for futher messages...');
-          sessions[sessionId].context = context;
+          if (error) {
+            console.log('Oops! Got an error from Wit:', error);
+          } else {
+            console.log('Waiting for further messages.');
+            sessions[sessionId].context = context;
+          }
         }
-      });
+      );
 
     }
     else if (msg) {
