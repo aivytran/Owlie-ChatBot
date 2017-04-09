@@ -85,7 +85,7 @@ app.post('/webhook', (req, res) => {
       wit.runActions(
         sessionId, // the user's current session
         "buy gift", // the user's message
-        sessions[sessionId].context, // the user's current session state
+        {_fbid_: sender}, // the user's current session state
         (error, context) => {
           if (error) {
             console.log('Oops! Got an error from Wit:', error);
