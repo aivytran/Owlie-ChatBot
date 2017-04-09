@@ -49,8 +49,8 @@ const findOrCreateSession = (fbid) => {
 
 const findUserID = (sessionId) => {
   console.log(sessions);
-  Object.values(sessions)
-}
+  Object.values(sessions);
+};
 
 // Starting our webserver and putting it all together
 const app = express();
@@ -200,7 +200,7 @@ app.post('/webhook', (req, res) => {
             console.log("INSIDE MORE SUGGESTIONS FUNCTION!!");
             wit.runActions(
               sessionId, // the user's current session
-              "buy gift", // the user's message
+              "Buy gift", // the user's message
               {_fbid_: sender,
                 giftRecipient: sessions[sessionId].context.giftRecipient,
                 gender: sessions[sessionId].context.gender,
@@ -264,4 +264,4 @@ app.post('/webhook', (req, res) => {
 
 
 // Set up interval to process reminder
-setInterval(createReminderProcessor(), 15000)
+setInterval(createReminderProcessor(), 15000);
