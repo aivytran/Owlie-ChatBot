@@ -140,7 +140,10 @@ const actions = {
 
   //bot executes
   ['getGift'](sessionId, context, cb) {
-    context.itemPage += 1;
+
+    context.itemPage = 1;
+    context.minimumPrice = "5000";
+    context.maximumPrice = "10000";
 
     console.log("gift type is: " + context.giftType);
     console.log("the item page is " + context.itemPage);
@@ -150,13 +153,14 @@ const actions = {
     console.log("end of context .....");
     console.log(" ");
 
-    searchItem(context.giftType, context.itemPage)
+    searchItem(context.giftType, context.itemPage, context.minimumPrice, context.maximumPrice)
       .then(response => {
         let cards = [];
         let title;
         let price;
         let imageUrl;
         let url;
+        let shipping;
 
         for (let i = 0; i < response.length; i++) {
           title = response[i];
@@ -167,8 +171,13 @@ const actions = {
           }
 
           price = response[i];
-          if (!!price["ItemAttributes"][0]["ListPrice"]) {
-            price = price["ItemAttributes"][0]["ListPrice"][0]["FormattedPrice"][0];
+          // if (!!price["ItemAttributes"][0]["ListPrice"]) {
+          //   price = price["ItemAttributes"][0]["ListPrice"][0]["FormattedPrice"][0];
+          // } else {
+          //   price = "";
+          // }
+          if (!!price["OfferSummary"][0]["LowestNewPrice"][0]["FormattedPrice"]) {
+            price = price["OfferSummary"][0]["LowestNewPrice"][0]["FormattedPrice"][0];
           } else {
             price = "";
           }
@@ -185,6 +194,13 @@ const actions = {
             url = url["DetailPageURL"][0];
           } else {
             url = "http://www.amazon.com";
+          }
+
+          shipping = response[i];
+          if (!!shipping["Offers"][0]["Offer"]) {
+            shipping = shipping["Offers"][0]["Offer"][0]["OfferListing"][0]["Availability"][0];
+          } else {
+            shipping = "";
           }
 
           cards.push( {
@@ -300,5 +316,5 @@ if (require.main === module) {
   client.interactive();
 }
 
-let query = searchItem("watches", "1", "$50.00", "$100.00");
-console.log(query);
+// let query = searchItem("watches", "1", "5000", "10000");
+// console.log(query);
