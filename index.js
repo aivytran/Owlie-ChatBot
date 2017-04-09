@@ -208,6 +208,34 @@ app.post('/webhook', (req, res) => {
           }
         }
       );
+      FB.fbMessage(
+        sender,
+        {"attachment":{
+            "type":"template",
+            "payload":{
+              "template_type":"button",
+              "text":"What would you like to do?",
+              "buttons":[
+                {
+                  "type":"postback",
+                  "title":"🎁  Buy gift",
+                  "payload":"USER_BUY_GIFT"
+                },
+                {
+                  "type":"postback",
+                  "title":"⏰  Remind to send gift",
+                  "payload":"USER_REMINDER"
+                },
+                {
+                  "type":"postback",
+                  "title":"😭  Help",
+                  "payload":"USER_HELP"
+                }
+              ]
+            }
+          }
+        }
+      );
 
     }
     else if (msg) {

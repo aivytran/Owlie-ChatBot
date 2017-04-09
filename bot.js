@@ -213,9 +213,9 @@ const actions = {
 
         context.gift = template;
       });
-    context.giftRecipient = undefined;
-    context.gender = undefined;
-    context.gift = undefined;
+    // context.giftRecipient = undefined;
+    // context.gender = undefined;
+    // context.gift = undefined;
     cb(context);
   },
 
