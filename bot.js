@@ -21,7 +21,9 @@ const firstEntityValue = (entities, entity) => {
 // Bot actions
 const actions = {
   say (sessionId, context, response, cb) {
-    // console.log(response);
+    console.log(response);
+    console.log("in say");
+    console.log(context);
 
     // Bot testing mode
     if (require.main === module) {
@@ -34,6 +36,20 @@ const actions = {
     if (recipientId) {
 
       let data = null;
+
+      if (response.includes("Got Cha!")) {
+        const newReminder = {
+            user_id: recipientId,
+            value: context.giftRecipient,
+            expiration: context.datetime
+        };
+        console.log(newReminder);
+
+        Reminder.create(newReminder, err => {
+          console.log(err);
+        });
+
+      }
 
       if (JsonUtil.isJsonString(response)) {
         data = JSON.parse(response);
@@ -99,7 +115,6 @@ const actions = {
     if (newKeyword) {
       context.newKeyword = newKeyword;
     }
-
     cb(context);
   },
 
@@ -288,6 +303,19 @@ const actions = {
   ['clearContext'](sessionId, context, cb) {
     console.log(context);
     console.log("clearing context..");
+    context.giftRecipient = undefined;
+    context.giftType = undefined;
+    context.itemPage = 0;
+    context.gender = undefined;
+    context.newKeyword = undefined;
+    console.log(context);
+
+    cb(context);
+  },
+
+  ['setReminder'](sessionId, context, cb) {
+    context.reminder = "Got Cha!"
+=======
     context.new_search = JSON.stringify({"attachment":{
         "type":"template",
         "payload":{
@@ -314,6 +342,7 @@ const actions = {
       }
     });
 
+>>>>>>> 57de46d31e471b84c41a8de9f8b326cc2374131a
     cb(context);
   },
 
