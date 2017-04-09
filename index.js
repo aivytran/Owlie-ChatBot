@@ -124,12 +124,12 @@ app.post('/webhook', (req, res) => {
               "buttons":[
                 {
                   "type":"postback",
-                  "title":"🎁  Buy gift",
+                  "title":"🎁 Buy gift",
                   "payload":"USER_BUY_GIFT"
                 },
                 {
                   "type":"postback",
-                  "title":"⏰  Remind to send gift",
+                  "title":"⏰ Set gift reminder",
                   "payload":"USER_REMINDER"
                 },
                 {
@@ -152,7 +152,7 @@ app.post('/webhook', (req, res) => {
     if (atts) {
       FB.fbMessage(
         sender,
-        {text: 'Sorry I can only process text messages for now.'}
+        {text: `Owlie can only understand text message for now 😥. I'm learning human speech though; I'll get you next time 😉.`}
       );
     } else if (msg) {
       wit.runActions(
