@@ -85,8 +85,7 @@ app.get('/webhook', (req, res) => {
 app.post('/webhook', (req, res) => {
   // Parsing the Messenger API response
   const messaging = FB.getFirstMessagingEntry(req.body);
-  const quickReply = messaging.message;
-  console.log(quickReply);
+
   console.log(messaging);
 
   // retrieve the Facebook user ID
@@ -167,6 +166,8 @@ app.post('/webhook', (req, res) => {
     const msg = messaging.message.text;
     const atts = messaging.message.attachments;
 
+
+
     if (atts) {
       FB.fbMessage(
         sender,
@@ -226,6 +227,16 @@ app.post('/webhook', (req, res) => {
       );
     }
   }
+  else if (messaging && messaging.message.quick_reply) {
+    const quickReply = messaging.message.quick_reply;
+    console.log(" ");
+    console.log("..beginning of quickReply...");
+    console.log(quickReply);
+    console.log("..ending of quickReply...");
+    console.log(" ");
+  }
+
+
   res.sendStatus(200);
 });
 
