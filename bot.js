@@ -144,8 +144,7 @@ const actions = {
 
   //bot executes
   ['getGift'](sessionId, context, cb) {
-    
-    context.itemPage = 1;
+
     context.minimumPrice = "5000";
     context.maximumPrice = "10000";
 
@@ -163,6 +162,7 @@ const actions = {
         let cards = [];
         let title;
         let price;
+        let availability;
         let imageUrl;
         let url;
         let shipping;
@@ -176,15 +176,18 @@ const actions = {
           }
 
           price = response[i];
-          // if (!!price["ItemAttributes"][0]["ListPrice"]) {
-          //   price = price["ItemAttributes"][0]["ListPrice"][0]["FormattedPrice"][0];
-          // } else {
-          //   price = "";
-          // }
           if (!!price["OfferSummary"][0]["LowestNewPrice"][0]["FormattedPrice"]) {
             price = price["OfferSummary"][0]["LowestNewPrice"][0]["FormattedPrice"][0];
           } else {
             price = "";
+          }
+
+          // console.log(results[i]["Offers"][0]["Offer"][0]["OfferListing"][0]["Availability"][0]);
+          availability = response[i];
+          if (!!availability["Offers"][0]["Offer"][0]["OfferListing"][0]["Availability"]) {
+            availability = availability["Offers"][0]["Offer"][0]["OfferListing"][0]["Availability"][0];
+          } else {
+            availability = "";
           }
 
           imageUrl = response[i];
@@ -210,7 +213,7 @@ const actions = {
 
           cards.push( {
             "title": title,
-            "subtitle": price,
+            "subtitle": `${price}\n${availability}`,
             "image_url": imageUrl,
             "buttons": [
               {
