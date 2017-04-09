@@ -161,30 +161,30 @@ const actions = {
         for (let i = 0; i < response.length; i++) {
           title = response[i];
           if (!!title["ItemAttributes"][0]["Title"]) {
-            title = title["ItemAttributes"][0]["Title"];
+            title = title["ItemAttributes"][0]["Title"][0];
           } else {
-            title = "untitled";
+            title = "";
           }
 
           price = response[i];
           if (!!price["ItemAttributes"][0]["ListPrice"]) {
-            price = price["ItemAttributes"][0]["ListPrice"][0]["FormattedPrice"];
+            price = price["ItemAttributes"][0]["ListPrice"][0]["FormattedPrice"][0];
           } else {
-            price = "no price";
+            price = "";
           }
 
           imageUrl = response[i];
           if (!!imageUrl["LargeImage"]) {
-            imageUrl = imageUrl["LargeImage"][0]["URL"];
+            imageUrl = imageUrl["LargeImage"][0]["URL"][0];
           } else {
             imageUrl = "http://res.cloudinary.com/d239j12/image/upload/v1491707637/noimagefound_vcaxfn.jpg";
           }
 
           url = response[i];
           if (!!url["DetailPageURL"]) {
-            url = url["DetailPageURL"];
+            url = url["DetailPageURL"][0];
           } else {
-            url = "no link available";
+            url = "http://www.amazon.com";
           }
 
           cards.push( {
@@ -201,7 +201,6 @@ const actions = {
           });
         }
 
-        // console.log(cards);
         let template = JSON.stringify({
           "attachment": {
             "type": "template",
