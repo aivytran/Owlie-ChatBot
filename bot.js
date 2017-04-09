@@ -215,7 +215,9 @@ const actions = {
           }
         });
 
-        context.gift = template;
+        setTimeout( () => {
+          context.gift = template;
+        }, 5000);
       });
     // context.giftRecipient = undefined;
     // context.gender = undefined;
