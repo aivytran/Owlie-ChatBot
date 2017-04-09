@@ -234,9 +234,6 @@ const actions = {
                 "type": "web_url",
                 "url": url,
                 "title": "details & buy"
-              }, {
-                "type": "text",
-                "title": eligiblePrime
               }
             ],
           });
