@@ -164,7 +164,7 @@ const actions = {
 
   //bot executes
   ['getGift'](sessionId, context, cb) {
-    context.showButtonOptions = undefined;
+    // context.showButtonOptions = undefined;
     context.minimumPrice = "5000";
     context.maximumPrice = "10000";
 
