@@ -166,9 +166,9 @@ app.post('/webhook', (req, res) => {
     const msg = messaging.message.text;
     const atts = messaging.message.attachments;
     console.log("  ");
-    console.log("..printing msg..");
-    console.log(msg);
-    console.log("..ending msg..");
+    console.log("..printing messaging.message..");
+    console.log(messaging.message);
+    console.log("..ending messaging.message..");
     console.log("  ");
 
 
@@ -178,7 +178,7 @@ app.post('/webhook', (req, res) => {
         {text: 'Sorry I can only process text messages for now.'}
       );
     }
-    else if (msg === "more suggestions") {
+    else if (messaging.message.quick_reply.payload === 'MORE_SUGGESTIONS') {
       sessions[sessionId].context.itemPage += 1;
       console.log("INSIDE MORE SUGGESTIONS FUNCTION!!");
       wit.runActions(
