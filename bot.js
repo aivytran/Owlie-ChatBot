@@ -71,6 +71,7 @@ const actions = {
     }
     if (giftType) {
       context.giftType = giftType;
+      context.itemPage = 0;
     }
     if (gender) {
       context.gender = gender;
@@ -84,6 +85,21 @@ const actions = {
 
     cb(context);
   },
+
+  // clearContext(sessionId, context, entities, response, cb) {
+  //   const clearContext = firstEntityValue(entities, 'clearContext');
+  //
+  //
+  //   if (clearContext) {
+  //     context.giftRecipient = undefined;
+  //     context.giftType = undefined;
+  //     context.gender = undefined;
+  //     context.newKeyword = undefined;
+  //     console.log("clearing context");
+  //   }
+  //
+  //   cb(context);
+  // },
 
   // findMethod(sessionId, context, entities, response, cb) {
   //   const method = firstEntityValue(entities, 'method');
@@ -105,22 +121,23 @@ const actions = {
   ['getGift'](sessionId, context, cb) {
 
     console.log("gift type is: " + context.giftType);
-
-    searchItem(context.giftType)
+    context.itemPage += 1;
+    console.log("the item page is " + context.itemPage);
+    searchItem(context.giftType, context.itemPage)
       .then(response => {
-
         let cards = [];
         for (let i = 0; i < 10; i++) {
           cards.push( {
             "title": `${response[i]["ItemAttributes"][0]["Title"]}`,
-            "subtitle": `${response[i]["ItemAttributes"][0]["ListPrice"]}`,
-            "image_url": `${response[i]["MediumImage"][0]["URL"]}`,
+            "subtitle": `${response[i]["ItemAttributes"][0]["ListPrice"][0]["FormattedPrice"]} ${response[i]["ItemAttributes"][0]["ListPrice"][0]["CurrencyCode"]}`,
+            "image_url": `${response[i]["LargeImage"][0]["URL"]}`,
             "buttons": [
               {
-              "type": "web_url",
-              "url": `${response[i]["DetailPageURL"]}`,
-              "title": "details & buy"
-              }],
+                "type": "web_url",
+                "url": `${response[i]["DetailPageURL"]}`,
+                "title": "details & buy"
+              }
+            ],
           });
         }
 
@@ -134,6 +151,7 @@ const actions = {
             }
           }
         });
+
         context.gift = template;
       });
 
@@ -141,7 +159,7 @@ const actions = {
   },
 
   ['showButtons'](sessionId, context, cb) {
-    console.log(context);
+    // console.log(context);
     context.showButtonOptions = JSON.stringify({
       "text":"showing Buttons..",
       "quick_replies":[
@@ -162,6 +180,20 @@ const actions = {
         }
       ]
     });
+    cb(context);
+  },
+
+
+  ['clearContext'](sessionId, context, cb) {
+    console.log(context);
+    console.log("clearing context..");
+    context.giftRecipient = undefined;
+    context.giftType = undefined;
+    context.itemPage = 0;
+    context.gender = undefined;
+    context.newKeyword = undefined;
+    console.log(context);
+
     cb(context);
   },
 
