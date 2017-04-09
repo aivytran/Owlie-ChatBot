@@ -139,6 +139,71 @@ const actions = {
     searchItem(context.giftType, context.itemPage)
       .then(response => {
         let cards = [];
+        let title;
+        let price;
+        let availability;
+        let imageUrl;
+        let url;
+        let shipping;
+        let eligiblePrime;
+
+        for (let i = 0; i < response.length; i++) {
+          title = response[i];
+          if (!!title["ItemAttributes"][0]["Title"]) {
+            title = title["ItemAttributes"][0]["Title"][0];
+          } else {
+            title = "";
+          }
+
+          price = response[i];
+          if (!!price["OfferSummary"][0]["LowestNewPrice"][0]["FormattedPrice"]) {
+            price = price["OfferSummary"][0]["LowestNewPrice"][0]["FormattedPrice"][0];
+          } else {
+            price = "";
+          }
+
+          availability = response[i];
+          if (!!availability["Offers"][0]["Offer"][0]["OfferListing"][0]["Availability"]) {
+            availability = availability["Offers"][0]["Offer"][0]["OfferListing"][0]["Availability"][0];
+          } else {
+            availability = "";
+          }
+
+          imageUrl = response[i];
+          if (!!imageUrl["LargeImage"][0]["URL"]) {
+            imageUrl = imageUrl["LargeImage"][0]["URL"][0];
+          } else {
+            imageUrl = "http://res.cloudinary.com/d239j12/image/upload/v1491707637/noimagefound_vcaxfn.jpg";
+          }
+
+          url = response[i];
+          if (!!url["DetailPageURL"]) {
+            url = url["DetailPageURL"][0];
+          } else {
+            url = "http://www.amazon.com";
+          }
+
+          shipping = response[i];
+          if (!!shipping["Offers"][0]["Offer"][0]["OfferListing"][0]["Availability"]) {
+            shipping = shipping["Offers"][0]["Offer"][0]["OfferListing"][0]["Availability"][0];
+          } else {
+            shipping = "";
+          }
+
+          eligiblePrime = response[i];
+          if (!!eligiblePrime["Offers"][0]["Offer"][0]["OfferListing"][0]["IsEligibleForPrime"]) {
+            eligiblePrime = eligiblePrime["Offers"][0]["Offer"][0]["OfferListing"][0]["IsEligibleForPrime"][0];
+            // console.log("if " + eligiblePrime);
+            if (eligiblePrime === '1') {
+              eligiblePrime = 'Eligible for Prime shipping';
+            } else {
+              eligiblePrime = 'Not eligible for Prime shipping';
+            }
+          } else {
+            eligiblePrime = 'Not eligible for Prime shipping';
+          }
+          // console.log("Eligible " + eligiblePrime);
+          
         for (let i = 0; i < 10; i++) {
           cards.push( {
             "title": `${response[i]["ItemAttributes"][0]["Title"]}`,
@@ -149,6 +214,9 @@ const actions = {
                 "type": "web_url",
                 "url": `${response[i]["DetailPageURL"]}`,
                 "title": "details & buy"
+              }, {
+                "type": "text",
+                "title": eligiblePrime
               }
             ],
           });
