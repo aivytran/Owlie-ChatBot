@@ -248,7 +248,7 @@ const actions = {
   ['clearContext'](sessionId, context, cb) {
     console.log(context);
     console.log("clearing context..");
-    context.new_search = {"attachment":{
+    context.new_search = JSON.stringify({"attachment":{
         "type":"template",
         "payload":{
           "template_type":"button",
@@ -272,7 +272,7 @@ const actions = {
           ]
         }
       }
-    }
+    });
 
     cb(context);
   },
