@@ -151,36 +151,44 @@ const actions = {
 
     searchItem(context.giftType, context.itemPage)
       .then(response => {
-        if (response) {
-          let cards = [];
-          for (let i = 0; i < 10; i++) {
-            cards.push( {
-              "title": `${response[i]["ItemAttributes"][0]["Title"]}`,
-              "subtitle": `${response[i]["ItemAttributes"][0]["ListPrice"][0]["FormattedPrice"]} ${response[i]["ItemAttributes"][0]["ListPrice"][0]["CurrencyCode"]}`,
-              "image_url": `${response[i]["LargeImage"][0]["URL"]}`,
-              "buttons": [
-                {
-                  "type": "web_url",
-                  "url": `${response[i]["DetailPageURL"]}`,
-                  "title": "details & buy"
-                }
-              ],
-            });
-          }
+        let cards = [];
+        let title = "";
+        let price = "";
+        let imageUrl = "";
+        let url = "";
 
-          // console.log(cards);
-          let template = JSON.stringify({
-            "attachment": {
-              "type": "template",
-              "payload": {
-                "template_type": "generic",
-                "elements": cards
+        for (let i = 0; i < response.length; i++) {
+          title = response[i]["ItemAttributes"][0]["Title"];
+          price = response[i]["ItemAttributes"][0]["ListPrice"][0]["FormattedPrice"];
+          imageUrl = response[i]["LargeImage"][0]["URL"];
+          url = response[i]["DetailPageURL"];
+
+          cards.push( {
+            "title": title,
+            "subtitle": price,
+            "image_url": imageUrl,
+            "buttons": [
+              {
+                "type": "web_url",
+                "url": url,
+                "title": "details & buy"
               }
-            }
+            ],
           });
-
-          context.gift = template;
         }
+
+        // console.log(cards);
+        let template = JSON.stringify({
+          "attachment": {
+            "type": "template",
+            "payload": {
+              "template_type": "generic",
+              "elements": cards
+            }
+          }
+        });
+
+        context.gift = template;
       });
 
     cb(context);
