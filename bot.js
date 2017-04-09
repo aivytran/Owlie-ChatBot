@@ -85,7 +85,7 @@ const actions = {
     }
     if (giftType) {
       context.giftType = giftType;
-      context.itemPage = 0;
+      context.itemPage = 1;
     }
     if (gender) {
       context.gender = gender;
