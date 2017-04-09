@@ -80,7 +80,7 @@ app.get('/webhook', (req, res) => {
 app.post('/webhook', (req, res) => {
   // Parsing the Messenger API response
   const messaging = FB.getFirstMessagingEntry(req.body);
-  const quickReply = messaging.message.quick_reply;
+  const quickReply = messaging.message;
   console.log(quickReply);
   console.log(messaging);
 
