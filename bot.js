@@ -159,8 +159,7 @@ const actions = {
         let url;
 
         for (let i = 0; i < response.length; i++) {
-
-          title = response[i]
+          title = response[i];
           if (!!title["ItemAttributes"][0]["Title"]) {
             title = title["ItemAttributes"][0]["Title"];
           } else {
