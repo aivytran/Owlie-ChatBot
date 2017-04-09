@@ -71,7 +71,7 @@ const actions = {
     }
     if (giftType) {
       context.giftType = giftType;
-      context.itemPage = 0;
+      context.itemPage = 1;
     }
     if (gender) {
       context.gender = gender;
@@ -84,6 +84,14 @@ const actions = {
     }
 
     cb(context);
+  },
+
+  ['incrementItemPage'](sessionId, context, cb) {
+    console.log("Inside incrementItemPage function ....");
+    context.itemPage += 1;
+    console.log(context);
+
+    console.log("ending incrementItemPage.. ");
   },
 
   // clearContext(sessionId, context, entities, response, cb) {
@@ -121,27 +129,31 @@ const actions = {
   ['getGift'](sessionId, context, cb) {
 
     console.log("gift type is: " + context.giftType);
-    context.itemPage += 1;
     console.log("the item page is " + context.itemPage);
+    console.log(" ");
+    console.log("beginning of context .....");
+    console.log(context);
+    console.log("end of context .....");
+    console.log(" ");
+
     searchItem(context.giftType, context.itemPage)
       .then(response => {
         let cards = [];
         let title = "";
         let price = "";
-        let currency = "";
-        let image_url = "";
+        let imageUrl = "";
         let url = "";
-        for (let i = 0; i < 10; i++) {
+
+        for (let i = 0; i < response.length; i++) {
           title = response[i]["ItemAttributes"][0]["Title"];
           price = response[i]["ItemAttributes"][0]["ListPrice"][0]["FormattedPrice"];
-          currency = response[i]["ItemAttributes"][0]["ListPrice"][0]["CurrencyCode"];
-          image_url = response[i]["LargeImage"][0]["URL"];
+          imageUrl = response[i]["LargeImage"][0]["URL"];
           url = response[i]["DetailPageURL"];
 
           cards.push( {
             "title": title,
             "subtitle": price,
-            "image_url": image_url,
+            "image_url": imageUrl,
             "buttons": [
               {
                 "type": "web_url",
