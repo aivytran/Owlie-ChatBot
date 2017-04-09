@@ -78,6 +78,7 @@ const actions = {
     const gender = firstEntityValue(entities, 'gender');
     const filterByPrice = firstEntityValue(entities, 'filterByPrice');
     const newKeyword = firstEntityValue(entities, 'keyword');
+    const moreSuggestions = firstEntityValue(entities, 'moreSuggestions');
 
     if (giftRecipient) {
       context.giftRecipient = giftRecipient;
@@ -88,6 +89,9 @@ const actions = {
     }
     if (gender) {
       context.gender = gender;
+    }
+    if (moreSuggestions) {
+      context.itemPage += 1;
     }
     if (filterByPrice) {
       context.filterByPrice = filterByPrice;

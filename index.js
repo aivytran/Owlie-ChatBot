@@ -157,21 +157,10 @@ app.post('/webhook', (req, res) => {
       );
     }
     else if (msg === "more suggestions") {
-      console.log("INSIDE FUNCTION!!");
-      // bot.incrementItemPage(
-      //   sessionId,
-      //   sessions[sessionId].context,
-      //   (error, context) => {
-      //   if (error) {
-      //     console.log('Got an error inside incrementItemPage..', error);
-      //   } else {
-      //     console.log('Waiting for futher messages...');
-      //     sessions[sessionId].context = context;
-      //   }
-      // });
+      console.log("INSIDE MORE SUGGESTIONS FUNCTION!!");
       wit.runActions(
         sessionId, // the user's current session
-        "buy gift", // the user's message
+        "more suggestions", // the user's message
         sessions[sessionId].context, // the user's current session state
         (error, context) => {
           if (error) {
@@ -185,17 +174,6 @@ app.post('/webhook', (req, res) => {
     }
     else if (msg === "new search please!") {
       console.log("INSIDE CLEAR FUNCTION!!");
-      // bot.actions.clearContext(
-      //   sessionId,
-      //   sessions[sessionId].context,
-      //   (error, context) => {
-      //   if (error) {
-      //     console.log('Got an error inside incrementItemPage..', error);
-      //   } else {
-      //     console.log('Waiting for futher messages...');
-      //     sessions[sessionId].context = context;
-      //   }
-      // });
       wit.runActions(
         sessionId, // the user's current session
         "new search please!", // the user's message
@@ -209,7 +187,6 @@ app.post('/webhook', (req, res) => {
           }
         }
       );
-
     }
     else if (msg) {
       wit.runActions(
