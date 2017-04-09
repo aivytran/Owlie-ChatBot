@@ -185,7 +185,7 @@ const actions = {
           if (!!url["DetailPageURL"]) {
             url = url["DetailPageURL"];
           } else {
-            url = "no link available";
+            url = "http://www.amazon.com";
           }
 
           cards.push( {
@@ -202,7 +202,6 @@ const actions = {
           });
         }
 
-        // console.log(cards);
         let template = JSON.stringify({
           "attachment": {
             "type": "template",
