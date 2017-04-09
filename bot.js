@@ -126,15 +126,26 @@ const actions = {
     searchItem(context.giftType, context.itemPage)
       .then(response => {
         let cards = [];
+        let title = "";
+        let price = "";
+        let currency = "";
+        let image_url = "";
+        let url = "";
         for (let i = 0; i < 10; i++) {
+          title = response[i]["ItemAttributes"][0]["Title"];
+          price = response[i]["ItemAttributes"][0]["ListPrice"][0]["FormattedPrice"];
+          currency = response[i]["ItemAttributes"][0]["ListPrice"][0]["CurrencyCode"];
+          image_url = response[i]["LargeImage"][0]["URL"];
+          url = response[i]["DetailPageURL"];
+
           cards.push( {
-            "title": `${response[i]["ItemAttributes"][0]["Title"]}`,
-            "subtitle": `${response[i]["ItemAttributes"][0]["ListPrice"][0]["FormattedPrice"]} ${response[i]["ItemAttributes"][0]["ListPrice"][0]["CurrencyCode"]}`,
-            "image_url": `${response[i]["LargeImage"][0]["URL"]}`,
+            "title": title,
+            "subtitle": price,
+            "image_url": image_url,
             "buttons": [
               {
                 "type": "web_url",
-                "url": `${response[i]["DetailPageURL"]}`,
+                "url": url,
                 "title": "details & buy"
               }
             ],
