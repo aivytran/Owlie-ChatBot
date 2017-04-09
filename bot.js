@@ -59,6 +59,19 @@ const actions = {
     }
   },
 
+  // clearContext(sessionId, context, cb) {
+  //   console.log(context);
+  //   console.log("clearing context..");
+  //   context.giftRecipient = undefined;
+  //   context.giftType = undefined;
+  //   context.itemPage = 0;
+  //   context.gender = undefined;
+  //   context.newKeyword = undefined;
+  //   console.log(context);
+  //
+  //   cb(context);
+  // },
+
   merge(sessionId, context, entities, response, cb) {
     // console.log(entities);
     const datetime = firstEntityValue(entities, 'datetime');
@@ -67,17 +80,21 @@ const actions = {
     const gender = firstEntityValue(entities, 'gender');
     const filterByPrice = firstEntityValue(entities, 'filterByPrice');
     const newKeyword = firstEntityValue(entities, 'keyword');
+    // const moreSuggestions = firstEntityValue(entities, 'moreSuggestions');
 
     if (giftRecipient) {
       context.giftRecipient = giftRecipient;
     }
     if (giftType) {
       context.giftType = giftType;
-      // context.itemPage = 0;
+      context.itemPage = 1;
     }
     if (gender) {
       context.gender = gender;
     }
+    // if (moreSuggestions) {
+    //   context.itemPage += 1;
+    // }
     if (filterByPrice) {
       context.filterByPrice = filterByPrice;
     }
@@ -89,6 +106,14 @@ const actions = {
     }
 
     cb(context);
+  },
+
+  ['incrementItemPage'](sessionId, context, cb) {
+    console.log("Inside incrementItemPage function ....");
+    context.itemPage += 1;
+    console.log(context);
+
+    console.log("ending incrementItemPage.. ");
   },
 
   // clearContext(sessionId, context, entities, response, cb) {
@@ -125,8 +150,11 @@ const actions = {
   //bot executes
   ['getGift'](sessionId, context, cb) {
 
+    context.minimumPrice = "5000";
+    context.maximumPrice = "10000";
+
+    console.log("in bot" + context);
     console.log("gift type is: " + context.giftType);
-    context.itemPage = 1;
     console.log("the item page is " + context.itemPage);
     console.log(" ");
     console.log("beginning of context .....");
@@ -134,25 +162,73 @@ const actions = {
     console.log("end of context .....");
     console.log(" ");
 
-    searchItem(context.giftType, context.itemPage)
+    searchItem(context.giftType, context.itemPage, context.minimumPrice, context.maximumPrice)
       .then(response => {
         let cards = [];
-        for (let i = 0; i < 10; i++) {
+        let title;
+        let price;
+        let availability;
+        let imageUrl;
+        let url;
+        let shipping;
+
+        for (let i = 0; i < response.length; i++) {
+          title = response[i];
+          if (!!title["ItemAttributes"][0]["Title"]) {
+            title = title["ItemAttributes"][0]["Title"][0];
+          } else {
+            title = "";
+          }
+
+          price = response[i];
+          if (!!price["OfferSummary"][0]["LowestNewPrice"][0]["FormattedPrice"]) {
+            price = price["OfferSummary"][0]["LowestNewPrice"][0]["FormattedPrice"][0];
+          } else {
+            price = "";
+          }
+
+          availability = response[i];
+          if (!!availability["Offers"][0]["Offer"][0]["OfferListing"][0]["Availability"]) {
+            availability = availability["Offers"][0]["Offer"][0]["OfferListing"][0]["Availability"][0];
+          } else {
+            availability = "";
+          }
+
+          imageUrl = response[i];
+          if (!!imageUrl["LargeImage"][0]["URL"]) {
+            imageUrl = imageUrl["LargeImage"][0]["URL"][0];
+          } else {
+            imageUrl = "http://res.cloudinary.com/d239j12/image/upload/v1491707637/noimagefound_vcaxfn.jpg";
+          }
+
+          url = response[i];
+          if (!!url["DetailPageURL"]) {
+            url = url["DetailPageURL"][0];
+          } else {
+            url = "http://www.amazon.com";
+          }
+
+          shipping = response[i];
+          if (!!shipping["Offers"][0]["Offer"][0]["OfferListing"][0]["Availability"]) {
+            shipping = shipping["Offers"][0]["Offer"][0]["OfferListing"][0]["Availability"][0];
+          } else {
+            shipping = "";
+          }
+
           cards.push( {
-            "title": `${response[i]["ItemAttributes"][0]["Title"]}`,
-            "subtitle": `${response[i]["ItemAttributes"][0]["ListPrice"][0]["FormattedPrice"]} ${response[i]["ItemAttributes"][0]["ListPrice"][0]["CurrencyCode"]}`,
-            "image_url": `${response[i]["LargeImage"][0]["URL"]}`,
+            "title": title,
+            "subtitle": `${price}\n${availability}`,
+            "image_url": imageUrl,
             "buttons": [
               {
                 "type": "web_url",
-                "url": `${response[i]["DetailPageURL"]}`,
+                "url": url,
                 "title": "details & buy"
               }
             ],
           });
         }
 
-        // console.log(cards);
         let template = JSON.stringify({
           "attachment": {
             "type": "template",
@@ -163,9 +239,13 @@ const actions = {
           }
         });
 
-        context.gift = template;
+        // setTimeout( () => {
+          context.gift = template;
+        // }, 3000);
       });
-
+    // context.giftRecipient = undefined;
+    // context.gender = undefined;
+    // context.gift = undefined;
     cb(context);
   },
 
@@ -198,12 +278,31 @@ const actions = {
   ['clearContext'](sessionId, context, cb) {
     console.log(context);
     console.log("clearing context..");
-    context.giftRecipient = undefined;
-    context.giftType = undefined;
-    context.itemPage = 0;
-    context.gender = undefined;
-    context.newKeyword = undefined;
-    console.log(context);
+    context.new_search = JSON.stringify({"attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"button",
+          "text":"What would you like to do?",
+          "buttons":[
+            {
+              "type":"postback",
+              "title":"🎁  Buy gift",
+              "payload":"USER_BUY_GIFT"
+            },
+            {
+              "type":"postback",
+              "title":"⏰  Remind to send gift",
+              "payload":"USER_REMINDER"
+            },
+            {
+              "type":"postback",
+              "title":"😭  Help",
+              "payload":"USER_HELP"
+            }
+          ]
+        }
+      }
+    });
 
     cb(context);
   },
@@ -256,7 +355,6 @@ const actions = {
 
 };
 
-
 const getWit = () => {
   return new Wit(Config.WIT_TOKEN, actions);
 };
@@ -269,3 +367,6 @@ if (require.main === module) {
   const client = getWit();
   client.interactive();
 }
+
+// let query = searchItem("watches", "1", "5000", "10000");
+// console.log(query);

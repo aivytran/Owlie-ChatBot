@@ -91,10 +91,11 @@ app.post('/webhook', (req, res) => {
   if (messaging.postback) {
     const payload = messaging.postback.payload;
     if (payload === "USER_BUY_GIFT") {
+      console.log("in user buy gift");
       wit.runActions(
         sessionId, // the user's current session
         "buy gift", // the user's message
-        sessions[sessionId].context, // the user's current session state
+        {_fbid_: sender}, // the user's current session state
         (error, context) => {
           if (error) {
             console.log('Oops! Got an error from Wit:', error);
@@ -106,10 +107,10 @@ app.post('/webhook', (req, res) => {
       );
     } else if (payload === "USER_GET_STARTED") {
       console.log("index");
-      let name = "test"
+      let name = "test";
       FB.getProfile(messaging.sender.id, (body) => {
         name = body.first_name;
-      })
+      });
       FB.fbMessage(
         sender,
         {attachment:{
@@ -134,12 +135,12 @@ app.post('/webhook', (req, res) => {
               "buttons":[
                 {
                   "type":"postback",
-                  "title":"🎁 Buy gift",
+                  "title":"🎁  Buy gift",
                   "payload":"USER_BUY_GIFT"
                 },
                 {
                   "type":"postback",
-                  "title":"⏰ Set gift reminder",
+                  "title":"⏰  Remind to send gift",
                   "payload":"USER_REMINDER"
                 },
                 {
@@ -162,9 +163,47 @@ app.post('/webhook', (req, res) => {
     if (atts) {
       FB.fbMessage(
         sender,
-        {text: `Owlie can only understand text message for now 😥. I'm learning human speech though; I'll get you next time 😉.`}
+        {text: 'Sorry I can only process text messages for now.'}
       );
-    } else if (msg) {
+    }
+    else if (msg === "more suggestions") {
+      sessions[sessionId].context.itemPage += 1;
+      console.log("INSIDE MORE SUGGESTIONS FUNCTION!!");
+      wit.runActions(
+        sessionId, // the user's current session
+        "buy gift", // the user's message
+        {_fbid_: sender,
+          giftRecipient: sessions[sessionId].context.giftRecipient,
+          gender: sessions[sessionId].context.gender,
+          giftType: sessions[sessionId].context.giftType,
+          itemPage: sessions[sessionId].context.itemPage }, // the user's current session state
+        (error, context) => {
+          if (error) {
+            console.log('Oops! Got an error from Wit:', error);
+          } else {
+            console.log('Waiting for futher messages.');
+            sessions[sessionId].context = context;
+          }
+        }
+      );
+    }
+    else if (msg === "new search please!") {
+      console.log("INSIDE CLEAR FUNCTION!!");
+      wit.runActions(
+        sessionId, // the user's current session
+        "new search please!", // the user's message
+        {_fbid_: sender}, // the user's current session state
+        (error, context) => {
+          if (error) {
+            console.log('Oops! Got an error from Wit:', error);
+          } else {
+            console.log('Waiting for further messages.');
+            sessions[sessionId].context = context;
+          }
+        }
+      );
+    }
+    else if (msg) {
       wit.runActions(
         sessionId, // the user's current session
         msg, // the user's message
