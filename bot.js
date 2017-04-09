@@ -211,7 +211,7 @@ const actions = {
   },
 
   ['setReminder'](sessionId, context, cb) {
-    console.log(context);
+    console.log(sessionId);
     const newReminder = {
         user_id: context.user_id,
         value: context.giftRecipient,

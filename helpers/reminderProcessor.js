@@ -1,7 +1,7 @@
 // const builder = require('botbuilder');
 // const consts = require('../helpers/consts');
 const Reminder = require('../models/reminder');
-const FB = require('./facebook.js');
+const FB = require('../facebook.js');
 
 /**
  * Returns a function that queries MongoDB for expired reminders, sends notifications and cleans up the database.
