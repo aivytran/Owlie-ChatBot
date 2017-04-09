@@ -162,7 +162,7 @@ app.post('/webhook', (req, res) => {
       console.log("INSIDE MORE SUGGESTIONS FUNCTION!!");
       wit.runActions(
         sessionId, // the user's current session
-        "more suggestions", // the user's message
+        "buy gift", // the user's message
         sessions[sessionId].context, // the user's current session state
         (error, context) => {
           if (error) {
