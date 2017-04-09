@@ -5,7 +5,6 @@ const FB = require('./facebook.js');
 const Config = require('./const.js');
 const {searchItem} = require('./util/amazon_api_util.js');
 const JsonUtil = require('./util/json_util.js');
-const Reminder = require('./models/reminder');
 
 
 const firstEntityValue = (entities, entity) => {
@@ -60,37 +59,56 @@ const actions = {
     }
   },
 
+  // clearContext(sessionId, context, cb) {
+  //   console.log(context);
+  //   console.log("clearing context..");
+  //   context.giftRecipient = undefined;
+  //   context.giftType = undefined;
+  //   context.itemPage = 0;
+  //   context.gender = undefined;
+  //   context.newKeyword = undefined;
+  //   console.log(context);
+  //
+  //   cb(context);
+  // },
+
   merge(sessionId, context, entities, response, cb) {
-    // console.log(entities);
-    const datetime = firstEntityValue(entities, 'datetime');
     const giftRecipient = firstEntityValue(entities, 'giftRecipient');
     const giftType = firstEntityValue(entities, 'giftType');
     const gender = firstEntityValue(entities, 'gender');
     const filterByPrice = firstEntityValue(entities, 'filterByPrice');
     const newKeyword = firstEntityValue(entities, 'keyword');
+    // const moreSuggestions = firstEntityValue(entities, 'moreSuggestions');
 
     if (giftRecipient) {
       context.giftRecipient = giftRecipient;
     }
     if (giftType) {
       context.giftType = giftType;
-      // context.itemPage = 0;
+      context.itemPage = 1;
     }
     if (gender) {
       context.gender = gender;
     }
+    // if (moreSuggestions) {
+    //   context.itemPage += 1;
+    // }
     if (filterByPrice) {
       context.filterByPrice = filterByPrice;
     }
     if (newKeyword) {
       context.newKeyword = newKeyword;
     }
-    if (datetime) {
-      context.datetime = datetime;
-    }
-    context.user_id = context._fbid_;
 
     cb(context);
+  },
+
+  ['incrementItemPage'](sessionId, context, cb) {
+    console.log("Inside incrementItemPage function ....");
+    context.itemPage += 1;
+    console.log(context);
+
+    console.log("ending incrementItemPage.. ");
   },
 
   // clearContext(sessionId, context, entities, response, cb) {
@@ -127,8 +145,11 @@ const actions = {
   //bot executes
   ['getGift'](sessionId, context, cb) {
 
+    context.minimumPrice = "5000";
+    context.maximumPrice = "10000";
+
+    console.log("in bot" + context);
     console.log("gift type is: " + context.giftType);
-    context.itemPage = 1;
     console.log("the item page is " + context.itemPage);
     console.log(" ");
     console.log("beginning of context .....");
@@ -136,7 +157,7 @@ const actions = {
     console.log("end of context .....");
     console.log(" ");
 
-    searchItem(context.giftType, context.itemPage)
+    searchItem(context.giftType, context.itemPage, context.minimumPrice, context.maximumPrice)
       .then(response => {
         let cards = [];
         let title;
@@ -203,16 +224,15 @@ const actions = {
             eligiblePrime = 'Not eligible for Prime shipping';
           }
           // console.log("Eligible " + eligiblePrime);
-          
-        for (let i = 0; i < 10; i++) {
+
           cards.push( {
-            "title": `${response[i]["ItemAttributes"][0]["Title"]}`,
-            "subtitle": `${response[i]["ItemAttributes"][0]["ListPrice"][0]["FormattedPrice"]} ${response[i]["ItemAttributes"][0]["ListPrice"][0]["CurrencyCode"]}`,
-            "image_url": `${response[i]["LargeImage"][0]["URL"]}`,
+            "title": title,
+            "subtitle": `${price}\n${availability}`,
+            "image_url": imageUrl,
             "buttons": [
               {
                 "type": "web_url",
-                "url": `${response[i]["DetailPageURL"]}`,
+                "url": url,
                 "title": "details & buy"
               }, {
                 "type": "text",
@@ -222,7 +242,6 @@ const actions = {
           });
         }
 
-        // console.log(cards);
         let template = JSON.stringify({
           "attachment": {
             "type": "template",
@@ -233,9 +252,13 @@ const actions = {
           }
         });
 
-        context.gift = template;
+        // setTimeout( () => {
+          context.gift = template;
+        // }, 3000);
       });
-
+    // context.giftRecipient = undefined;
+    // context.gender = undefined;
+    // context.gift = undefined;
     cb(context);
   },
 
@@ -268,30 +291,32 @@ const actions = {
   ['clearContext'](sessionId, context, cb) {
     console.log(context);
     console.log("clearing context..");
-    context.giftRecipient = undefined;
-    context.giftType = undefined;
-    context.itemPage = 0;
-    context.gender = undefined;
-    context.newKeyword = undefined;
-    console.log(context);
-
-    cb(context);
-  },
-
-  ['setReminder'](sessionId, context, cb) {
-    console.log(sessionId);
-    const newReminder = {
-        user_id: context.user_id,
-        value: context.giftRecipient,
-        expiration: context.datetime
-    };
-    console.log(newReminder);
-
-    Reminder.create(newReminder, err => {
-      console.log(err);
+    context.new_search = JSON.stringify({"attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"button",
+          "text":"What would you like to do?",
+          "buttons":[
+            {
+              "type":"postback",
+              "title":"🎁  Buy gift",
+              "payload":"USER_BUY_GIFT"
+            },
+            {
+              "type":"postback",
+              "title":"⏰  Remind to send gift",
+              "payload":"USER_REMINDER"
+            },
+            {
+              "type":"postback",
+              "title":"😭  Help",
+              "payload":"USER_HELP"
+            }
+          ]
+        }
+      }
     });
 
-    context.reminder = context.datetime
     cb(context);
   },
 
@@ -326,7 +351,6 @@ const actions = {
 
 };
 
-
 const getWit = () => {
   return new Wit(Config.WIT_TOKEN, actions);
 };
@@ -339,3 +363,6 @@ if (require.main === module) {
   const client = getWit();
   client.interactive();
 }
+
+// let query = searchItem("watches", "1", "5000", "10000");
+// console.log(query);
