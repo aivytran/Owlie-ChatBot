@@ -304,6 +304,7 @@ const actions = {
         }
       ]
     });
+    context.showButtonOptions = undefined;
     cb(context);
   },
 
