@@ -15,8 +15,8 @@ const searchItem = (keywords, itemPage, minimumPrice, maximumPrice) => {
   return client.itemSearch({
     keywords: keywords,
     itemPage: itemPage,
-    // minimumPrice: minimumPrice,
-    // maximumPrice: maximumPrice,
+    minimumPrice: minimumPrice,
+    maximumPrice: maximumPrice,
     responseGroup: 'ItemAttributes,Offers,Images'
   }).then(function(results){
     // for (let i = 0; i < results.length; i++) {

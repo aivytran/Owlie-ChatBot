@@ -182,7 +182,6 @@ const actions = {
             price = "";
           }
 
-          // console.log(results[i]["Offers"][0]["Offer"][0]["OfferListing"][0]["Availability"][0]);
           availability = response[i];
           if (!!availability["Offers"][0]["Offer"][0]["OfferListing"][0]["Availability"]) {
             availability = availability["Offers"][0]["Offer"][0]["OfferListing"][0]["Availability"][0];
