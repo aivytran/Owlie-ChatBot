@@ -81,7 +81,11 @@ app.post('/webhook', (req, res) => {
   // Parsing the Messenger API response
   const messaging = FB.getFirstMessagingEntry(req.body);
   const quickReply = messaging.message;
+  console.log(" ");
+  console.log("..beginning of quickReply...");
   console.log(quickReply);
+  console.log("..ending of quickReply...");
+  console.log(" ");
   console.log(messaging);
 
   // retrieve the Facebook user ID
