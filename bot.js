@@ -300,5 +300,5 @@ if (require.main === module) {
   client.interactive();
 }
 
-let query = searchItem("watches", "1", "100");
+let query = searchItem("watches", "1", "5000", "10000");
 console.log(query);
