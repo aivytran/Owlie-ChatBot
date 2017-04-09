@@ -96,6 +96,7 @@ const actions = {
     const filterByPrice = firstEntityValue(entities, 'filterByPrice');
     const newKeyword = firstEntityValue(entities, 'keyword');
     const datetime = firstEntityValue(entities, 'datetime');
+    context.showButtonOptions = undefined;
     // const moreSuggestions = firstEntityValue(entities, 'moreSuggestions');
     if (giftRecipient) {
       context.giftRecipient = giftRecipient;
@@ -163,7 +164,7 @@ const actions = {
 
   //bot executes
   ['getGift'](sessionId, context, cb) {
-
+    context.showButtonOptions = undefined;
     context.minimumPrice = "5000";
     context.maximumPrice = "10000";
 
@@ -304,7 +305,7 @@ const actions = {
         }
       ]
     });
-    context.showButtonOptions = undefined;
+    // context.showButtonOptions = undefined;
     cb(context);
   },
 
