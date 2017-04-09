@@ -89,11 +89,6 @@ const actions = {
   // },
 
   merge(sessionId, context, entities, response, cb) {
-<<<<<<< HEAD
-    console.log(context);
-    const datetime = firstEntityValue(entities, 'datetime');
-=======
->>>>>>> 57de46d31e471b84c41a8de9f8b326cc2374131a
     const giftRecipient = firstEntityValue(entities, 'giftRecipient');
     const giftType = firstEntityValue(entities, 'giftType');
     const gender = firstEntityValue(entities, 'gender');
@@ -120,13 +115,6 @@ const actions = {
     if (newKeyword) {
       context.newKeyword = newKeyword;
     }
-<<<<<<< HEAD
-    if (datetime) {
-      context.datetime = datetime;
-    }
-=======
-
->>>>>>> 57de46d31e471b84c41a8de9f8b326cc2374131a
     cb(context);
   },
 
@@ -315,7 +303,6 @@ const actions = {
   ['clearContext'](sessionId, context, cb) {
     console.log(context);
     console.log("clearing context..");
-<<<<<<< HEAD
     context.giftRecipient = undefined;
     context.giftType = undefined;
     context.itemPage = 0;
