@@ -154,32 +154,34 @@ app.post('/webhook', (req, res) => {
         sender,
         {text: 'Sorry I can only process text messages for now.'}
       );
-    } else if (msg === "more suggestions") {
-      // bot.incrementItemPage(
-      //   sessionId,
-      //   sessions[sessionId].context,
-      //   (error, context) => {
-      //   if (error) {
-      //     console.log('Got an error inside incrementItemPage..', error);
-      //   } else {
-      //     console.log('Waiting for futher messages...');
-      //     sessions[sessionId].context = context;
-      //   }
-      // });
-      wit.runActions(
-        sessionId, // the user's current session
-        "buy gift", // the user's message
-        sessions[sessionId].context, // the user's current session state
-        (error, context) => {
-          if (error) {
-            console.log('Oops! Got an error from Wit:', error);
-          } else {
-            console.log('Waiting for futher messages.');
-            sessions[sessionId].context = context;
-          }
-        }
-      );
-    } else if (msg) {
+    }
+    // else if (msg === "more suggestions") {
+    //   // bot.incrementItemPage(
+    //   //   sessionId,
+    //   //   sessions[sessionId].context,
+    //   //   (error, context) => {
+    //   //   if (error) {
+    //   //     console.log('Got an error inside incrementItemPage..', error);
+    //   //   } else {
+    //   //     console.log('Waiting for futher messages...');
+    //   //     sessions[sessionId].context = context;
+    //   //   }
+    //   // });
+    //   wit.runActions(
+    //     sessionId, // the user's current session
+    //     "buy gift", // the user's message
+    //     sessions[sessionId].context, // the user's current session state
+    //     (error, context) => {
+    //       if (error) {
+    //         console.log('Oops! Got an error from Wit:', error);
+    //       } else {
+    //         console.log('Waiting for futher messages.');
+    //         sessions[sessionId].context = context;
+    //       }
+    //     }
+    //   );
+    // }
+    else if (msg) {
       wit.runActions(
         sessionId, // the user's current session
         msg, // the user's message
