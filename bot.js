@@ -86,11 +86,12 @@ const actions = {
     cb(context);
   },
 
-  incrementItemPage(sessionId, context, entities, response, cb) {
-    const moreSuggestions = firstEntityValue(entities, 'moreSuggestions');
-    if (moreSuggestions){
-      context.itemPage += 1;
-    }
+  ['incrementItemPage'](sessionId, context, cb) {
+    console.log("Inside incrementItemPage function ....");
+    context.itemPage += 1;
+    console.log(context);
+
+    console.log("ending incrementItemPage.. ");
   },
 
   // clearContext(sessionId, context, entities, response, cb) {
