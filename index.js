@@ -156,6 +156,7 @@ app.post('/webhook', (req, res) => {
       );
     }
     else if (msg === "more suggestions") {
+      console.log("INSIDE FUNCTION!!");
       // bot.incrementItemPage(
       //   sessionId,
       //   sessions[sessionId].context,
