@@ -81,6 +81,7 @@ app.post('/webhook', (req, res) => {
   if (messaging.postback) {
     const payload = messaging.postback.payload;
     if (payload === "USER_BUY_GIFT") {
+      console.log("in user buy gift");
       wit.runActions(
         sessionId, // the user's current session
         "buy gift", // the user's message
@@ -205,34 +206,6 @@ app.post('/webhook', (req, res) => {
           } else {
             console.log('Waiting for further messages.');
             sessions[sessionId].context = context;
-          }
-        }
-      );
-      FB.fbMessage(
-        sender,
-        {"attachment":{
-            "type":"template",
-            "payload":{
-              "template_type":"button",
-              "text":"What would you like to do?",
-              "buttons":[
-                {
-                  "type":"postback",
-                  "title":"🎁  Buy gift",
-                  "payload":"USER_BUY_GIFT"
-                },
-                {
-                  "type":"postback",
-                  "title":"⏰  Remind to send gift",
-                  "payload":"USER_REMINDER"
-                },
-                {
-                  "type":"postback",
-                  "title":"😭  Help",
-                  "payload":"USER_HELP"
-                }
-              ]
-            }
           }
         }
       );

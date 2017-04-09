@@ -245,18 +245,37 @@ const actions = {
   },
 
 
-  // ['clearContext'](sessionId, context, cb) {
-  //   console.log(context);
-  //   console.log("clearing context..");
-  //   context.giftRecipient = undefined;
-  //   context.giftType = undefined;
-  //   context.itemPage = 0;
-  //   context.gender = undefined;
-  //   context.newKeyword = undefined;
-  //   console.log(context);
-  //
-  //   cb(context);
-  // },
+  ['clearContext'](sessionId, context, cb) {
+    console.log(context);
+    console.log("clearing context..");
+    context.new_search = {"attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"button",
+          "text":"What would you like to do?",
+          "buttons":[
+            {
+              "type":"postback",
+              "title":"🎁  Buy gift",
+              "payload":"USER_BUY_GIFT"
+            },
+            {
+              "type":"postback",
+              "title":"⏰  Remind to send gift",
+              "payload":"USER_REMINDER"
+            },
+            {
+              "type":"postback",
+              "title":"😭  Help",
+              "payload":"USER_HELP"
+            }
+          ]
+        }
+      }
+    }
+
+    cb(context);
+  },
 
   ['showFilterOptions'](sessionId, context, cb) {
     context.showFilterOptions = JSON.stringify({
