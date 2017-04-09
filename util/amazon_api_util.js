@@ -9,13 +9,18 @@ const client = amazon.createClient({
   awsTag: Config.AWS_ASSOCIATE_TAG
 });
 
-const searchItem = (keywords, itemPage) => {
+const searchItem = (keywords, itemPage, maximumPrice) => {
   return client.itemSearch({
     keywords: keywords,
     itemPage: itemPage,
+    maximumPrice: maximumPrice,
     responseGroup: 'ItemAttributes,Offers,Images'
   }).then(function(results){
-    // console.log(results);
+    for (let i = 0; i < results.length - 7; i++) {
+      console.log(i);
+      console.log(results[0]);
+      // console.log(results[0]["BrowseNodes"][0]["BrowseNode"]);
+    }
     return results;
   }).catch(function(err){
     console.log(err);

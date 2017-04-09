@@ -287,7 +287,6 @@ const actions = {
 
 };
 
-
 const getWit = () => {
   return new Wit(Config.WIT_TOKEN, actions);
 };
@@ -300,3 +299,6 @@ if (require.main === module) {
   const client = getWit();
   client.interactive();
 }
+
+let query = searchItem("watches", "1", "100");
+console.log(query);
