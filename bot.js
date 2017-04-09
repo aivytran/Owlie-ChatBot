@@ -71,7 +71,7 @@ const actions = {
     }
     if (giftType) {
       context.giftType = giftType;
-      // context.itemPage = 0;
+      context.itemPage = 1;
     }
     if (gender) {
       context.gender = gender;
@@ -84,6 +84,13 @@ const actions = {
     }
 
     cb(context);
+  },
+
+  incrementItemPage(sessionId, context, entities, response, cb) {
+    const moreSuggestions = firstEntityValue(entities, 'moreSuggestions');
+    if (moreSuggestions){
+      context.itemPage += 1;
+    }
   },
 
   // clearContext(sessionId, context, entities, response, cb) {
@@ -121,7 +128,6 @@ const actions = {
   ['getGift'](sessionId, context, cb) {
 
     console.log("gift type is: " + context.giftType);
-    context.itemPage = 1;
     console.log("the item page is " + context.itemPage);
     console.log(" ");
     console.log("beginning of context .....");
@@ -131,34 +137,36 @@ const actions = {
 
     searchItem(context.giftType, context.itemPage)
       .then(response => {
-        let cards = [];
-        for (let i = 0; i < 10; i++) {
-          cards.push( {
-            "title": `${response[i]["ItemAttributes"][0]["Title"]}`,
-            "subtitle": `${response[i]["ItemAttributes"][0]["ListPrice"][0]["FormattedPrice"]} ${response[i]["ItemAttributes"][0]["ListPrice"][0]["CurrencyCode"]}`,
-            "image_url": `${response[i]["LargeImage"][0]["URL"]}`,
-            "buttons": [
-              {
-                "type": "web_url",
-                "url": `${response[i]["DetailPageURL"]}`,
-                "title": "details & buy"
-              }
-            ],
-          });
-        }
-
-        // console.log(cards);
-        let template = JSON.stringify({
-          "attachment": {
-            "type": "template",
-            "payload": {
-              "template_type": "generic",
-              "elements": cards
-            }
+        if (response) {
+          let cards = [];
+          for (let i = 0; i < 10; i++) {
+            cards.push( {
+              "title": `${response[i]["ItemAttributes"][0]["Title"]}`,
+              "subtitle": `${response[i]["ItemAttributes"][0]["ListPrice"][0]["FormattedPrice"]} ${response[i]["ItemAttributes"][0]["ListPrice"][0]["CurrencyCode"]}`,
+              "image_url": `${response[i]["LargeImage"][0]["URL"]}`,
+              "buttons": [
+                {
+                  "type": "web_url",
+                  "url": `${response[i]["DetailPageURL"]}`,
+                  "title": "details & buy"
+                }
+              ],
+            });
           }
-        });
 
-        context.gift = template;
+          // console.log(cards);
+          let template = JSON.stringify({
+            "attachment": {
+              "type": "template",
+              "payload": {
+                "template_type": "generic",
+                "elements": cards
+              }
+            }
+          });
+
+          context.gift = template;
+        }
       });
 
     cb(context);
