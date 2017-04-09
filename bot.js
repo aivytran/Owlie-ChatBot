@@ -22,7 +22,9 @@ const firstEntityValue = (entities, entity) => {
 // Bot actions
 const actions = {
   say (sessionId, context, response, cb) {
-    // console.log(response);
+    console.log(response);
+    console.log("in say");
+    console.log(context);
 
     // Bot testing mode
     if (require.main === module) {
@@ -35,6 +37,20 @@ const actions = {
     if (recipientId) {
 
       let data = null;
+
+      if (response.includes("Got Cha!")) {
+        const newReminder = {
+            user_id: recipientId,
+            value: context.giftRecipient,
+            expiration: context.datetime
+        };
+        console.log(newReminder);
+
+        Reminder.create(newReminder, err => {
+          console.log(err);
+        });
+
+      }
 
       if (JsonUtil.isJsonString(response)) {
         data = JSON.parse(response);
@@ -61,7 +77,7 @@ const actions = {
   },
 
   merge(sessionId, context, entities, response, cb) {
-    // console.log(entities);
+    console.log(context);
     const datetime = firstEntityValue(entities, 'datetime');
     const giftRecipient = firstEntityValue(entities, 'giftRecipient');
     const giftType = firstEntityValue(entities, 'giftType');
@@ -88,8 +104,6 @@ const actions = {
     if (datetime) {
       context.datetime = datetime;
     }
-    context.user_id = context._fbid_;
-
     cb(context);
   },
 
@@ -211,19 +225,7 @@ const actions = {
   },
 
   ['setReminder'](sessionId, context, cb) {
-    console.log(sessionId);
-    const newReminder = {
-        user_id: context.user_id,
-        value: context.giftRecipient,
-        expiration: context.datetime
-    };
-    console.log(newReminder);
-
-    Reminder.create(newReminder, err => {
-      console.log(err);
-    });
-
-    context.reminder = context.datetime
+    context.reminder = "Got Cha!"
     cb(context);
   },
 

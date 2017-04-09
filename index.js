@@ -47,6 +47,11 @@ const findOrCreateSession = (fbid) => {
   return sessionId;
 };
 
+const findUserID = (sessionId) => {
+  console.log(sessions);
+  Object.values(sessions)
+}
+
 // Starting our webserver and putting it all together
 const app = express();
 app.set('port', PORT);
