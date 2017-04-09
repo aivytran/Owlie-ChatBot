@@ -191,7 +191,7 @@ const actions = {
           }
 
           imageUrl = response[i];
-          if (!!imageUrl["LargeImage"]) {
+          if (!!imageUrl["LargeImage"][0]["URL"]) {
             imageUrl = imageUrl["LargeImage"][0]["URL"][0];
           } else {
             imageUrl = "http://res.cloudinary.com/d239j12/image/upload/v1491707637/noimagefound_vcaxfn.jpg";
@@ -205,7 +205,7 @@ const actions = {
           }
 
           shipping = response[i];
-          if (!!shipping["Offers"][0]["Offer"]) {
+          if (!!shipping["Offers"][0]["Offer"][0]["OfferListing"][0]["Availability"]) {
             shipping = shipping["Offers"][0]["Offer"][0]["OfferListing"][0]["Availability"][0];
           } else {
             shipping = "";
