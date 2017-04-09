@@ -158,12 +158,16 @@ app.post('/webhook', (req, res) => {
     }
     else if (msg === "more suggestions") {
       sessions[sessionId].context.itemPage += 1;
-      console.log(sessions[sessionId].context.itemPage);
+      console.log(sessions[sessionId].context);
       console.log("INSIDE MORE SUGGESTIONS FUNCTION!!");
       wit.runActions(
         sessionId, // the user's current session
-        "more suggestions please!", // the user's message
-        sessions[sessionId].context, // the user's current session state
+        "buy gift for " + sessions[sessionId].context.giftRecipient, // the user's message
+        {_fbid_: sender,
+          giftRecipient: sessions[sessionId].context.giftRecipient,
+          gender: sessions[sessionId].context.gender,
+          giftType: sessions[sessionId].context.giftType,
+          itemPage: sessions[sessionId].context.itemPage }, // the user's current session state
         (error, context) => {
           if (error) {
             console.log('Oops! Got an error from Wit:', error);
