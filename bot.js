@@ -22,7 +22,7 @@ const firstEntityValue = (entities, entity) => {
 // Bot actions
 const actions = {
   say (sessionId, context, response, cb) {
-    console.log(response);
+    // console.log(response);
     console.log("in say");
     console.log(context);
 
@@ -306,7 +306,7 @@ const actions = {
       ]
     });
     // context.showButtonOptions = undefined;
-    cb(context);
+    // cb(context);
   },
 
 
