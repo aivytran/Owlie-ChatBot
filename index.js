@@ -158,7 +158,6 @@ app.post('/webhook', (req, res) => {
     }
     else if (msg === "more suggestions") {
       sessions[sessionId].context.itemPage += 1;
-      console.log(sessions[sessionId].context);
       console.log("INSIDE MORE SUGGESTIONS FUNCTION!!");
       wit.runActions(
         sessionId, // the user's current session
