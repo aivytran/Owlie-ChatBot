@@ -26,6 +26,7 @@ module.exports = () => {
                 // const msg = new builder.Message()
                 //     .address(reminder.user_address)
                 //     .text(consts.Messages.REMINDER, reminder.value);
+                console.log("found reminder");
                 console.log(reminder);
                 FB.fbMessage(
                   reminder.user_id,
