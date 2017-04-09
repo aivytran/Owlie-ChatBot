@@ -145,7 +145,7 @@ const actions = {
   //bot executes
   ['getGift'](sessionId, context, cb) {
     // context.itemPage += 1;
-
+    console.log(context);
     console.log("gift type is: " + context.giftType);
     console.log("the item page is " + context.itemPage);
     console.log(" ");
