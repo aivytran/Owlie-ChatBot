@@ -32,14 +32,15 @@ nav a {
 
 .navbar {
   font-family: "Fredoka One";
-  height: 50px;
+  height: 60px;
   background-color: #93c7aa;
   /*padding-left: 700px;*/
   /*justify-content: flex-end;*/
 }
 
 .navbar img {
-  height: 50px
+  height: 60px;
+  padding-left: 20px;
 }
 
 .header-right-links {
@@ -72,13 +73,19 @@ nav a {
 section.features h1 {
     color: #ed826c;
     margin: 0px 79px;
-    font-size: 35px;
+    padding: 10px 0;
+    font-size: 40px;
 }
 
-section.features ul {
+.features-list {
     margin: 0px 126px;
-    font-size: 20px;
+    font-size: 23px;
     padding: 9px 0;
+    list-style: none;
+}
+
+.features-list li {
+  margin: 0 -43px;
 }
 
 #privacy{
@@ -144,7 +151,7 @@ section.features ul {
 
 .left {
   display: inline-block;
-  min-width: 520px;
+  min-width: 60px;
 }
 
 .right {
