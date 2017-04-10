@@ -231,10 +231,10 @@ const actions = {
             if (eligiblePrime === '1') {
               eligiblePrime = '✅ Eligible for Prime';
             } else {
-              eligiblePrime = '❎ No info on Prime';
+              eligiblePrime = '❎ No shipping info on Prime';
             }
           } else {
-            eligiblePrime = '❎ No info on Prime';
+            eligiblePrime = '❎ No shipping info on Prime';
           }
 
           cards.push( {
