@@ -105,13 +105,13 @@ const actions = {
     cb(context);
   },
 
-  ['incrementItemPage'](sessionId, context, cb) {
-    console.log("Inside incrementItemPage function ....");
-    context.itemPage += 1;
-    console.log(context);
-
-    console.log("ending incrementItemPage.. ");
-  },
+  // ['incrementItemPage'](sessionId, context, cb) {
+  //   console.log("Inside incrementItemPage function ....");
+  //   context.itemPage += 1;
+  //   console.log(context);
+  //
+  //   console.log("ending incrementItemPage.. ");
+  // },
 
   error(sessionId, context, error) {
     console.log(error.message);
@@ -253,7 +253,7 @@ const actions = {
       ]
     });
     // context.showButtonOptions = undefined;
-    // cb(context);
+    cb(context);
   },
 
 
@@ -283,7 +283,7 @@ const actions = {
           ]
         }
       }
-    })
+    });
     cb(context);
   },
 
