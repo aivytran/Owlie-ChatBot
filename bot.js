@@ -55,7 +55,7 @@ const actions = {
       if (context.gift) {
         setTimeout(() => {
           FB.fbMessage(recipientId, {
-            "text":"showing Buttons..",
+            "text":"Here are more options 😘😘",
             "quick_replies":[
               {
                 "content_type":"text",
@@ -73,8 +73,9 @@ const actions = {
                 "payload":"NEW_SEARCH_PLEASE"
               }
             ]
-          })
-        }, 20000)
+          });
+          context.gift = {};
+        }, 10000)
       }
 
 
