@@ -43,7 +43,7 @@ const fbMessage = (recipientId, data, cb) => {
       message: data,
     },
   };
-  FB.fbTypingMessage(sender);
+  fbTypingMessage(sender);
   fbReq(opts, (err, resp, data) => {
     if (cb) {
       cb(err || data.error && data.error.message, data);
