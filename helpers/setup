@@ -17,12 +17,12 @@ curl -X POST -H "Content-Type: application/json" -d '{
   "call_to_actions":[
     {
       "type":"postback",
-      "title":"Help",
+      "title":"😭 Help",
       "payload":"USER_HELP"
     },
     {
       "type":"postback",
-      "title":"New Search",
+      "title":"🔍 New Search",
       "payload":"USER_NEW_SEARCH"
     }
   ]
