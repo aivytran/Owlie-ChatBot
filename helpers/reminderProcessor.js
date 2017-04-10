@@ -30,7 +30,7 @@ module.exports = () => {
                 console.log(reminder);
                 FB.fbMessage(
                   reminder.user_id,
-                  {text: "oh yayyyyyyyyy"},
+                  {text: "Hey, don't forget to send gift to " + reminder.value + " today! ☝ "},
                   (err) => {
                     if (err) {
                       console.log(
@@ -47,6 +47,11 @@ module.exports = () => {
                       });
                     }
                 });
+
+                setTimeout(() => FB.fbMessage(
+                  sender,
+                  {text: `Oh, hey ${name} 👋. I'm Owlie! I'm here to help you with gifts! 😍`}
+                ), 2000);
 
                 // Send message and remove each reminder afterwards
                 // bot.send(msg, () => {

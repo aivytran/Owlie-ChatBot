@@ -43,10 +43,27 @@ const fbMessage = (recipientId, data, cb) => {
       message: data,
     },
   };
-
-  fbReq(opts, (err, resp, data) => {
+  fbTypingMessage(recipientId);
+  setTimeout(() => fbReq(opts, (err, resp, data) => {
     if (cb) {
       cb(err || data.error && data.error.message, data);
+    }
+  }), 2000);
+};
+
+const fbTypingMessage = (recipientId, cb) => {
+  const opts = {
+    form: {
+      recipient: {
+        id: recipientId,
+      },
+      "sender_action":"typing_on"
+    },
+  };
+
+  fbReq(opts, (err, resp) => {
+    if (cb) {
+      cb(err);
     }
   });
 };
@@ -73,5 +90,6 @@ module.exports = {
   getFirstMessagingEntry: getFirstMessagingEntry,
   fbMessage: fbMessage,
   fbReq: fbReq,
-  getProfile: getProfile
+  getProfile: getProfile,
+  fbTypingMessage: fbTypingMessage
 };
