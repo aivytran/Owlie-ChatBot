@@ -49,27 +49,63 @@ const actions = {
         Reminder.create(newReminder, err => {
           console.log(err);
         });
-
       }
 
-      if (JsonUtil.isJsonString(response)) {
+      if (context.gift) {
         data = JSON.parse(response);
+        FB.fbMessage(recipientId, data, (err, data) => {
+          if (err) {
+            console.log(
+              'Oops! An error occurred while forwarding the response to',
+              recipientId,
+              ':',
+              err
+            );
+          }
+          // Give the wheel back to our bot
+          cb();
+        });
+        setTimeout(() => FB.fbMessage(recipientId,
+          {
+            "text":"showing Buttons..",
+            "quick_replies":[
+              {
+                "content_type":"text",
+                "title":"more suggestions",
+                "payload":"MORE_SUGGESTIONS"
+              },
+              {
+                "content_type":"text",
+                "title":"search by filters",
+                "payload":"SEARCH_BY_FILTERS"
+              },
+              {
+                "content_type":"text",
+                "title":"new search please!",
+                "payload":"NEW_SEARCH_PLEASE"
+              }
+            ]
+          }), 10000)
       } else {
-        data = {"text": response};
-      }
-
-      return FB.fbMessage(recipientId, data, (err, data) => {
-        if (err) {
-          console.log(
-            'Oops! An error occurred while forwarding the response to',
-            recipientId,
-            ':',
-            err
-          );
+        if (JsonUtil.isJsonString(response)) {
+          data = JSON.parse(response);
+        } else {
+          data = {"text": response};
         }
-        // Give the wheel back to our bot
-        cb();
-      });
+
+        return FB.fbMessage(recipientId, data, (err, data) => {
+          if (err) {
+            console.log(
+              'Oops! An error occurred while forwarding the response to',
+              recipientId,
+              ':',
+              err
+            );
+          }
+          // Give the wheel back to our bot
+          cb();
+        });
+      }
     } else {
       console.log('Oops! Couldn\'t find user in context:', context);
       cb();
