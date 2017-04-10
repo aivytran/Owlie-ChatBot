@@ -86,7 +86,6 @@ const actions = {
               }
             ]
           });
-          context.gift = null;
         }, 10000)
       } else {
         if (JsonUtil.isJsonString(response)) {
