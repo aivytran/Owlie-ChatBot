@@ -40,9 +40,7 @@ const fbMessage = (recipientId, data, cb) => {
       recipient: {
         id: recipientId,
       },
-      sender_action:"typing_on",
       message: data,
-      sender_action:"typing_off"
     },
   };
 
