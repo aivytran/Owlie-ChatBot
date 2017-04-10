@@ -28,6 +28,11 @@ nav a {
   text-decoration: none;
 }
 
+.navbar {
+  font-family: "Fredoka One";
+  background-color: #abddd7;
+}
+
 .header-right-links {
   display: flex;
   flex-direction: row;
