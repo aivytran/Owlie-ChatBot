@@ -15,7 +15,7 @@
  */
 body {
   margin: 0px;
-  font-family: "Shadows Into Light";
+  font-family: "Fredoka One";
 }
 
 nav {
@@ -40,7 +40,7 @@ nav a {
 }
 
 #master-view {
-  background-color: #F44336;
+  background-color: #abddd7;
   height: 700px;
   /*text-align: center;*/
   /*padding: 208px 0 0 0;*/
