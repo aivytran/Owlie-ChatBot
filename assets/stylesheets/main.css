@@ -118,27 +118,29 @@ section.features ul {
     width: 600px;
 }
 
-.gif {
+/*.gif {
     display: flex;
-}
+}*/
 
 .demo-phone {
     background: url(http://res.cloudinary.com/candycanetrain/video/upload/v1491812541/official1and2small_xfmnt5.gif);
     height: 720px;
     /* padding: 25px; */
     width: 500px;
-    margin: -126px 59px;
+    /*margin: -126px 59px;*/
+    border-radius: 30px;
+    border: 30px solid white;
 }
 
-.facebook-button {
-  padding: 15px;
+.features {
+  display: flex;
 }
 
-.fb-messengermessageus {
-  padding: 50px;
-  font-size: 20px;
+
+/*.left {
+  display: inline-block;
 }
 
-button {
-  padding: 50px;
-}
+.right {
+  display: inline-block;
+}*/
