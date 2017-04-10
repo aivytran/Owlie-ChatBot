@@ -158,3 +158,8 @@ section.features h1 {
   display: inline-block;
   min-width: 600px;
 }
+
+.facebook-button {
+  padding-left: 79px;
+  margin: 18px 0;
+}
