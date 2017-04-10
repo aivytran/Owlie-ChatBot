@@ -117,3 +117,15 @@ section.features ul {
     height: 600px;
     width: 600px;
 }
+
+.gif {
+    display: flex;
+}
+
+.demo-phone {
+    background: url(http://res.cloudinary.com/candycanetrain/video/upload/v1491812541/official1and2small_xfmnt5.gif);
+    height: 720px;
+    /* padding: 25px; */
+    width: 500px;
+    margin: -126px 59px;
+}
