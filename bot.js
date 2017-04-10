@@ -3,7 +3,7 @@
 const Wit = require('node-wit').Wit;
 const FB = require('./facebook.js');
 const Config = require('./const.js');
-const {searchItem, additionalSearch} = require('./util/amazon_api_util.js');
+const {searchItem} = require('./util/amazon_api_util.js');
 const JsonUtil = require('./util/json_util.js');
 const Reminder = require('./models/reminder');
 
@@ -22,7 +22,6 @@ const firstEntityValue = (entities, entity) => {
 // Bot actions
 const actions = {
   say (sessionId, context, response, cb) {
-    // console.log(response);
     console.log("in say");
     console.log(context);
     console.log(response);
