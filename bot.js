@@ -239,12 +239,12 @@ const actions = {
           if (!!eligiblePrime["Offers"][0]["Offer"][0]["OfferListing"][0]["IsEligibleForPrime"]) {
             eligiblePrime = eligiblePrime["Offers"][0]["Offer"][0]["OfferListing"][0]["IsEligibleForPrime"][0];
             if (eligiblePrime === '1') {
-              eligiblePrime = 'eligible for Prime';
+              eligiblePrime = 'Eligible for Prime ✅';
             } else {
-              eligiblePrime = 'no info on Prime';
+              eligiblePrime = 'No Info on Prime ❎';
             }
           } else {
-            eligiblePrime = 'no info on Prime';
+            eligiblePrime = 'No Info on Prime ❎';
           }
 
           cards.push( {
@@ -255,7 +255,7 @@ const actions = {
               {
                 "type": "web_url",
                 "url": url,
-                "title": "details & buy"
+                "title": "Details & Buy 🛍"
               }, {
                 "type": "web_url",
                 "url": url,
