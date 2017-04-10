@@ -49,8 +49,8 @@ module.exports = () => {
                 });
 
                 setTimeout(() => FB.fbMessage(
-                  sender,
-                  {text: `Oh, hey ${name} 👋. I'm Owlie! I'm here to help you with gifts! 😍`}
+                  reminder.user_id,
+                  {text: `And of course I will help you find gifts 😜. Say "buy gift" to start looking! 👌`}
                 ), 2000);
 
                 // Send message and remove each reminder afterwards
