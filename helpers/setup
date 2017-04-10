@@ -24,11 +24,6 @@ curl -X POST -H "Content-Type: application/json" -d '{
       "type":"postback",
       "title":"New Search",
       "payload":"USER_NEW_SEARCH"
-    },
-    {
-      "type":"postback",
-      "title":"Saved Item",
-      "payload": "USER_SAVED_ITEM"
     }
   ]
 }' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAADLWouDF0sBAMDpqdLw7ZCOkFeU1MuhSwfq6gCWVSwyLS3mWB2QjoXKF36yOLbTMwwwZBeJHueEN5IZCJ0qjedYt5CN5SL1qa0wTbZCRbHEj2e70cZBZAFdjrOHeJi0BbjVjxCwvmXJY0hT9ZCZC7A2mn6O9mYsihRw39DluhGk5wZDZD"

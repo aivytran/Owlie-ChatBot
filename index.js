@@ -112,6 +112,53 @@ app.post('/webhook', (req, res) => {
           }
         }
       );
+    } else if (payload === "USER_HELP") {
+      FB.fbMessage(
+        sender,
+        {text: `Hi there. I'm here to help you with gifts. So you can tell me things like:\n\n\t•Buy gift for mom\n\t•Remind me to send gift to Candra.`}
+      )
+      FB.fbMessage(
+      sender,
+      {"attachment":{
+          "type":"template",
+          "payload":{
+            "template_type":"button",
+            "text":"What would you like to do?",
+            "buttons":[
+              {
+                "type":"postback",
+                "title":"🎁 Buy gift",
+                "payload":"USER_BUY_GIFT"
+              },
+              {
+                "type":"postback",
+                "title":"⏰ Set gift reminder",
+                "payload":"USER_REMINDER"
+              },
+              {
+                "type":"postback",
+                "title":"😭 Help",
+                "payload":"USER_HELP"
+              }
+            ]
+          }
+        }
+      }
+    )
+    } else if (payload === "USER_NEW_SEARCH") {
+      wit.runActions(
+        sessionId, // the user's current session
+        "new search please!", // the user's message
+        {_fbid_: sender}, // the user's current session state
+        (error, context) => {
+          if (error) {
+            console.log('Oops! Got an error from Wit:', error);
+          } else {
+            console.log('Waiting for further messages.');
+            sessions[sessionId].context = context;
+          }
+        }
+      );
     } else if (payload === "USER_REMINDER") {
       console.log("in user reminder");
       wit.runActions(
@@ -166,7 +213,7 @@ app.post('/webhook', (req, res) => {
                 },
                 {
                   "type":"postback",
-                  "title":"⏰  Remind to send gift",
+                  "title":"⏰ Set gift reminder",
                   "payload":"USER_REMINDER"
                 },
                 {
@@ -197,32 +244,7 @@ app.post('/webhook', (req, res) => {
         sender,
         {text: 'Sorry I can only process text messages for now.'}
       );
-    }
-    // else if (messaging.message.quick_reply) {
-    //   const payload = messaging.message.quick_reply.payload;
-    //   if (payload === 'MORE_SUGGESTIONS'){
-    //         sessions[sessionId].context.itemPage += 1;
-    //         console.log("INSIDE MORE SUGGESTIONS FUNCTION!!");
-    //         wit.runActions(
-    //           sessionId, // the user's current session
-    //           "buy gift", // the user's message
-    //           {_fbid_: sender,
-    //             giftRecipient: sessions[sessionId].context.giftRecipient,
-    //             gender: sessions[sessionId].context.gender,
-    //             giftType: sessions[sessionId].context.giftType,
-    //             itemPage: sessions[sessionId].context.itemPage }, // the user's current session state
-    //           (error, context) => {
-    //             if (error) {
-    //               console.log('Oops! Got an error from Wit:', error);
-    //             } else {
-    //               console.log('Waiting for futher messages.');
-    //               sessions[sessionId].context = context;
-    //             }
-    //           }
-    //         );
-    //   }
-    // }
-    else if (msg === "more suggestions") {
+    } else if (msg === "more suggestions") {
       sessions[sessionId].context.itemPage += 1;
       console.log("INSIDE MORE SUGGESTIONS FUNCTION!!");
       wit.runActions(
