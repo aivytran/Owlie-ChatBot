@@ -164,15 +164,6 @@ const actions = {
     context.minimumPrice = "5000";
     context.maximumPrice = "10000";
 
-    console.log("in bot" + context);
-    console.log("gift type is: " + context.giftType);
-    console.log("the item page is " + context.itemPage);
-    console.log(" ");
-    console.log("beginning of context .....");
-    console.log(context);
-    console.log("end of context .....");
-    console.log(" ");
-
     searchItem(context.giftType, context.itemPage, context.minimumPrice, context.maximumPrice)
       .then(response => {
         let cards = [];
@@ -267,32 +258,6 @@ const actions = {
 
         let options = Object.keys(filters);
         context.filterOptions = options.join(",");
-        console.log(context);
-
-        // searchItem(options[0], '1', context.minimumPrice, context.maximumPrice)
-        //   .then(res => {
-        //     console.log("in additional search");
-        //     console.log(res);
-        //     console.log("after response");
-        //   }
-        // );
-
-        // console.log("Filters " + JSON.stringify(filters));
-        // let keys = Object.keys(filters);
-        // for (let i = 0; i < keys.length; i++) {
-        //   console.log(keys[i]);
-        //   console.log(filters[keys[i]]);
-        // }
-        // console.log(keys[1]);
-        // let filter = keys[1];
-        // console.log(filters[keys[0]]);
-        // let filter = filters[keys[0]];
-        // console.log(filter);
-        // console.log(searchItem("Smart Watches", "1", "5000", "10000"));
-        // console.log("///// before additional search");
-        // additionalSearch(filter, (results) => {console.log(results);});
-        // additionalSearch(filter);
-        // console.log("///// after additional search");
 
         let template = JSON.stringify({
           "attachment": {
@@ -330,7 +295,7 @@ const actions = {
         }
       ]
     });
-    // context.showButtonOptions = undefined;
+
     cb(context);
   },
 
@@ -413,6 +378,3 @@ if (require.main === module) {
   const client = getWit();
   client.interactive();
 }
-
-// let query = searchItem("watches", "1", "5000", "10000");
-// console.log(query);
