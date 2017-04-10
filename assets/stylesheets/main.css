@@ -15,17 +15,22 @@
  */
 body {
   margin: 0px;
-  font-family: "Shadows Into Light";
+  font-family: "Fredoka One";
 }
 
 nav {
   display: flex;
   /*margin: 5px 15px;*/
-  padding: 5px 15px;
+  padding: 10px 20px;
 }
 
 nav a {
   text-decoration: none;
+}
+
+.navbar {
+  font-family: "Fredoka One";
+  background-color: #abddd7;
 }
 
 .header-right-links {
@@ -40,7 +45,7 @@ nav a {
 }
 
 #master-view {
-  background-color: #F44336;
+  background-color: #abddd7;
   height: 700px;
   /*text-align: center;*/
   /*padding: 208px 0 0 0;*/
@@ -54,7 +59,7 @@ nav a {
   height: 100%;
   text-align: center;
   font-family: 'Open Sans',arial,sans-serif;
-  background-color: #F44336;
+  background-color: #abddd7;
 }
 
 .privacy-header{
@@ -62,24 +67,24 @@ nav a {
 }
 
 .privacy-header h1 {
-    color: #f8e9b4;
+    color: #ed826c;
     font-size: 39px;
     margin: 10px;
 }
 
 .privacy-content{
   margin: 10px 200px;
-  border: 2px solid #F44336;
+  border: 2px solid #ed826c;
   padding: 0px 40px;
   border-radius: 24px;
-  background-color: #f8e9b4;
+  background-color: #F0F0D9;
 }
 
 .privacy-content h1 {
-  color: #f44336;
+  color: #ed826c;
 }
 
 .privacy-content h3 {
-  color: #f44336;
+  color: #ed826c;
   margin: 10px;
 }
