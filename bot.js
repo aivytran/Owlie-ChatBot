@@ -249,21 +249,33 @@ const actions = {
           });
         }
 
-        console.log("Filters " + JSON.stringify(filters));
-        let keys = Object.keys(filters);
+        let options = Object.keys(filters);
+        context.filterOptions = options;
+        console.log(context);
+
+        // searchItem(options[0], '1', context.minimumPrice, context.maximumPrice)
+        //   .then(res => {
+        //     console.log("in additional search");
+        //     console.log(res);
+        //     console.log("after response");
+        //   }
+        // );
+
+        // console.log("Filters " + JSON.stringify(filters));
+        // let keys = Object.keys(filters);
         // for (let i = 0; i < keys.length; i++) {
         //   console.log(keys[i]);
         //   console.log(filters[keys[i]]);
         // }
-        console.log(keys[1]);
-        let filter = keys[1];
+        // console.log(keys[1]);
+        // let filter = keys[1];
         // console.log(filters[keys[0]]);
         // let filter = filters[keys[0]];
         // console.log(filter);
         // console.log(searchItem("Smart Watches", "1", "5000", "10000"));
         // console.log("///// before additional search");
         // additionalSearch(filter, (results) => {console.log(results);});
-        additionalSearch(filter);
+        // additionalSearch(filter);
         // console.log("///// after additional search");
 
         let template = JSON.stringify({
