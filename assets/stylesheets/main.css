@@ -17,7 +17,7 @@ body {
   margin: 0px;
   font-family: "Fredoka One";
   height: 1000px;
-  min-width: 1200px;
+  min-width: 1300px;
 }
 
 nav {
@@ -143,6 +143,7 @@ section.features h1 {
 
 .demo-phone {
     background: url(http://res.cloudinary.com/candycanetrain/video/upload/v1491812541/official1and2small_xfmnt5.gif);
+
     height: 720px;
     /* padding: 25px; */
     width: 500px;
