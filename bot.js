@@ -52,6 +52,32 @@ const actions = {
 
       }
 
+      if (context.gift) {
+        setTimeout(() => {
+          FB.fbMessage(recipientId, {
+            "text":"showing Buttons..",
+            "quick_replies":[
+              {
+                "content_type":"text",
+                "title":"more suggestions",
+                "payload":"MORE_SUGGESTIONS"
+              },
+              {
+                "content_type":"text",
+                "title":"search by filters",
+                "payload":"SEARCH_BY_FILTERS"
+              },
+              {
+                "content_type":"text",
+                "title":"new search please!",
+                "payload":"NEW_SEARCH_PLEASE"
+              }
+            ]
+          })
+        }, 20000)
+      }
+
+
       if (JsonUtil.isJsonString(response)) {
         data = JSON.parse(response);
       } else {
@@ -253,7 +279,6 @@ const actions = {
         }
       ]
     });
-    // context.showButtonOptions = undefined;
     cb(context);
   },
 
