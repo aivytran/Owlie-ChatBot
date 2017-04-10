@@ -76,19 +76,6 @@ const actions = {
     }
   },
 
-  // clearContext(sessionId, context, cb) {
-  //   console.log(context);
-  //   console.log("clearing context..");
-  //   context.giftRecipient = undefined;
-  //   context.giftType = undefined;
-  //   context.itemPage = 0;
-  //   context.gender = undefined;
-  //   context.newKeyword = undefined;
-  //   console.log(context);
-  //
-  //   cb(context);
-  // },
-
   merge(sessionId, context, entities, response, cb) {
     const giftRecipient = firstEntityValue(entities, 'giftRecipient');
     const giftType = firstEntityValue(entities, 'giftType');
@@ -96,8 +83,6 @@ const actions = {
     const filterByPrice = firstEntityValue(entities, 'filterByPrice');
     const newKeyword = firstEntityValue(entities, 'keyword');
     const datetime = firstEntityValue(entities, 'datetime');
-    // context.showButtonOptions = undefined;
-    // const moreSuggestions = firstEntityValue(entities, 'moreSuggestions');
     if (giftRecipient) {
       context.giftRecipient = giftRecipient;
     }
@@ -108,9 +93,6 @@ const actions = {
     if (gender) {
       context.gender = gender;
     }
-    // if (moreSuggestions) {
-    //   context.itemPage += 1;
-    // }
     if (filterByPrice) {
       context.filterByPrice = filterByPrice;
     }
@@ -131,40 +113,12 @@ const actions = {
     console.log("ending incrementItemPage.. ");
   },
 
-  // clearContext(sessionId, context, entities, response, cb) {
-  //   const clearContext = firstEntityValue(entities, 'clearContext');
-  //
-  //
-  //   if (clearContext) {
-  //     context.giftRecipient = undefined;
-  //     context.giftType = undefined;
-  //     context.gender = undefined;
-  //     context.newKeyword = undefined;
-  //     console.log("clearing context");
-  //   }
-  //
-  //   cb(context);
-  // },
-
-  // findMethod(sessionId, context, entities, response, cb) {
-  //   const method = firstEntityValue(entities, 'method');
-  //
-  //   if (method === 'more suggestions') {
-  //     this.getGift();
-  //   }
-  //   if (method === "showButtons") {
-  //     this.showButtons();
-  //   }
-  // },
-
-
   error(sessionId, context, error) {
     console.log(error.message);
   },
 
   //bot executes
   ['getGift'](sessionId, context, cb) {
-    // context.showButtonOptions = undefined;
     context.minimumPrice = "5000";
     context.maximumPrice = "10000";
 
@@ -243,7 +197,6 @@ const actions = {
           } else {
             eligiblePrime = 'No info on Prime shipping';
           }
-          // console.log("Eligible " + eligiblePrime);
 
           cards.push( {
             "title": title,
@@ -273,18 +226,12 @@ const actions = {
           }
         });
 
-        // setTimeout( () => {
           context.gift = template;
-        // }, 3000);
       });
-    // context.giftRecipient = undefined;
-    // context.gender = undefined;
-    // context.gift = undefined;
     cb(context);
   },
 
   ['showButtons'](sessionId, context, cb) {
-    // console.log(context);
     context.showButtonOptions = JSON.stringify({
       "text":"showing Buttons..",
       "quick_replies":[
@@ -388,6 +335,3 @@ if (require.main === module) {
   const client = getWit();
   client.interactive();
 }
-
-// let query = searchItem("watches", "1", "5000", "10000");
-// console.log(query);
