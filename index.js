@@ -225,25 +225,23 @@ app.post('/webhook', (req, res) => {
     else if (msg === "more suggestions") {
       sessions[sessionId].context.itemPage += 1;
       console.log("INSIDE MORE SUGGESTIONS FUNCTION!!");
-      setTimeout( () => {
-        wit.runActions(
-          sessionId, // the user's current session
-          "buy gift", // the user's message
-          {_fbid_: sender,
-            giftRecipient: sessions[sessionId].context.giftRecipient,
-            gender: sessions[sessionId].context.gender,
-            giftType: sessions[sessionId].context.giftType,
-            itemPage: sessions[sessionId].context.itemPage }, // the user's current session state
-          (error, context) => {
-            if (error) {
-              console.log('Oops! Got an error from Wit:', error);
-            } else {
-              console.log('Waiting for futher messages.');
-              sessions[sessionId].context = context;
-            }
+      wit.runActions(
+        sessionId, // the user's current session
+        "buy gift", // the user's message
+        {_fbid_: sender,
+          giftRecipient: sessions[sessionId].context.giftRecipient,
+          gender: sessions[sessionId].context.gender,
+          giftType: sessions[sessionId].context.giftType,
+          itemPage: sessions[sessionId].context.itemPage }, // the user's current session state
+        (error, context) => {
+          if (error) {
+            console.log('Oops! Got an error from Wit:', error);
+          } else {
+            console.log('Waiting for futher messages.');
+            sessions[sessionId].context = context;
           }
-        );
-      }, 10000);
+        }
+      );
     }
     else if (msg === "new search please!") {
       console.log("INSIDE CLEAR FUNCTION!!");

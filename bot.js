@@ -53,6 +53,18 @@ const actions = {
       }
 
       if (context.gift) {
+        FB.fbMessage(recipientId, data, (err, data) => {
+          if (err) {
+            console.log(
+              'Oops! An error occurred while forwarding the response to',
+              recipientId,
+              ':',
+              err
+            );
+          }
+          // Give the wheel back to our bot
+          cb();
+        });
         setTimeout(() => {
           FB.fbMessage(recipientId, {
             "text":"Here are more options 😘😘",
@@ -76,27 +88,26 @@ const actions = {
           });
           context.gift = null;
         }, 10000)
-      }
-
-
-      if (JsonUtil.isJsonString(response)) {
-        data = JSON.parse(response);
       } else {
-        data = {"text": response};
-      }
-
-      return FB.fbMessage(recipientId, data, (err, data) => {
-        if (err) {
-          console.log(
-            'Oops! An error occurred while forwarding the response to',
-            recipientId,
-            ':',
-            err
-          );
+        if (JsonUtil.isJsonString(response)) {
+          data = JSON.parse(response);
+        } else {
+          data = {"text": response};
         }
-        // Give the wheel back to our bot
-        cb();
-      });
+
+        return FB.fbMessage(recipientId, data, (err, data) => {
+          if (err) {
+            console.log(
+              'Oops! An error occurred while forwarding the response to',
+              recipientId,
+              ':',
+              err
+            );
+          }
+          // Give the wheel back to our bot
+          cb();
+        });
+      }
     } else {
       console.log('Oops! Couldn\'t find user in context:', context);
       cb();
