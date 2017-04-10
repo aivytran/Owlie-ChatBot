@@ -48,7 +48,7 @@ const fbMessage = (recipientId, data, cb) => {
     if (cb) {
       cb(err || data.error && data.error.message, data);
     }
-  }), 2000);
+  }), 1500);
 };
 
 const fbTypingMessage = (recipientId, cb) => {
