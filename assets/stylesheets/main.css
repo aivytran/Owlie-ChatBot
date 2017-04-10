@@ -16,6 +16,7 @@
 body {
   margin: 0px;
   font-family: "Fredoka One";
+  height: 1000px
 }
 
 nav {
@@ -30,7 +31,13 @@ nav a {
 
 .navbar {
   font-family: "Fredoka One";
-  background-color: #abddd7;
+  height: 50px;
+  background-color: #93c7aa;
+  padding-left: 700px;
+}
+
+.navbar img {
+  height: 50px
 }
 
 .header-right-links {
@@ -44,15 +51,32 @@ nav a {
   margin: 0 20px;
 }
 
+.header-right-links a{
+  color: #f8e9b4;
+  font-size: 25px;
+}
+
 #master-view {
   background-color: #abddd7;
-  height: 700px;
+  height: 100%;
   /*text-align: center;*/
   /*padding: 208px 0 0 0;*/
 }
 
 .features {
   padding: 15px;
+}
+
+section.features h1 {
+    color: #ed826c;
+    margin: 0px 79px;
+    font-size: 35px;
+}
+
+section.features ul {
+    margin: 0px 126px;
+    font-size: 20px;
+    padding: 9px 0;
 }
 
 #privacy{
@@ -87,4 +111,10 @@ nav a {
 .privacy-content h3 {
   color: #ed826c;
   margin: 10px;
+}
+
+.gif-main {
+    background: url(http://res.cloudinary.com/candycanetrain/image/upload/c_scale,w_600/v1491616754/owlie_slow_aqj8yo.gif);
+    height: 600px;
+    width: 600px;
 }
