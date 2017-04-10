@@ -134,7 +134,7 @@ section.features h1 {
     background: url(http://res.cloudinary.com/candycanetrain/image/upload/c_scale,w_400/v1491616754/owlie_slow_aqj8yo.gif);
     height: 400px;
     width: 400px;
-    margin: 0 auto;
+    margin: 0 75px;
 }
 
 /*.gif {
@@ -167,6 +167,7 @@ section.features h1 {
 .right {
   display: inline-block;
   min-width: 600px;
+  padding-left: 120px;
 }
 
 .facebook-button {
