@@ -112,7 +112,7 @@ app.post('/webhook', (req, res) => {
         }
       );
     } else if (payload === "USER_REMINDER") {
-      console.log("in user buy gift");
+      console.log("in user reminder");
       wit.runActions(
         sessionId, // the user's current session
         "set reminder", // the user's message
