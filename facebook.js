@@ -44,11 +44,11 @@ const fbMessage = (recipientId, data, cb) => {
     },
   };
   fbTypingMessage(recipientId);
-  fbReq(opts, (err, resp, data) => {
+  setTimeout(fbReq(opts, (err, resp, data) => {
     if (cb) {
       cb(err || data.error && data.error.message, data);
     }
-  });
+  }), 5000);
 };
 
 const fbTypingMessage = (recipientId, cb) => {

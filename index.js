@@ -132,7 +132,6 @@ app.post('/webhook', (req, res) => {
       FB.getProfile(messaging.sender.id, (body) => {
         name = body.first_name;
       });
-      // FB.fbTypingMessage(sender)
       FB.fbMessage(
         sender,
         {attachment:{
@@ -145,14 +144,12 @@ app.post('/webhook', (req, res) => {
       );
 
       setTimeout(() => {
-        // FB.fbTypingMessage(sender);
         FB.fbMessage(
         sender,
         {text: `Oh, hey ${name} 👋. I'm Owlie! I'm here to help you with gifts! 😍`}
       )}, 2000);
 
       setTimeout(() => {
-        // FB.fbTypingMessage(sender);
         FB.fbMessage(
         sender,
         {"attachment":{
