@@ -51,6 +51,23 @@ const fbMessage = (recipientId, data, cb) => {
   });
 };
 
+const fbTypingMessage = (recipientId, cb) => {
+  const opts = {
+    form: {
+      recipient: {
+        id: recipientId,
+      },
+      "sender_action":"typing_on"
+    },
+  };
+
+  fbReq(opts, (err, resp) => {
+    if (cb) {
+      cb(err);
+    }
+  });
+};
+
 
 // See the Webhook reference
 // https://developers.facebook.com/docs/messenger-platform/webhook-reference
