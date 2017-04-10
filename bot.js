@@ -72,7 +72,7 @@ const actions = {
         });
         setTimeout(() => FB.fbMessage(recipientId,
           {
-            "text":"showing Buttons..",
+            "text":"Here are more options...",
             "quick_replies":[
               {
                 "content_type":"text",
