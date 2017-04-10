@@ -32,3 +32,11 @@ curl -X POST -H "Content-Type: application/json" -d '{
     }
   ]
 }' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAADLWouDF0sBAMDpqdLw7ZCOkFeU1MuhSwfq6gCWVSwyLS3mWB2QjoXKF36yOLbTMwwwZBeJHueEN5IZCJ0qjedYt5CN5SL1qa0wTbZCRbHEj2e70cZBZAFdjrOHeJi0BbjVjxCwvmXJY0hT9ZCZC7A2mn6O9mYsihRw39DluhGk5wZDZD"
+
+## typing indicator
+curl -X POST -H "Content-Type: application/json" -d '{
+  "recipient":{
+  	"id":"USER_ID"
+  },
+  "sender_action":"typing_on"
+}' "https://graph.facebook.com/v2.6/me/messages?access_token=EAADLWouDF0sBAMDpqdLw7ZCOkFeU1MuhSwfq6gCWVSwyLS3mWB2QjoXKF36yOLbTMwwwZBeJHueEN5IZCJ0qjedYt5CN5SL1qa0wTbZCRbHEj2e70cZBZAFdjrOHeJi0BbjVjxCwvmXJY0hT9ZCZC7A2mn6O9mYsihRw39DluhGk5wZDZD"
