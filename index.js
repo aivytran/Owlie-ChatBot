@@ -115,7 +115,7 @@ app.post('/webhook', (req, res) => {
     } else if (payload === "USER_HELP") {
       FB.fbMessage(
         sender,
-        {text: `Hi there. I'm here to help you with gifts. So you can tell me things like:\n\n\t•Buy gift for mom\n\t•Remind me to send gift to Candra.`}
+        {text: `Hi there 👋. I'm here to help you with gifts🎁. So you can tell me things like:\n • Buy gift for mom 👗.\n • Remind me to send gift to Candra👠.`}
       )
       FB.fbMessage(
       sender,
