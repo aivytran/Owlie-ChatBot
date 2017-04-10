@@ -44,7 +44,7 @@ const fbMessage = (recipientId, data, cb) => {
     },
   };
   fbTypingMessage(recipientId);
-  setTimeout(fbReq(opts, (err, resp, data) => {
+  setTimeout(() => fbReq(opts, (err, resp, data) => {
     if (cb) {
       cb(err || data.error && data.error.message, data);
     }
