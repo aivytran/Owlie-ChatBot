@@ -3,7 +3,7 @@
 const Wit = require('node-wit').Wit;
 const FB = require('./facebook.js');
 const Config = require('./const.js');
-const {searchItem} = require('./util/amazon_api_util.js');
+const {searchItem, additionalSearch} = require('./util/amazon_api_util.js');
 const JsonUtil = require('./util/json_util.js');
 const Reminder = require('./models/reminder');
 
@@ -159,6 +159,10 @@ const actions = {
     searchItem(context.giftType, context.itemPage, context.minimumPrice, context.maximumPrice)
       .then(response => {
         let cards = [];
+        let filters = {};
+        let nodeName;
+        let nodeId;
+
         let title;
         let price;
         let availability;
@@ -167,7 +171,12 @@ const actions = {
         let shipping;
         let eligiblePrime;
 
+
         for (let i = 0; i < response.length; i++) {
+          nodeName = response[i]["BrowseNodes"][0]["BrowseNode"][0]["Name"][0];
+          nodeId = response[i]["BrowseNodes"][0]["BrowseNode"][0]["BrowseNodeId"][0];
+          filters[nodeName] = nodeId;
+
           title = response[i];
           if (!!title["ItemAttributes"][0]["Title"]) {
             title = title["ItemAttributes"][0]["Title"][0];
@@ -213,7 +222,6 @@ const actions = {
           eligiblePrime = response[i];
           if (!!eligiblePrime["Offers"][0]["Offer"][0]["OfferListing"][0]["IsEligibleForPrime"]) {
             eligiblePrime = eligiblePrime["Offers"][0]["Offer"][0]["OfferListing"][0]["IsEligibleForPrime"][0];
-            // console.log("if " + eligiblePrime);
             if (eligiblePrime === '1') {
               eligiblePrime = 'eligible for Prime';
             } else {
@@ -240,6 +248,23 @@ const actions = {
             ],
           });
         }
+
+        console.log("Filters " + JSON.stringify(filters));
+        let keys = Object.keys(filters);
+        // for (let i = 0; i < keys.length; i++) {
+        //   console.log(keys[i]);
+        //   console.log(filters[keys[i]]);
+        // }
+        console.log(keys[1]);
+        let filter = keys[1];
+        // console.log(filters[keys[0]]);
+        // let filter = filters[keys[0]];
+        // console.log(filter);
+        // console.log(searchItem("Smart Watches", "1", "5000", "10000"));
+        // console.log("///// before additional search");
+        // additionalSearch(filter, (results) => {console.log(results);});
+        additionalSearch(filter);
+        // console.log("///// after additional search");
 
         let template = JSON.stringify({
           "attachment": {
@@ -360,3 +385,6 @@ if (require.main === module) {
   const client = getWit();
   client.interactive();
 }
+
+// let query = searchItem("watches", "1", "5000", "10000");
+// console.log(query);
