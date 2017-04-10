@@ -190,12 +190,12 @@ const actions = {
             eligiblePrime = eligiblePrime["Offers"][0]["Offer"][0]["OfferListing"][0]["IsEligibleForPrime"][0];
             // console.log("if " + eligiblePrime);
             if (eligiblePrime === '1') {
-              eligiblePrime = 'Eligible for Prime shipping';
+              eligiblePrime = 'eligible for Prime';
             } else {
-              eligiblePrime = 'No info on Prime shipping';
+              eligiblePrime = 'no info on Prime';
             }
           } else {
-            eligiblePrime = 'No info on Prime shipping';
+            eligiblePrime = 'no info on Prime';
           }
 
           cards.push( {
@@ -226,7 +226,7 @@ const actions = {
           }
         });
 
-          context.gift = template;
+        context.gift = template;
       });
     cb(context);
   },
