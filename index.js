@@ -143,13 +143,17 @@ app.post('/webhook', (req, res) => {
           }
         }
       );
-      FB.fbTypingMessage(sender)
-      setTimeout(() => FB.fbMessage(
+
+      setTimeout(() => {
+        FB.fbTypingMessage(sender);
+        FB.fbMessage(
         sender,
         {text: `Oh, hey ${name} 👋. I'm Owlie! I'm here to help you with gifts! 😍`}
-      ), 2000);
-      FB.fbTypingMessage(sender)
-      setTimeout(() => FB.fbMessage(
+      )}, 2000);
+
+      setTimeout(() => {
+        FB.fbTypingMessage(sender);
+        FB.fbMessage(
         sender,
         {"attachment":{
             "type":"template",
@@ -176,7 +180,7 @@ app.post('/webhook', (req, res) => {
             }
           }
         }
-      ), 3000);
+      )}, 3000);
     }
   }
   else if (messaging && messaging.message) {
