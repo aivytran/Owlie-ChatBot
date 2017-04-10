@@ -53,7 +53,7 @@ const actions = {
       }
 
       if (context.gift) {
-        data = JSON.parse(response)
+        data = JSON.parse(response);
         FB.fbMessage(recipientId, data, (err, data) => {
           if (err) {
             console.log(
