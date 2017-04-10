@@ -53,7 +53,8 @@ const actions = {
       }
 
       if (context.gift) {
-        FB.fbMessage(recipientId, JSON.parse(response), (err, JSON.parse(response)) => {
+        data = JSON.parse(response)
+        FB.fbMessage(recipientId, data, (err, data) => {
           if (err) {
             console.log(
               'Oops! An error occurred while forwarding the response to',
