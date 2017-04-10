@@ -90,5 +90,6 @@ module.exports = {
   getFirstMessagingEntry: getFirstMessagingEntry,
   fbMessage: fbMessage,
   fbReq: fbReq,
-  getProfile: getProfile
+  getProfile: getProfile,
+  fbTypingMessage: fbTypingMessage
 };
