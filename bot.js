@@ -52,31 +52,6 @@ const actions = {
 
       }
 
-      if (context.gift) {
-          FB.fbMessage(recipientId, {
-            "text":"Here are more options 😘😘",
-            "quick_replies":[
-              {
-                "content_type":"text",
-                "title":"more suggestions",
-                "payload":"MORE_SUGGESTIONS"
-              },
-              {
-                "content_type":"text",
-                "title":"search by filters",
-                "payload":"SEARCH_BY_FILTERS"
-              },
-              {
-                "content_type":"text",
-                "title":"new search please!",
-                "payload":"NEW_SEARCH_PLEASE"
-              }
-            ]
-          });
-          context.gift = null;
-      }
-
-
       if (JsonUtil.isJsonString(response)) {
         data = JSON.parse(response);
       } else {
@@ -250,7 +225,7 @@ const actions = {
         }
 
         let options = Object.keys(filters);
-        context.filterOptions = options;
+        context.filterOptions = options.join(",");
         console.log(context);
 
         // searchItem(options[0], '1', context.minimumPrice, context.maximumPrice)
@@ -294,7 +269,6 @@ const actions = {
   },
 
   ['showButtons'](sessionId, context, cb) {
-    context.gift = {};
     context.showButtonOptions = JSON.stringify({
       "text":"showing Buttons..",
       "quick_replies":[
@@ -315,6 +289,7 @@ const actions = {
         }
       ]
     });
+    // context.showButtonOptions = undefined;
     cb(context);
   },
 
