@@ -25,6 +25,8 @@ const actions = {
     // console.log(response);
     console.log("in say");
     console.log(context);
+    console.log(response);
+    console.log(response.includes("Got Cha!"));
 
     // Bot testing mode
     if (require.main === module) {
@@ -38,7 +40,7 @@ const actions = {
 
       let data = null;
 
-      if (response.includes("Got Cha!")) {
+      if (response.includes("Got Cha!") || context.reminder === "Got Cha!") {
         const newReminder = {
             user_id: recipientId,
             value: context.giftRecipient,
