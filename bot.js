@@ -52,7 +52,11 @@ const actions = {
       }
 
       if (context.gift) {
-        data = JSON.parse(response);
+        if (JsonUtil.isJsonString(response)) {
+          data = JSON.parse(response);
+        } else {
+          data = {"text": response};
+        }
         FB.fbMessage(recipientId, data, (err, data) => {
           if (err) {
             console.log(
@@ -259,9 +263,9 @@ const actions = {
           });
         }
 
-        // let options = Object.keys(filters);
-        // context.filterOptions = options.join(",");
-        // console.log(context);
+        let options = Object.keys(filters);
+        context.filterOptions = options.join(",");
+        console.log(context);
 
         // searchItem(options[0], '1', context.minimumPrice, context.maximumPrice)
         //   .then(res => {
