@@ -3,7 +3,7 @@
 const Wit = require('node-wit').Wit;
 const FB = require('./facebook.js');
 const Config = require('./const.js');
-const {searchItem} = require('./util/amazon_api_util.js');
+const {searchItem, additionalSearch} = require('./util/amazon_api_util.js');
 const JsonUtil = require('./util/json_util.js');
 const Reminder = require('./models/reminder');
 
@@ -52,62 +52,24 @@ const actions = {
 
       }
 
-      if (context.gift) {
+      if (JsonUtil.isJsonString(response)) {
         data = JSON.parse(response);
-        FB.fbMessage(recipientId, data, (err, data) => {
-          if (err) {
-            console.log(
-              'Oops! An error occurred while forwarding the response to',
-              recipientId,
-              ':',
-              err
-            );
-          }
-          // Give the wheel back to our bot
-          cb();
-        });
-        setTimeout(() => {
-          FB.fbMessage(recipientId, {
-            "text":"Here are more options 😘😘",
-            "quick_replies":[
-              {
-                "content_type":"text",
-                "title":"more suggestions",
-                "payload":"MORE_SUGGESTIONS"
-              },
-              {
-                "content_type":"text",
-                "title":"search by filters",
-                "payload":"SEARCH_BY_FILTERS"
-              },
-              {
-                "content_type":"text",
-                "title":"new search please!",
-                "payload":"NEW_SEARCH_PLEASE"
-              }
-            ]
-          });
-        }, 10000)
       } else {
-        if (JsonUtil.isJsonString(response)) {
-          data = JSON.parse(response);
-        } else {
-          data = {"text": response};
-        }
-
-        return FB.fbMessage(recipientId, data, (err, data) => {
-          if (err) {
-            console.log(
-              'Oops! An error occurred while forwarding the response to',
-              recipientId,
-              ':',
-              err
-            );
-          }
-          // Give the wheel back to our bot
-          cb();
-        });
+        data = {"text": response};
       }
+
+      return FB.fbMessage(recipientId, data, (err, data) => {
+        if (err) {
+          console.log(
+            'Oops! An error occurred while forwarding the response to',
+            recipientId,
+            ':',
+            err
+          );
+        }
+        // Give the wheel back to our bot
+        cb();
+      });
     } else {
       console.log('Oops! Couldn\'t find user in context:', context);
       cb();
@@ -172,6 +134,10 @@ const actions = {
     searchItem(context.giftType, context.itemPage, context.minimumPrice, context.maximumPrice)
       .then(response => {
         let cards = [];
+        let filters = {};
+        let nodeName;
+        let nodeId;
+
         let title;
         let price;
         let availability;
@@ -181,6 +147,10 @@ const actions = {
         let eligiblePrime;
 
         for (let i = 0; i < response.length; i++) {
+          nodeName = response[i]["BrowseNodes"][0]["BrowseNode"][0]["Name"][0];
+          nodeId = response[i]["BrowseNodes"][0]["BrowseNode"][0]["BrowseNodeId"][0];
+          filters[nodeName] = nodeId;
+
           title = response[i];
           if (!!title["ItemAttributes"][0]["Title"]) {
             title = title["ItemAttributes"][0]["Title"][0];
@@ -226,7 +196,6 @@ const actions = {
           eligiblePrime = response[i];
           if (!!eligiblePrime["Offers"][0]["Offer"][0]["OfferListing"][0]["IsEligibleForPrime"]) {
             eligiblePrime = eligiblePrime["Offers"][0]["Offer"][0]["OfferListing"][0]["IsEligibleForPrime"][0];
-            // console.log("if " + eligiblePrime);
             if (eligiblePrime === '1') {
               eligiblePrime = 'eligible for Prime';
             } else {
@@ -253,6 +222,7 @@ const actions = {
             ],
           });
         }
+
         let options = Object.keys(filters);
         context.filterOptions = options.join(",");
         console.log(context);
@@ -401,3 +371,6 @@ if (require.main === module) {
   const client = getWit();
   client.interactive();
 }
+
+// let query = searchItem("watches", "1", "5000", "10000");
+// console.log(query);
