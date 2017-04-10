@@ -53,7 +53,6 @@ const actions = {
       }
 
       if (context.gift) {
-        setTimeout(() => {
           FB.fbMessage(recipientId, {
             "text":"Here are more options 😘😘",
             "quick_replies":[
@@ -75,7 +74,6 @@ const actions = {
             ]
           });
           context.gift = null;
-        }, 10000)
       }
 
 
