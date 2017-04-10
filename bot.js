@@ -314,7 +314,7 @@ const actions = {
             },
             {
               "type":"postback",
-              "title":"⏰  Remind to send gift",
+              "title":"⏰  Set gift reminder",
               "payload":"USER_REMINDER"
             },
             {
