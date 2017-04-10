@@ -259,9 +259,9 @@ const actions = {
           });
         }
 
-        let options = Object.keys(filters);
-        context.filterOptions = options.join(",");
-        console.log(context);
+        // let options = Object.keys(filters);
+        // context.filterOptions = options.join(",");
+        // console.log(context);
 
         // searchItem(options[0], '1', context.minimumPrice, context.maximumPrice)
         //   .then(res => {
