@@ -147,7 +147,7 @@ app.post('/webhook', (req, res) => {
         FB.fbMessage(
         sender,
         {text: `Oh, hey ${name} 👋. I'm Owlie! I'm here to help you with gifts! 😍`}
-      )}, 2000);
+      )}, 5000);
 
       setTimeout(() => {
         FB.fbMessage(
@@ -177,7 +177,7 @@ app.post('/webhook', (req, res) => {
             }
           }
         }
-      )}, 3000);
+      )}, 7000);
     }
   }
   else if (messaging && messaging.message) {
