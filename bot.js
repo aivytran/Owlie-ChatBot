@@ -74,7 +74,7 @@ const actions = {
               }
             ]
           });
-          context.gift = {};
+          context.gift = null;
         }, 10000)
       }
 
