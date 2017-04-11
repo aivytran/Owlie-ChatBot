@@ -43,8 +43,6 @@ h2 {
   font-family: "Fredoka One";
   height: 60px;
   background-color: #93c7aa;
-  /*padding-left: 700px;*/
-  /*justify-content: flex-end;*/
 }
 
 .navbar img {
@@ -71,8 +69,6 @@ h2 {
 #master-view {
   background-color: #abddd7;
   height: 100%;
-  /*text-align: center;*/
-  /*padding: 208px 0 0 0;*/
 }
 
 .features {
@@ -81,20 +77,13 @@ h2 {
 
 section.features h1 {
     color: #ed826c;
-    /*margin: 0px 79px;*/
-    /*padding: 0px 0;*/
     font-size: 45px;
 }
 
 .features-list {
-    /*margin: 0px 126px;*/
     font-size: 23px;
     padding: 9px 0;
     list-style: none;
-}
-
-.features-list li {
-  /*margin: 0 -43px;*/
 }
 
 #privacy{
@@ -136,20 +125,12 @@ section.features h1 {
     width: 400px;
     margin: 0 75px;
 }
-
-/*.gif {
-    display: flex;
-}*/
-
 .demo-phone {
-    background: url(http://res.cloudinary.com/candycanetrain/video/upload/v1491812541/official1and2small_xfmnt5.gif);
-
     height: 720px;
-    /* padding: 25px; */
-    width: 500px;
-    /*margin: -126px 59px;*/
+    width: 404px;
     border-radius: 30px;
-    border: 30px solid white;
+    border: 35px solid white;
+    box-shadow: 10px 10px 5px grey;
 }
 
 .features {
