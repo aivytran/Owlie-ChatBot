@@ -14,7 +14,7 @@ Go to the link above and click the "Message Us" button, which will lead you to F
 
 ## Demo
 
-![Demo Gif](http://res.cloudinary.com/candycanetrain/video/upload/c_scale,w_308/v1491812527/official1small_wiyl6c.gif)
+![Gif for Owlie](http://res.cloudinary.com/candycanetrain/video/upload/c_scale,w_308/v1491812527/official1small_wiyl6c.gif)
 
 ### Persistent Menu
 
