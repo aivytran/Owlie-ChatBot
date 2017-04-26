@@ -1,6 +1,6 @@
 # Owlie the GiftBot
 
-[Owlie the Giftbot live](http://res.cloudinary.com/owlie/video/upload/c_scale,w_270/v1493163858/official1small_wiyl6c_v3ydm0.gif)
+[Owlie the Giftbot live](http://www.owlie.site/?utm_source=owlie&utm_medium=github)
 
 ## Description
 
@@ -14,7 +14,7 @@ Go to the link above and click the "Message Us" button, which will lead you to F
 
 ## Demo
 
-![Gif of Owlie](http://res.cloudinary.com/candycanetrain/video/upload/c_scale,q_57,w_308/v1491812527/official1small_wiyl6c.gif)
+![Gif of Owlie](http://res.cloudinary.com/owlie/video/upload/c_scale,w_270/v1493163858/official1small_wiyl6c_v3ydm0.gif)
 
 ### Persistent Menu
 
