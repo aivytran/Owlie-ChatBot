@@ -16,8 +16,8 @@
 body {
   margin: 0px;
   font-family: "Fredoka One";
-  height: 1000px;
-  min-width: 1300px;
+  /*height: 1000px;
+  min-width: 1300px;*/
 }
 
 nav {
@@ -66,9 +66,13 @@ h2 {
   font-size: 20px;
 }
 
-#master-view {
+html {
   background-color: #abddd7;
-  height: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /*z-index: 5px;*/
 }
 
 .features {
@@ -128,7 +132,7 @@ section.features h1 {
 
 .demo-phone {
     height: 600px;
-    width: 368px;
+    width: 349px;
     border-radius: 30px;
     border: 35px solid white;
     box-shadow: 10px 10px 5px grey;
@@ -137,14 +141,14 @@ section.features h1 {
 .features {
   display: flex;
   padding: 30px 30px;
-  min-width: 1000px;
+  /*min-width: 1000px;*/
 }
 
 
 .left {
   display: inline-block;
   width: 50%;
-  padding: 0 70px;
+  margin-left: 105px;
 }
 
 .right {
